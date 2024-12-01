@@ -1,0 +1,39 @@
+PAGfx Converter, by Mollusk     www.palib.com
+If you have suggestions, problems, or anything, please mail me at mollusk@palib.info
+
+Converting PAGfx.ini
+Transparent Color : Magenta
+
+4 sprites :
+  Pieza : 256colors, 16x224, Pal : Pieza_Pal, -> Pieza_Sprite
+  botones : 256colors, 16x128, Pal : botones_Pal, -> botones_Sprite
+  numeros : 256colors, 8x96, Pal : numeros_Pal, -> numeros_Sprite
+  cursor_sonido : 256colors, 16x32, Pal : cursor_sonido_Pal, -> cursor_sonido_Sprite
+
+10 backgrounds :
+  custom_font : TileBg, 256x192, Pal : custom_font_Pal, 176 tiles -> custom_font_Tiles and custom_font_Map
+  superior_inicio : 16bit, 256x192, -> superior_inicio_Bitmap
+  inferior_inicio : EasyBg, 256x192, Pal : inferior_inicio_Pal, 102 tiles -> inferior_inicio_Tiles and inferior_inicio_Map
+  inferior_juego : EasyBg, 256x192, Pal : inferior_juego_Pal, 448 tiles -> inferior_juego_Tiles and inferior_juego_Map
+  inferior_versus : EasyBg, 256x192, Pal : inferior_versus_Pal, 617 tiles -> inferior_versus_Tiles and inferior_versus_Map
+  inferior_disco : EasyBg, 256x192, Pal : inferior_disco_Pal, 486 tiles -> inferior_disco_Tiles and inferior_disco_Map
+  menu_inferior : 16bit, 256x192, -> menu_inferior_Bitmap
+  inferior_credits : 16bit, 256x192, -> inferior_credits_Bitmap
+  options_inferior : 16bit, 256x192, -> options_inferior_Bitmap
+  inferior_records : EasyBg, 256x192, Pal : inferior_records_Pal, 399 tiles -> inferior_records_Tiles and inferior_records_Map
+
+10 palettes :
+  Pieza_Pal, 10 colors
+  botones_Pal, 4 colors
+  numeros_Pal, 7 colors
+  cursor_sonido_Pal, 6 colors
+  custom_font_Pal, 7 colors
+  inferior_inicio_Pal, 12 colors
+  inferior_juego_Pal, 46 colors
+  inferior_versus_Pal, 32 colors
+  inferior_disco_Pal, 51 colors
+  inferior_records_Pal, 89 colors
+
+Converted in 0 minutes 2 seconds
+
+Finished !
