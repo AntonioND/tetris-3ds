@@ -10,21 +10,21 @@
 #include "../source/gfx/all_gfx.c"
 #include "../source/gfx/all_gfx.h"
 
-#include "Textura_Tetris_1.h"
-#include "Textura_Tetris_2.h"
-#include "Textura_Tetris_3.h"
-#include "Textura_Tetris_4.h"
-#include "Textura_Tetris_5.h"
+#include "Textura_Tetris_1_pcx.h"
+#include "Textura_Tetris_2_pcx.h"
+#include "Textura_Tetris_3_pcx.h"
+#include "Textura_Tetris_4_pcx.h"
+#include "Textura_Tetris_5_pcx.h"
 
-#include "Textura_Escenario_1.h"
-#include "Textura_Escenario_2.h"
-#include "Textura_Escenario_Borde.h"
+#include "Textura_Escenario_1_pcx.h"
+#include "Textura_Escenario_2_pcx.h"
+#include "Textura_Escenario_Borde_pcx.h"
 
-#include "Textura_Disco_Foco.h"
-#include "Textura_Disco_Metal.h"
-#include "Textura_Disco_Suelo.h"
-#include "Textura_Disco_Pared.h"
-#include "Textura_Disco_Asiento.h"
+#include "Textura_Disco_Foco_pcx.h"
+#include "Textura_Disco_Metal_pcx.h"
+#include "Textura_Disco_Suelo_pcx.h"
+#include "Textura_Disco_Pared_pcx.h"
+#include "Textura_Disco_Asiento_pcx.h"
 
 bool MENU_ACTIVO, JUEGO_ACTIVO, PAUSA;
 u8 pausa_lista;
@@ -114,7 +114,9 @@ _TEXT_DATA_ Text_Color;
 //Apagar la DS
 void PowerOFF() 
 {
+#if 0
 IPC->aux |= BIT(6);
+#endif
 }
 
 

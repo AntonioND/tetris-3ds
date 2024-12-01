@@ -3,8 +3,8 @@
 
 #include <PA9.h>
 #include "math.h"
-#include "splash_down_bmp.h"
-#include "splash_up_bmp.h"
+#include "splash_down_bmp_bin.h"
+#include "splash_up_bmp_bin.h"
 
 int texture_[2]; 
 
@@ -24,9 +24,9 @@ glViewport(0,0,255,191);
 
 glGenTextures(2, &texture_[0]); 
 glBindTexture(0, texture_[0]);
-glTexImage2D(0, 0, GL_RGB, TEXTURE_SIZE_256 , TEXTURE_SIZE_128, 0, TEXGEN_TEXCOORD, splash_up_bmp);
+glTexImage2D(0, 0, GL_RGB, TEXTURE_SIZE_256 , TEXTURE_SIZE_128, 0, TEXGEN_TEXCOORD, splash_up_bmp_bin);
 glBindTexture(0, texture_[1]);
-glTexImage2D(0, 0, GL_RGB, TEXTURE_SIZE_256 , TEXTURE_SIZE_64, 0, TEXGEN_TEXCOORD, splash_down_bmp);
+glTexImage2D(0, 0, GL_RGB, TEXTURE_SIZE_256 , TEXTURE_SIZE_64, 0, TEXGEN_TEXCOORD, splash_down_bmp_bin);
 
 glMatrixMode(GL_PROJECTION); 
 glLoadIdentity(); 

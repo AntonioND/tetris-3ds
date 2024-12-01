@@ -30,9 +30,9 @@ SDIMAGE		:= image.bin
 # -----------------
 
 SOURCEDIRS	:= gfx source data
-INCLUDEDIRS	:=
+INCLUDEDIRS	:= include
 GFXDIRS		:=
-BINDIRS		:= include data
+BINDIRS		:= data source
 AUDIODIRS	:=
 # A single directory that is the root of NitroFS:
 NITROFSDIR	:=
@@ -93,7 +93,7 @@ endif
 
 ifneq ($(BINDIRS),)
     SOURCES_BIN	:= $(shell find -L $(BINDIRS) -name "*.bin")
-    SOURCES_RAW := $(shell find -L $(BINDIRS) -name "*.raw")
+    SOURCES_PCX := $(shell find -L $(BINDIRS) -name "*.pcx")
     INCLUDEDIRS	+= $(addprefix $(BUILDDIR)/,$(BINDIRS))
 endif
 ifneq ($(GFXDIRS),)
@@ -137,12 +137,12 @@ ASFLAGS		+= -x assembler-with-cpp $(INCLUDEFLAGS) $(DEFINES) \
 
 CFLAGS		+= -std=gnu17 $(WARNFLAGS) $(INCLUDEFLAGS) $(DEFINES) \
 		   $(ARCH) -O2 -ffunction-sections -fdata-sections \
-		   -specs=$(SPECS)
+		   -specs=$(SPECS) -fcommon
 
 CXXFLAGS	+= -std=gnu++17 $(WARNFLAGS) $(INCLUDEFLAGS) $(DEFINES) \
 		   $(ARCH) -O2 -ffunction-sections -fdata-sections \
 		   -fno-exceptions -fno-rtti \
-		   -specs=$(SPECS)
+		   -specs=$(SPECS) -fcommon
 
 LDFLAGS		:= $(ARCH) $(LIBDIRSFLAGS) -Wl,-Map,$(MAP) $(DEFINES) \
 		   -Wl,--start-group $(LIBS) -Wl,--end-group -specs=$(SPECS)
@@ -151,11 +151,11 @@ LDFLAGS		:= $(ARCH) $(LIBDIRSFLAGS) -Wl,-Map,$(MAP) $(DEFINES) \
 # ------------------------
 
 OBJS_ASSETS	:= $(addsuffix .o,$(addprefix $(BUILDDIR)/,$(SOURCES_BIN))) \
-		   $(addsuffix .o,$(addprefix $(BUILDDIR)/,$(SOURCES_RAW))) \
+		   $(addsuffix .o,$(addprefix $(BUILDDIR)/,$(SOURCES_PCX))) \
 		   $(addsuffix .o,$(addprefix $(BUILDDIR)/,$(SOURCES_PNG)))
 
 HEADERS_ASSETS	:= $(patsubst %.bin,%_bin.h,$(addprefix $(BUILDDIR)/,$(SOURCES_BIN))) \
-		   $(patsubst %.raw,%_raw.h,$(addprefix $(BUILDDIR)/,$(SOURCES_RAW))) \
+		   $(patsubst %.pcx,%_pcx.h,$(addprefix $(BUILDDIR)/,$(SOURCES_PCX))) \
 		   $(patsubst %.png,%.h,$(addprefix $(BUILDDIR)/,$(SOURCES_PNG)))
 
 ifneq ($(SOURCES_AUDIO),)
@@ -263,11 +263,11 @@ $(BUILDDIR)/%.bin.o $(BUILDDIR)/%_bin.h : %.bin
 	$(V)$(BLOCKSDS)/tools/bin2c/bin2c $< $(@D)
 	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.bin.o $(BUILDDIR)/$*_bin.c
 
-$(BUILDDIR)/%.raw.o $(BUILDDIR)/%_raw.h : %.raw
+$(BUILDDIR)/%.pcx.o $(BUILDDIR)/%_pcx.h : %.pcx
 	@echo "  BIN2C   $<"
 	@$(MKDIR) -p $(@D)
 	$(V)$(BLOCKSDS)/tools/bin2c/bin2c $< $(@D)
-	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.raw.o $(BUILDDIR)/$*_raw.c
+	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.pcx.o $(BUILDDIR)/$*_pcx.c
 
 $(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
 	@echo "  GRIT    $<"

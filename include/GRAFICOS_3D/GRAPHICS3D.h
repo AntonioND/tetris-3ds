@@ -50,15 +50,15 @@ glMatrixMode(GL_MODELVIEW);
 
 
 glResetTextures(); 
-LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_1, 1, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
-LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_2, 2, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
-LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_3, 3, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
-LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_4, 4, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
-LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_5, 5, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_1_pcx, 1, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_2_pcx, 2, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_3_pcx, 3, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_4_pcx, 4, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Tetris_5_pcx, 5, TEXTURE_SIZE_32, TEXTURE_SIZE_32);
 
-LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_1, 7, TEXTURE_SIZE_128, TEXTURE_SIZE_256);
-LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_2, 8, TEXTURE_SIZE_128, TEXTURE_SIZE_256);
-LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_Borde, 9, TEXTURE_SIZE_128, TEXTURE_SIZE_32);
+LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_1_pcx, 7, TEXTURE_SIZE_128, TEXTURE_SIZE_256);
+LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_2_pcx, 8, TEXTURE_SIZE_128, TEXTURE_SIZE_256);
+LoadGLTexture_PCX_8bit((u8*)Textura_Escenario_Borde_pcx, 9, TEXTURE_SIZE_128, TEXTURE_SIZE_32);
 }
 
 
@@ -102,11 +102,11 @@ gluLookAt( -1.0, 0.0, 0.0,		//camera possition
 void Load_Disco_Textures()
 {
 glResetTextures(); 
-LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Suelo,  1, TEXTURE_SIZE_128, TEXTURE_SIZE_128); //Suelo
-LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Pared,  2, TEXTURE_SIZE_128, TEXTURE_SIZE_128); //Pared
-LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Asiento,3, TEXTURE_SIZE_128, TEXTURE_SIZE_32); //Asiento
-LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Metal,  4, TEXTURE_SIZE_32, TEXTURE_SIZE_32); //Metal
-LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Foco,   5, TEXTURE_SIZE_32, TEXTURE_SIZE_32); //Foco
+LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Suelo_pcx,  1, TEXTURE_SIZE_128, TEXTURE_SIZE_128); //Suelo
+LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Pared_pcx,  2, TEXTURE_SIZE_128, TEXTURE_SIZE_128); //Pared
+LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Asiento_pcx,3, TEXTURE_SIZE_128, TEXTURE_SIZE_32); //Asiento
+LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Metal_pcx,  4, TEXTURE_SIZE_32, TEXTURE_SIZE_32); //Metal
+LoadGLTexture_PCX_8bit((u8*)Textura_Disco_Foco_pcx,   5, TEXTURE_SIZE_32, TEXTURE_SIZE_32); //Foco
 }
 
 //Para simplificar las cosas...

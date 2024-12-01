@@ -1,6 +1,6 @@
-#include "as_lib9.h"	// include our own as_lib9.h before including the one in PALib!
+//#include "as_lib9.h"	// include our own as_lib9.h before including the one in PALib!
 #include <PA9.h> 
-#include <header.h>
+#include "header.h"
 #include "splash.c"
 
 //printf("\n\nRam usage: Culling %s", ( held & KEY_A) ? "none" : "back faces" );
@@ -85,9 +85,10 @@ int main(int argc, char** argv)
 		Comprobar_FAT();
 		//Convertir_Nombre(); //Convertir de ASCII a el formato de este juego de 3D.
 		
+#if 0
 		PA_InitASLibForMP3(AS_MODE_MP3 //| AS_MODE_SURROUND 
 						| AS_MODE_16CH);	
-						
+#endif
 		AS_SetMasterVolume(MASTER_SOUND);
 		}
 	

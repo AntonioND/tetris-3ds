@@ -17,7 +17,7 @@ typedef struct
 	_KEY_STATE_ A,B,X,Y,Select,Start,L,R,Up,Down,Right,Left,Anykey,Touch;
 	} _KEYSINFO_;
 	
-_KEYSINFO_ Keys;
+_KEYSINFO_ KI;
 
 void Anular_Newpress() //:P
 {
@@ -85,58 +85,58 @@ void My_Press_Buttons()
 {
 
 if(Pad.Newpress.Anykey) //Preparar boton
-	{Keys.Anykey.AlreadyPressed = 1; Keys.Anykey.Held = 0;}
+	{KI.Anykey.AlreadyPressed = 1; KI.Anykey.Held = 0;}
 if(Pad.Released.Anykey) //Reset
-	{Keys.Anykey.AlreadyPressed = 0; Keys.Anykey.Held = 0;}
+	{KI.Anykey.AlreadyPressed = 0; KI.Anykey.Held = 0;}
 if(Pad.Held.Anykey)
 	{
-	if(!Keys.Anykey.AlreadyPressed) //Si no estaba pulsado
+	if(!KI.Anykey.AlreadyPressed) //Si no estaba pulsado
 		{
 		Pad.Newpress.Anykey = 1;
-		Keys.Anykey.AlreadyPressed = 1;
-		Keys.Anykey.Held = 0;
+		KI.Anykey.AlreadyPressed = 1;
+		KI.Anykey.Held = 0;
 		}
 	else //Ya estaba pulsado
 		{
-		if(Keys.Anykey.Held) //Si estaba pulsado...
+		if(KI.Anykey.Held) //Si estaba pulsado...
 			{/*Nada*/}
 		else //Si no estaba pulsado
-			{Keys.Anykey.Held = 1;}
+			{KI.Anykey.Held = 1;}
 		}	
 	}
 else //Si no esta pulsado
 	{
-	if(Keys.Anykey.Held) //Se acaba de soltar
-		{ Keys.Anykey.Held = 0; Pad.Released.Anykey = 1; }
+	if(KI.Anykey.Held) //Se acaba de soltar
+		{ KI.Anykey.Held = 0; Pad.Released.Anykey = 1; }
 	//No se ha tocado
 	else {/*Nada*/}
 	}
 	
 	
 if(Pad.Newpress.A) //Preparar boton
-	{Keys.A.AlreadyPressed = 1; Keys.A.Held = 0;}
+	{KI.A.AlreadyPressed = 1; KI.A.Held = 0;}
 if(Pad.Released.A) //Reset
-	{Keys.A.AlreadyPressed = 0; Keys.A.Held = 0;}
+	{KI.A.AlreadyPressed = 0; KI.A.Held = 0;}
 if(Pad.Held.A)
 	{
-	if((!Keys.A.AlreadyPressed) && (!Pad.Newpress.A)) //Si no estaba pulsado
+	if((!KI.A.AlreadyPressed) && (!Pad.Newpress.A)) //Si no estaba pulsado
 		{
 		Pad.Newpress.A = 1;
-		Keys.A.AlreadyPressed = 1;
-		Keys.A.Held = 0;
+		KI.A.AlreadyPressed = 1;
+		KI.A.Held = 0;
 		}
 	else //Ya estaba pulsado
 		{
-		if(Keys.A.Held) //Si estaba pulsado...
+		if(KI.A.Held) //Si estaba pulsado...
 			{/*Nada*/}
 		else //Si no estaba pulsado
-			{Keys.A.Held = 1;}
+			{KI.A.Held = 1;}
 		}	
 	}
 else //Si no esta pulsado
 	{
-	if((Keys.A.Held) && (!Pad.Released.A))//Se acaba de soltar
-		{ Keys.A.Held = 0; Pad.Released.A = 1; Keys.A.AlreadyPressed = 0;}
+	if((KI.A.Held) && (!Pad.Released.A))//Se acaba de soltar
+		{ KI.A.Held = 0; Pad.Released.A = 1; KI.A.AlreadyPressed = 0;}
 	//No se ha tocado
 	else {/*Nada*/}
 	}
