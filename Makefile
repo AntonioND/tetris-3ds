@@ -40,7 +40,7 @@ NITROFSDIR	:=
 # Defines passed to all files
 # ---------------------------
 
-DEFINES		:=
+DEFINES		:= -DPA_NO_DEPRECATION
 
 # Libraries
 # ---------
