@@ -10,8 +10,6 @@ int main(int argc, char** argv)
     defaultExceptionHandler();
 
     PA_Init();
-    PA_InitVBL();
-    PA_InitRand();
 
     //Splash_Screen();
 
