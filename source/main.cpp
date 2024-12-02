@@ -85,7 +85,12 @@ int main(int argc, char** argv)
 		Comprobar_FAT();
 		//Convertir_Nombre(); //Convertir de ASCII a el formato de este juego de 3D.
 		
+
+		PA_VBLFunctionInit(AS_SoundVBL);
+		AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
+		AS_SetDefaultSettings(AS_PCM_8BIT, 11025, AS_SURROUND);
 #if 0
+
 		PA_InitASLibForMP3(AS_MODE_MP3 //| AS_MODE_SURROUND 
 						| AS_MODE_16CH);	
 #endif
