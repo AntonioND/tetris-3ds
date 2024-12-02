@@ -1,10 +1,6 @@
 #ifndef __RECORDS__
 #define __RECORDS__
 
-char* name_ = "12_456_89_";
-char* score_ = "__--__";
-char* lines_ = "__---";
-
 u8 newrecord;
 
 u8 Add_Record(char* name, u32 score, u16 lines)
@@ -74,15 +70,18 @@ Guardar_Datos();
 //Escribir records
 for(auxiliar = 0; auxiliar < 10; auxiliar++)
 	{
-	sprintf(name_,"%s",(char*)Record[auxiliar].Nombre);
-	sprintf(score_,"%d",(int)Record[auxiliar].Puntuacion);
-	sprintf(lines_,"%d",(int)Record[auxiliar].Lineas);
-	
-	PA_CenterSmartText(1, 7,6 + (19 * auxiliar),119,15 + (19 * auxiliar),name_, auxiliar + 1 /*Color*/ , 2, 0); 
-	PA_CenterSmartText(1, 127,6 + (19 * auxiliar),199,15 + (19 * auxiliar),score_, auxiliar + 1 /*Color*/ , 2, 0); 
-	PA_CenterSmartText(1, 207,6 + (19 * auxiliar),248,15 + (19 * auxiliar),lines_, auxiliar + 1 /*Color*/ , 2, 0); 
+	char str[30];
+
+	snprintf(str, sizeof(str), "%s", (char *)Record[auxiliar].Nombre);
+	PA_CenterSmartText(1, 7,6 + (19 * auxiliar),119,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0); 
+
+	snprintf(str, sizeof(str), "%d", (int)Record[auxiliar].Puntuacion);
+	PA_CenterSmartText(1, 127,6 + (19 * auxiliar),199,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0);
+
+	snprintf(str, sizeof(str), "%d", (int)Record[auxiliar].Lineas);
+	PA_CenterSmartText(1, 207,6 + (19 * auxiliar),248,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0);
 	}
-	
+
 //Bucle de espera
 while(!(Stylus.Newpress || Pad.Newpress.Anykey))
 	{

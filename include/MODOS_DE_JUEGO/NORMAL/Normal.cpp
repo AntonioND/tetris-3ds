@@ -394,7 +394,7 @@ lasttime = (u8)PA_RTC.Minutes;
 if(UPDATE_2D)
 	{
 	//Dibujar puntuación
-	char str[30];
+	char str[50];
 	snprintf(str, sizeof(str), " Score: %d  ",(int)puntuacion_total);
 	PA_SmartText(1, 8,8,183,16 ,str, 1, // Color
 				4, 3, 25);

@@ -515,7 +515,7 @@ if(UPDATE_2D)
 	//PA_Clear8bitBg(1);
 
 	//Dibujar puntuaciones
-	char str[30];
+	char str[50];
 	snprintf(str, sizeof(str), "Score J1: %d  ",(int)puntuacion_total);
 	PA_SmartText(1, 55,15,210,30 ,str, 1, // Color
 				3, 0, 25);

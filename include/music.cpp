@@ -156,21 +156,21 @@ if((!SONG_ERROR) && (!FAT_ERROR))
 			
 			//PA_InitASLibForMP3(AS_MODE_MP3 /*| AS_MODE_SURROUND*/ | AS_MODE_16CH);	
 			
-			Error_Log = "Error decoding SONG_XX.mp3     ";
-			sprintf(Error_Log,"Error decoding SONG_%02d.mp3 \r\n",Current_Song);
+			char Error_Log[100];
+			snprintf(Error_Log, sizeof(Error_Log), "Error decoding SONG_%02d.mp3 \r\n", Current_Song);
 			
 			//Guardar informacion en un archivo
 			FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
 			if(ERROR_LOG_WRITE_FILE)
 				{
-				fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+				fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 				fclose(ERROR_LOG_WRITE_FILE);
 				}
 			else
 				{
 				fclose(ERROR_LOG_WRITE_FILE);	
 				FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "wb"); //wb = create/truncate & write
-				fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+				fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 				fclose(ERROR_LOG_WRITE_FILE);	
 				}
 			
@@ -244,21 +244,21 @@ if((!SONG_ERROR) && (!FAT_ERROR))
 			
 			//PA_InitASLibForMP3(AS_MODE_MP3 /*| AS_MODE_SURROUND*/ | AS_MODE_16CH);	
 			
-			Error_Log = "Error decoding MENU.mp3     ";
-			sprintf(Error_Log,"Error decoding MENU.mp3 \r\n ");
+			char Error_Log[100];
+			snprintf(Error_Log, sizeof(Error_Log), "Error decoding MENU.mp3 \r\n ");
 				
 			//Guardar informacion en un archivo
 			FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
 			if(ERROR_LOG_WRITE_FILE)
 				{
-				fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+				fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 				fclose(ERROR_LOG_WRITE_FILE);
 				}
 			else
 				{
 				fclose(ERROR_LOG_WRITE_FILE);	
 				FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "wb"); //wb = create/truncate & write
-				fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+				fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 				fclose(ERROR_LOG_WRITE_FILE);	
 				}
 			}
@@ -309,21 +309,21 @@ void Write_Error_Log(int numero)
 // if(AS_GetMP3Status() & MP3ST_DECODE_ERROR)     <-- Usar esto
 if((!SONG_ERROR) && (!FAT_ERROR))
 	{
-	Error_Log = "Error decoding SONG_XX.mp3     ";
-	sprintf(Error_Log,"Error decoding SONG_%02d.mp3 \r\n ",numero);
+	char Error_Log[100];
+	snprintf(Error_Log, sizeof(Error_Log), "Error decoding SONG_%02d.mp3 \r\n ", numero);
 	
 	//Guardar informacion en un archivo
 	FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
 	if(ERROR_LOG_WRITE_FILE)
 		{
-		fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+		fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 		fclose(ERROR_LOG_WRITE_FILE);
 		}
 	else
 		{
 		fclose(ERROR_LOG_WRITE_FILE);	
 		FILE* ERROR_LOG_WRITE_FILE = fopen ("/Tetris_3DS/Error_Log.txt", "wb"); 
-		fwrite(Error_Log, 28, 1, ERROR_LOG_WRITE_FILE);
+		fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
 		fclose(ERROR_LOG_WRITE_FILE);	
 		}		
 	}
