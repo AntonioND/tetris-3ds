@@ -233,6 +233,7 @@ glMaterialShinyness();
 
 glClearColor((int)Fondo_Menu.r,(int)Fondo_Menu.g,(int)Fondo_Menu.b,31);
 
+glBindTexture(0, 0);
 
 glTranslatef(Figura_Menu.x,Figura_Menu.y,Figura_Menu.z);
 glRotateX(Figura_Menu.gx);
