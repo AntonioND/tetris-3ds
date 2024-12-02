@@ -94,7 +94,7 @@ PIEZA_TETRIS Pieza_CPU;
 u8 Tipo_Pieza[5]; // 0 = Actual
 u8 Tipo_Pieza_CPU[5];
 
-u8 Colisiones_Actual[16]; //Cuadrícula
+u8 Colisiones_Actual[16]; //CuadrÃ­cula
 u8 Colisiones_Actual_CPU[16];
 
 typedef struct
@@ -127,7 +127,7 @@ void PowerOFF_Countdown(u8 seconds)
 time_to_shutdown = (seconds + 1) * 60;
 PA_Init2D();
 PA_ResetBgSys();
-PA_InitCustomText(1, 0, custom_font); //2º = background number
+PA_InitCustomText(1, 0, custom_font); //2Âº = background number
 
 while(time_to_shutdown > 0)
 	{

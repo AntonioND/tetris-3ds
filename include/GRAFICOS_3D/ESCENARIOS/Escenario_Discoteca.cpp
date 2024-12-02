@@ -212,7 +212,7 @@ void Draw_Bola()
 {
 glBindTexture(GL_TEXTURE_2D,texture[0]);
 glBegin(GL_TRIANGLES);
-	//1ª vuelta
+	//1Âª vuelta
 	glColor3f(0.9,0.9,0.9);
 	glVertex3v16(0,19034,0);
 	glVertex3v16(0,18723,-1567);
@@ -278,7 +278,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(599,18723,-1448);
 	glVertex3v16(0,18723,-1567);
 	
-	//2ª vuelta
+	//2Âª vuelta
 	glColor3f(1,1,1);
 	glVertex3v16(0,18723,-1567);
 	glVertex3v16(0,17835,-2896);
@@ -392,7 +392,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,17835,-2896);
 	glVertex3v16(0,18723,-1567);
 	
-	//3ª vuelta
+	//3Âª vuelta
 	glColor3f(0.9,0.9,0.9);
 	glVertex3v16(0,17835,-2896);
 	glVertex3v16(0,16506,-3784);
@@ -506,7 +506,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,16506,-3784);
 	glVertex3v16(0,17835,-2896);
 
-	//4ª vuelta
+	//4Âª vuelta
 	glColor3f(1,1,1);	
 	glVertex3v16(0,16506,-3784);
 	glVertex3v16(0,14938,-4096);
@@ -620,7 +620,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,14938,-4096);
 	glVertex3v16(0,16506,-3784);
 	
-	//5ª vuelta
+	//5Âª vuelta
 	glColor3f(0.9,0.9,0.9);
 	glVertex3v16(0,14938,-4096);
 	glVertex3v16(0,13371,-3784);
@@ -734,7 +734,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,13371,-3784);
 	glVertex3v16(0,14938,-4096);
 	
-	//6ª vuelta
+	//6Âª vuelta
 	glColor3f(1,1,1);
 	glVertex3v16(0,13371,-3784);
 	glVertex3v16(0,12042,-2896);
@@ -848,7 +848,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,12042,-2896);
 	glVertex3v16(0,13371,-3784);
 	
-	//7ª vuelta
+	//7Âª vuelta
 	glColor3f(0.9,0.9,0.9);
 	glVertex3v16(0,12042,-2896);
 	glVertex3v16(0,11154,-1567);
@@ -962,7 +962,7 @@ glBegin(GL_TRIANGLES);
 	glVertex3v16(0,11154,-1567);
 	glVertex3v16(0,12042,-2896);
 	
-	//8ª vuelta
+	//8Âª vuelta
 	glColor3f(1,1,1);
 	glVertex3v16(0,10842,0);
 	glVertex3v16(-599,11154,-1448);
@@ -1324,7 +1324,7 @@ glBegin(GL_QUADS);
 	glTexCoord2f(0,1);
 	glVertex3v16(-9762,4722,12269);
 	
-	//Lateral pequeño
+	//Lateral pequeÃ±o
 	glColor3f(Limitar_float(0,1,(focoizq[0].red + focoizq[1].red / 2) - 0.5),  
 			  Limitar_float(0,1,(focoizq[0].green + focoizq[1].green / 2) - 0.5),  
 			  Limitar_float(0,1,(focoizq[0].blue + focoizq[1].blue / 2) - 0.5));
@@ -1380,7 +1380,7 @@ glBegin(GL_QUADS);
 	glTexCoord2f(0,1);
 	glVertex3v16(9642,0,-12390);
 	
-	//Lateral pequeño
+	//Lateral pequeÃ±o
 	glColor3f(Limitar_float(0,1,(focoder[0].red + focoder[1].red / 2) - 0.5),  
 			  Limitar_float(0,1,(focoder[0].green + focoder[1].green / 2) - 0.5),  
 			  Limitar_float(0,1,(focoder[0].blue + focoder[1].blue / 2) - 0.5));

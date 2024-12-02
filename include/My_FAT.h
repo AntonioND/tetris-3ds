@@ -57,7 +57,7 @@ for(auxiliar = 0; auxiliar < 10; auxiliar ++)
 	}
 fclose(CONFIG_WRITE_FILE);
 
-//Añadir checsum al final
+//AÃ±adir checsum al final
 FILE* CONFIG_CHECKSUM_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //wb = create/truncate & write
 if (CONFIG_CHECKSUM_FILE == NULL)
 	return;
@@ -115,7 +115,7 @@ for(auxiliar = 0; auxiliar < 163; auxiliar ++)
 fread(&auxiliar, 4, 1, CONFIG_CHECK_READ_FILE);
 fclose(CONFIG_CHECK_READ_FILE);
 
-if(auxiliar == Checksum(acumulador)) //Si el archivo está bien	
+if(auxiliar == Checksum(acumulador)) //Si el archivo estÃ¡ bien	
 	{
 	FILE* CONFIG_READ_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //rb = read
 
@@ -159,7 +159,7 @@ if(!FAT_ERROR)
 			break;
 			
 		case 1:
-			//Archivo dañado
+			//Archivo daÃ±ado
 			texture_selected = 2;
 			camera_selected = 2;
 			MASTER_SOUND = 64;

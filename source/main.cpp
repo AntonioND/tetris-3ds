@@ -52,7 +52,7 @@ int main(int argc, char** argv)
 	for(auxiliar = 0;auxiliar < 30; auxiliar++)
 		PA_WaitForVBL(); 
 	
-	PA_InitCustomText(1, 0, custom_font); //2บ = background number
+	PA_InitCustomText(1, 0, custom_font); //2ยบ = background number
 	
 	if(Pad.Held.L && Pad.Held.R)//No iniciar FAT
 		{

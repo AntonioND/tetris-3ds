@@ -358,12 +358,12 @@ while(JUEGO_ACTIVO)
 	Dibujar_Pieza_Actual_CPU();
 	
 	//-----------
-    //Gráficos 2D
+    //GrÃ¡ficos 2D
     //-----------
 	Graficos_2D_Contra_CPU();
 	
 	//-----------
-	//Gráficos 3D
+	//GrÃ¡ficos 3D
 	//-----------
 	Graficos_3D_Contra_CPU();
 
@@ -437,12 +437,12 @@ while(JUEGO_ACTIVO)
 	if((Pad.Held.Anykey || Stylus.Held) && (girarcount > 98)) JUEGO_ACTIVO = false;
 	
 	//-----------
-    //Gráficos 2D
+    //GrÃ¡ficos 2D
     //-----------
 	Graficos_2D_Contra_CPU();
 	
 	//-----------
-	//Gráficos 3D
+	//GrÃ¡ficos 3D
 	//-----------
 	Graficos_3D_Contra_CPU();
 

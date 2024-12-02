@@ -12,7 +12,7 @@ char* Error_Log;
 
 void Wait_To_Stop_Song()
 {
-//NO VA ¿?
+//NO VA Â¿?
 
 /*if((!SONG_ERROR) && (!FAT_ERROR))
 	{

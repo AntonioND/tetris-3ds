@@ -1,4 +1,4 @@
-//Incluir los archivos de gr·ficos
+//Incluir los archivos de gr√°ficos
 
 #ifndef __MY_3D__
 #define __MY_3D__

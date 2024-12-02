@@ -438,7 +438,7 @@ case 13:
 	glVertex3v16(8,0,2155);
 	break;
 case 14:
-	//Ñ
+	//Ã‘
 	glVertex3v16(844,0,-1111);
 	glVertex3v16(844,0,-301);
 	glVertex3v16(1655,0,-1111);
@@ -879,7 +879,7 @@ case 31:
 	glVertex3v16(1607,0,1972);
 	break;
 case 32:
-	//¡
+	//Â¡
 	glVertex3v16(820,0,-654);
 	glVertex3v16(820,0,1928);
 	glVertex3v16(1655,0,-654);
@@ -909,7 +909,7 @@ case 33:
 	glVertex3v16(862,0,2024);
 	break;
 case 34:
-	//¿
+	//Â¿
 	glVertex3v16(827,0,-456);
 	glVertex3v16(827,0,354);
 	glVertex3v16(1638,0,-456);

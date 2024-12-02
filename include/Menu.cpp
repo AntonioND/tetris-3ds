@@ -170,7 +170,7 @@ while (MENU_ACTIVO)
 			Opciones_Menu();	
 			Reload_Menu();
 			}
-		else if(PA_StylusInZone(197,168, 255,191)) //Créditos
+		else if(PA_StylusInZone(197,168, 255,191)) //CrÃ©ditos
 			{
 			Draw16bitRectangleEx(1, 197,168,255,191, PA_RGB(31,31,31),4);
 				

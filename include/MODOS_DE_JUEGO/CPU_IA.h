@@ -73,7 +73,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 		//Si el de abajo esta vacio o esta en el borde
 		if(((Colisiones_Actual_CPU[auxiliar + 4] == 0) && (auxiliar < 12)) || (auxiliar > 12))
 			{
-			//Si est· dentro del escenario a lo ancho
+			//Si est√° dentro del escenario a lo ancho
 			if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
 				{
 				
@@ -96,7 +96,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	if(Colisiones_Actual_CPU[auxiliar] == 1)
 		{
 		//Arriba
-		//Si est· dentro del escenario
+		//Si est√° dentro del escenario
 		if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
 		if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) + 2) == Pieza_CPU.Y + (auxiliar / 4) + 2)	
 			{			
@@ -104,7 +104,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 				acumulador++;
 			}
 		//Abajo
-		//Si est· dentro del escenario
+		//Si est√° dentro del escenario
 		if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
 		if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4)) == Pieza_CPU.Y + (auxiliar / 4))	
 			{			
@@ -112,7 +112,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 				acumulador++;
 			}	
 		//Derecha
-		//Si est· dentro del escenario
+		//Si est√° dentro del escenario
 		if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4)) == Pieza_CPU.X + (auxiliar % 4))
 		if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)	
 			{			
@@ -120,7 +120,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 				acumulador++;
 			}
 		//Izquierda
-		//Si est· dentro del escenario
+		//Si est√° dentro del escenario
 		if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 2) == Pieza_CPU.X + (auxiliar % 4) - 2)
 		if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)	
 			{			
@@ -132,7 +132,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	/*
 	if(Colisiones_Actual_CPU[auxiliar] == 0)
 		{
-		//Si est· dentro del escenario a lo ancho
+		//Si est√° dentro del escenario a lo ancho
 		if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
 		if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)	
 			{			
@@ -496,7 +496,7 @@ for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 	Escenario_Tetris_CPU[auxiliar2][altura].dibujar = 0;
 	}
 
-//Desplazar lÌneas hacia abajo
+//Desplazar l√≠neas hacia abajo
 for(auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar ++)
 	{
 	for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
@@ -508,7 +508,7 @@ for(auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar ++)
 		}
 	}
 
-//Borrar ˙ltima linea
+//Borrar √∫ltima linea
 for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 	{
 	Escenario_Tetris_CPU[auxiliar2][16].dibujar = 0;
@@ -516,7 +516,7 @@ for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 }
 
 
-//Devuelve las lÌneas completas
+//Devuelve las l√≠neas completas
 u8 Comprobar_Lineas_Completas_CPU()
 {
 auxiliar4 = 0;
@@ -705,7 +705,7 @@ switch(Tipo_Pieza_CPU[0])
 
 
 
-//Devuelve 1 si est· ocupado, 0 si no. Los bordes cuentan como 1.
+//Devuelve 1 si est√° ocupado, 0 si no. Los bordes cuentan como 1.
 u8 Estado_Cuadricula_CPU(int x, int y)
 {
 if((Limitar_int(0,9,x) != x) || (y < 0)) return 1;
@@ -719,7 +719,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual_CPU[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y est· a la abajo
+		//Si el siguiente esta vacio y est√° a la abajo
 		if((Colisiones_Actual_CPU[auxiliar + 4] == 0) || (auxiliar / 4 == 3) )
 			{
 			if(Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
@@ -739,7 +739,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual_CPU[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y est· a la derecha 
+		//Si el siguiente esta vacio y est√° a la derecha 
 		if((Colisiones_Actual_CPU[auxiliar + 1] == 0) || (auxiliar % 4 == 3) )
 			{
 			//if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) - 1) == Pieza_CPU.Y + (auxiliar / 4) - 1)
@@ -759,7 +759,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual_CPU[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y est· a la derecha 
+		//Si el siguiente esta vacio y est√° a la derecha 
 		if((Colisiones_Actual_CPU[auxiliar - 1] == 0) || (auxiliar % 4 == 0) )
 			{
 			//if(Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) - 1) == Pieza_CPU.Y + (auxiliar / 4) - 1)
@@ -793,7 +793,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 		}
 	}
 
-//Probar subiendo la pieza una posiciÛn
+//Probar subiendo la pieza una posici√≥n
 if(auxiliar2 == 1)
 	{
 	auxiliar2 = 2;

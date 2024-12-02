@@ -262,12 +262,12 @@ while(JUEGO_ACTIVO)
 	
 
 	//-----------
-    //Gráficos 2D
+    //GrÃ¡ficos 2D
     //-----------
 	Graficos_2D_Normal();
 	
 	//-----------
-	//Gráficos 3D
+	//GrÃ¡ficos 3D
 	//-----------
 	Graficos_3D_Normal();
 	
@@ -330,12 +330,12 @@ while(JUEGO_ACTIVO)
 	if((Pad.Held.Anykey || Stylus.Newpress) && (girarcount > 98)) JUEGO_ACTIVO = false;
 	
 	//-----------
-    //Gráficos 2D
+    //GrÃ¡ficos 2D
     //-----------
 	Graficos_2D_Normal();
 	
 	//-----------
-	//Gráficos 3D
+	//GrÃ¡ficos 3D
 	//-----------
 	Graficos_3D_Normal();
 
@@ -393,7 +393,7 @@ lasttime = (u8)PA_RTC.Minutes;
 
 if(UPDATE_2D)
 	{
-	//Dibujar puntuación
+	//Dibujar puntuaciÃ³n
 	almacen_string = "_    ALMACEN_STRING    _";
 	sprintf(almacen_string," Score: %d  ",(int)puntuacion_total);
 	PA_SmartText(1, 8,8,183,16 ,almacen_string, 1, // Color 

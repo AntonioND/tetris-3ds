@@ -68,7 +68,7 @@ if((Stylus.DblClick) && (Stylus.Uptime < 30) && (stylus_dblclicused == 0))
 	}
 else if((Stylus.Newpress) && (stylus_dblclicused == 1)) stylus_dblclicused = 0;
 	
-//Caer rápido
+//Caer rÃ¡pido
 if((Stylus.X < 63) && (Stylus.Held)) Pad.Held.Left = 1;
 
 
@@ -122,7 +122,7 @@ if((Stylus.DblClick) && (Stylus.Uptime < 30) && (stylus_dblclicused == 0))
 	}
 else if((Stylus.Newpress) && (stylus_dblclicused == 1)) stylus_dblclicused = 0;
 	
-//Caer rápido
+//Caer rÃ¡pido
 if((Stylus.Y > 160) && (Stylus.Held)) Pad.Held.Down = 1;
 
 
@@ -251,7 +251,7 @@ for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 	Escenario_Tetris[auxiliar2][altura].dibujar = 0;
 	}
 
-//Desplazar líneas hacia abajo
+//Desplazar lÃ­neas hacia abajo
 for(auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar ++)
 	{
 	for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
@@ -263,7 +263,7 @@ for(auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar ++)
 		}
 	}
 
-//Borrar última linea
+//Borrar Ãºltima linea
 for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 	{
 	Escenario_Tetris[auxiliar2][16].dibujar = 0;
@@ -271,7 +271,7 @@ for(auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
 }
 
 
-//Devuelve las líneas completas
+//Devuelve las lÃ­neas completas
 u8 Comprobar_Lineas_Completas()
 {
 auxiliar4 = 0;
@@ -460,7 +460,7 @@ switch(Tipo_Pieza[0])
 
 
 
-//Devuelve 1 si está ocupado, 0 si no. Los bordes cuentan como 1.
+//Devuelve 1 si estÃ¡ ocupado, 0 si no. Los bordes cuentan como 1.
 u8 Estado_Cuadricula(int x, int y)
 {
 if((Limitar_int(0,9,x) != x) || (y < 0)) return 1;
@@ -474,7 +474,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y está a la abajo
+		//Si el siguiente esta vacio y estÃ¡ a la abajo
 		if((Colisiones_Actual[auxiliar + 4] == 0) || (auxiliar / 4 == 3) )
 			{
 			if(Limitar_int(0,9,Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1)
@@ -494,7 +494,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y está a la derecha 
+		//Si el siguiente esta vacio y estÃ¡ a la derecha 
 		if((Colisiones_Actual[auxiliar + 1] == 0) || (auxiliar % 4 == 3) )
 			{
 			//if(Limitar_int(0,16,Pieza.Y + (auxiliar / 4) - 1) == Pieza.Y + (auxiliar / 4) - 1)
@@ -514,7 +514,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 	{
 	if(Colisiones_Actual[auxiliar] == 1)
 		{
-		//Si el siguiente esta vacio y está a la derecha 
+		//Si el siguiente esta vacio y estÃ¡ a la derecha 
 		if((Colisiones_Actual[auxiliar - 1] == 0) || (auxiliar % 4 == 0) )
 			{
 			//if(Limitar_int(0,16,Pieza.Y + (auxiliar / 4) - 1) == Pieza.Y + (auxiliar / 4) - 1)
@@ -548,7 +548,7 @@ for(auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
 		}
 	}
 
-//Probar subiendo la pieza una posición
+//Probar subiendo la pieza una posiciÃ³n
 if(auxiliar2 == 1)
 	{
 	auxiliar2 = 2;
