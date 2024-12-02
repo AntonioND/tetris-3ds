@@ -7,7 +7,7 @@
 #include "OBJETOS/3D_BOX.cpp"
 #include "OBJETOS/Figura_Luz.cpp"
 #include "TEXTO/numeros.h"
-#include "TEXTO/LETRAS.cpp"
+#include "TEXTO/letras.h"
 #include <header.h>
 
 void My_Init_3D()
