@@ -23,9 +23,9 @@ PA_EasyBgLoad(1,2,inferior_disco);
 PA_SetBgPalCol(1, 1, PA_RGB(0, 0, 0));	
 PA_SetBgColor(1, PA_RGB(24, 24, 24));
 
-hora = " 00:00 "; 	
-sprintf(hora," %02d ", Current_Song);
-PA_CenterSmartText(1, 193,19,244,50 ,hora, 1 /*Color*/ , 4, 0);
+char songnum[6];
+snprintf(songnum, sizeof(songnum), " %02d ", Current_Song);
+PA_CenterSmartText(1, 193,19,244,50 ,songnum, 1 /*Color*/ , 4, 0);
 
 PA_LoadSpritePal(1, 0,(void*)cursor_sonido_Pal);
 PA_CreateSprite(1, 0,(void*)cursor_sonido_Sprite, OBJ_SIZE_16X32,1, 0, (int)(14 + ((float)MASTER_SOUND / 128 * 227) - 8),162);
@@ -77,9 +77,9 @@ while(!Pad.Newpress.Start)
 		Current_Song = Limitar_int(0,numsongs, Current_Song  + Pad.Newpress.Up - Pad.Newpress.Down);
 		if(Pad.Newpress.Up || Pad.Newpress.Down)
 			{
-			hora = " 00:00 "; 
-			sprintf(hora," %02d ", Current_Song);
-			PA_CenterSmartText(1, 193,19,244,50 ,hora, 1 /*Color*/ , 4, 0);
+			char songnum[6];
+			snprintf(songnum, sizeof(songnum), " %02d ", Current_Song);
+			PA_CenterSmartText(1, 193,19,244,50 ,songnum, 1 /*Color*/ , 4, 0);
 			}		
 		
 		

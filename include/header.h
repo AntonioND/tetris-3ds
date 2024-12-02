@@ -54,7 +54,6 @@ bool READY;
 
 u8 texture_selected, camera_selected, USE_SOUND, MASTER_SOUND;
 
-char *Puntuacion_string, *almacen_string, *hora;
 float velocidad;
 int framecount, velocidadcount, girarcount, velocidadcount_CPU, girarcount_CPU;
 

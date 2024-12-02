@@ -515,36 +515,32 @@ if(UPDATE_2D)
 	//PA_Clear8bitBg(1);
 
 	//Dibujar puntuaciones
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string,"Score J1: %d  ",(int)puntuacion_total);
-	PA_SmartText(1, 55,15,210,30 ,almacen_string, 1, // Color 
-				3, 0, 25); 
-				
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string,"Score J2: %d  ",(int)puntuacion_total_CPU);
-	PA_SmartText(1, 55,44,210,59 ,almacen_string, 4, // Color 
-				3, 0, 25); 
-				
-				
-	//Dibujar lineas
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string,"Lines: %d  ",(int)linecount);
-	PA_SmartText(1, 31,87,124,102 ,almacen_string, 1 , 3, 0, 18); 
+	char str[30];
+	snprintf(str, sizeof(str), "Score J1: %d  ",(int)puntuacion_total);
+	PA_SmartText(1, 55,15,210,30 ,str, 1, // Color
+				3, 0, 25);
 
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string,"Lines: %d  ",(int)linecount_CPU);
-	PA_SmartText(1, 131,87,224,102 ,almacen_string, 4 , 3, 0, 18); 
+	snprintf(str, sizeof(str), "Score J2: %d  ",(int)puntuacion_total_CPU);
+	PA_SmartText(1, 55,44,210,59 ,str, 4, // Color
+				3, 0, 25);
+
+
+	//Dibujar lineas
+	snprintf(str, sizeof(str), "Lines: %d  ",(int)linecount);
+	PA_SmartText(1, 31,87,124,102 ,str, 1 , 3, 0, 18);
+
+	snprintf(str, sizeof(str), "Lines: %d  ",(int)linecount_CPU);
+	PA_SmartText(1, 131,87,224,102 ,str, 4 , 3, 0, 18);
 
 	//Dibujar nombre
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string," Player:  %s  ", (char*)PA_UserInfo.Name);
-	PA_SmartText(1, 12,172,175,184 ,almacen_string, 2, // Color 
-				3, 0, PA_UserInfo.NameLength + 11); 
+	snprintf(str, sizeof(str), " Player:  %s  ", (char*)PA_UserInfo.Name);
+	PA_SmartText(1, 12,172,175,184 ,str, 2, // Color
+				3, 0, PA_UserInfo.NameLength + 11);
 
 	//Dibujar hora
-	hora = " 00:00 ";
-	sprintf(hora," %02d:%02d ",(int)PA_RTC.Hour, (int)PA_RTC.Minutes);
-	PA_CenterSmartText(1, 180,171,242,185 ,hora, 3 /*Color*/ , 3, 0   );//, 12); 
+	char hora[20];
+	snprintf(hora, sizeof(hora), " %02d:%02d ",(int)PA_RTC.Hour, (int)PA_RTC.Minutes);
+	PA_CenterSmartText(1, 180,171,242,185 ,hora, 3 /*Color*/ , 3, 0   );//, 12);
 	}
 }
 

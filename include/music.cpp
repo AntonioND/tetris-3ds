@@ -4,7 +4,7 @@
 #include <header.h>
 
 u8 Current_Song;
-char* Song_Path;
+char Song_Path[50];
 bool SONG_ERROR;
 s8 Wait_Time;
 char* Error_Log;
@@ -27,14 +27,12 @@ void Wait_To_Stop_Song()
 
 void Set_New_Song_Path()
 {
-Song_Path = "/Tetris_3DS/Song___.mp3";
-sprintf(Song_Path,"/Tetris_3DS/Song_%02d.mp3", Current_Song);
+    snprintf(Song_Path, sizeof(Song_Path), "/Tetris_3DS/Song_%02d.mp3", Current_Song);
 }
 
 void Set_Menu_Song_Path()
 {
-Song_Path = "/Tetris_3DS/Song___.mp3";
-sprintf(Song_Path,"/Tetris_3DS/MENU.mp3");
+    snprintf(Song_Path, sizeof(Song_Path), "/Tetris_3DS/MENU.mp3");
 }
 
 void Pause_Song()

@@ -394,25 +394,24 @@ lasttime = (u8)PA_RTC.Minutes;
 if(UPDATE_2D)
 	{
 	//Dibujar puntuación
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string," Score: %d  ",(int)puntuacion_total);
-	PA_SmartText(1, 8,8,183,16 ,almacen_string, 1, // Color 
-				4, 3, 25); 
+	char str[30];
+	snprintf(str, sizeof(str), " Score: %d  ",(int)puntuacion_total);
+	PA_SmartText(1, 8,8,183,16 ,str, 1, // Color
+				4, 3, 25);
+
 	//Dibujar lineas
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string,"Lines: %d  ",(int)linecount);
-	PA_SmartText(1, 13,35,119,249 ,almacen_string, 1 /*Color*/, 3, 3, 18); 
+	snprintf(str, sizeof(str), "Lines: %d  ",(int)linecount);
+	PA_SmartText(1, 13,35,119,249 ,str, 1 /*Color*/, 3, 3, 18);
 
 	//Dibujar nombre
-	almacen_string = "_    ALMACEN_STRING    _";
-	sprintf(almacen_string," Player:  %s  ",  (char*)PA_UserInfo.Name);
-	PA_SmartText(1, 8,239,183,247 ,almacen_string, 2, // Color 
-				3, 3, PA_UserInfo.NameLength + 11); 
+	snprintf(str, sizeof(str), " Player:  %s  ",  (char*)PA_UserInfo.Name);
+	PA_SmartText(1, 8,239,183,247 ,str, 2, // Color
+				3, 3, PA_UserInfo.NameLength + 11);
 
 	//Dibujar hora
-	hora = " 00:00 ";
-	sprintf(hora," %02d:%02d ",(int)PA_RTC.Hour, (int)PA_RTC.Minutes);
-	PA_CenterSmartText(1, 106,214,152,255 ,hora, 3 /*Color*/ , 3, 3   );//, 12); 
+	char hora[20];
+	snprintf(hora, sizeof(hora), " %02d:%02d ",(int)PA_RTC.Hour, (int)PA_RTC.Minutes);
+	PA_CenterSmartText(1, 106,214,152,255 ,hora, 3 /*Color*/ , 3, 3   );//, 12);
 	}
 }
 
