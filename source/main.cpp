@@ -13,7 +13,7 @@ int main(int argc, char** argv)
 	PA_InitVBL();
 	PA_InitRand();	
 
-	Splash_Screen();
+	//Splash_Screen();
 
 
 	//------------MY SPLASH----------------
