@@ -141,46 +141,30 @@ PA_OutputText(1,0,2,"DS shouldn't be ON!!!");
 while(1) PA_WaitForVBL();
 }
 
-
-float Elevar_int(int numero, u8 potencia)
+// Valor absoluto para variables del tipo float
+static inline float Float_Abs(float num)
 {
-acumulador = 1;
-for(auxiliar4 = potencia;auxiliar4 > 0; auxiliar4--)
-	{
-	acumulador *= numero;
-	}
-return acumulador;
+    if (num < 0)
+        return -num;
+    return num;
 }
 
-float Elevar_float(float numero, u8 potencia)
+static inline int Limitar_int(int min, int max, int numero)
 {
-auxiliar_float = 1;
-for(auxiliar4 = potencia;auxiliar4 > 0; auxiliar4--)
-	{
-	auxiliar_float *= numero;
-	}
-return auxiliar_float;
+    if (numero < min)
+        return min;
+    if (numero > max)
+        return max;
+    return numero;
 }
 
-//Valor absoluto para variables del tipo float
-float Float_Abs(float num)
+static inline float Limitar_float(float min, float max, float numero)
 {
-if(num < 0) return -num;
-return num;
-}
-
-int Limitar_int(int min, int max, int numero)
-{
-if(numero < min) return min;
-if(numero > max) return max;
-return numero;
-}
-
-float Limitar_float(float min, float max, float numero)
-{
-if(numero < min) return min;
-if(numero > max) return max;
-return numero;
+    if (numero < min)
+        return min;
+    if (numero > max)
+        return max;
+    return numero;
 }
 
 #define TEXT_SMALL		0
