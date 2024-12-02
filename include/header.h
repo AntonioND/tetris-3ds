@@ -111,11 +111,9 @@ _TEXT_DATA_ Text_Color;
 
 
 //Apagar la DS
-void PowerOFF() 
+void PowerOFF()
 {
-#if 0
-IPC->aux |= BIT(6);
-#endif
+    systemShutDown();
 }
 
 
