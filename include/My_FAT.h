@@ -42,6 +42,8 @@ if(FAT_ERROR) return;
 
 acumulador = 0;
 FILE* CONFIG_WRITE_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "wb"); //wb = create/truncate & write
+if (CONFIG_WRITE_FILE == NULL)
+	return;
 
 fwrite(&texture_selected, 1, 1, CONFIG_WRITE_FILE);
 fwrite(&camera_selected, 1, 1, CONFIG_WRITE_FILE);
@@ -57,6 +59,9 @@ fclose(CONFIG_WRITE_FILE);
 
 //Añadir checsum al final
 FILE* CONFIG_CHECKSUM_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //wb = create/truncate & write
+if (CONFIG_CHECKSUM_FILE == NULL)
+	return;
+
 auxiliar2 = 0;
 for(auxiliar = 0; auxiliar < 163; auxiliar ++)
 	{
@@ -68,6 +73,8 @@ fclose(CONFIG_CHECKSUM_FILE);
 auxiliar = Checksum(acumulador);
 
 FILE* CONFIG_WRITE_CHECKSUM_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "a"); //wb = create/truncate & write
+if (CONFIG_WRITE_CHECKSUM_FILE == NULL)
+	return;
 fwrite(&auxiliar, 4, 1, CONFIG_WRITE_CHECKSUM_FILE);
 fclose(CONFIG_WRITE_CHECKSUM_FILE);
 }
@@ -84,7 +91,7 @@ FILE* CONFIG_CHECK_READ_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "rb");
 if(CONFIG_CHECK_READ_FILE == NULL)
 	{
 	//No existe el archivo
-	fclose(CONFIG_CHECK_READ_FILE);	
+	//fclose(CONFIG_CHECK_READ_FILE);	
 	
 	//Default
 	texture_selected = 2;

@@ -81,6 +81,7 @@ if(!FAT_ERROR)
 	if (!file)
 		{
 		SONG_ERROR = true;
+		return;
 		}
 	FILE_CLOSE(file);
 	AS_MP3StreamPlay(Song_Path);
@@ -98,6 +99,7 @@ if(!FAT_ERROR)
 	if (!file)
 		{
 		SONG_ERROR = true;
+		return;
 		}
 	FILE_CLOSE(file);
 	if(!SONG_ERROR)
@@ -293,7 +295,7 @@ if(!FAT_ERROR)
 		MP3FILE* file = FILE_OPEN(Song_Path);
 		if (!file)
 			{
-			FILE_CLOSE(file);
+			//FILE_CLOSE(file);
 			return (auxiliar - 1);
 			}
 		FILE_CLOSE(file);
