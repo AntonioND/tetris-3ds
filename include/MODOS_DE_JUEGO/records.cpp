@@ -1,8 +1,6 @@
 #ifndef __RECORDS__
 #define __RECORDS__
 
-u8 newrecord;
-
 u8 Add_Record(char* name, u32 score, u16 lines)
 {
 for(auxiliar = 0; auxiliar < 10; auxiliar ++)
@@ -64,7 +62,7 @@ for (auxiliar = -31; auxiliar < 0; auxiliar++)
 PA_SetBrightness(0, 0);
 PA_SetBrightness(1, 0);
 
-newrecord = Add_Record((char*)PA_UserInfo.Name, (u32)puntuacion_total, (u16)linecount);
+u8 newrecord = Add_Record((char*)PA_UserInfo.Name, (u32)puntuacion_total, (u16)linecount);
 Guardar_Datos();
 
 //Escribir records
