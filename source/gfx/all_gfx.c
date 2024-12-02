@@ -10,34 +10,34 @@ extern "C" {
 
 
 // Sprite files : 
-#include "Pieza.c"
-#include "botones.c"
-#include "numeros.c"
-#include "cursor_sonido.c"
+#include "Pieza.h"
+#include "botones.h"
+#include "numeros.h"
+#include "cursor_sonido.h"
 
 // Background files : 
-#include "custom_font.c"
-#include "superior_inicio.c"
-#include "inferior_inicio.c"
-#include "inferior_juego.c"
-#include "inferior_versus.c"
-#include "inferior_disco.c"
-#include "menu_inferior.c"
-#include "inferior_credits.c"
-#include "options_inferior.c"
-#include "inferior_records.c"
+#include "custom_font.h"
+#include "superior_inicio.h"
+#include "inferior_inicio.h"
+#include "inferior_juego.h"
+#include "inferior_versus.h"
+#include "inferior_disco.h"
+#include "menu_inferior.h"
+#include "inferior_credits.h"
+#include "options_inferior.h"
+#include "inferior_records.h"
 
 // Palette files : 
-#include "Pieza.pal.c"
-#include "botones.pal.c"
-#include "numeros.pal.c"
-#include "cursor_sonido.pal.c"
-#include "custom_font.pal.c"
-#include "inferior_inicio.pal.c"
-#include "inferior_juego.pal.c"
-#include "inferior_versus.pal.c"
-#include "inferior_disco.pal.c"
-#include "inferior_records.pal.c"
+#include "Pieza.pal.h"
+#include "botones.pal.h"
+#include "numeros.pal.h"
+#include "cursor_sonido.pal.h"
+#include "custom_font.pal.h"
+#include "inferior_inicio.pal.h"
+#include "inferior_juego.pal.h"
+#include "inferior_versus.pal.h"
+#include "inferior_disco.pal.h"
+#include "inferior_records.pal.h"
 
 // Background Pointers :
 PAGfx_struct custom_font = {(void*)custom_font_Map, 768, (void*)custom_font_Tiles, 11264, (void*)custom_font_Pal, (int*)custom_font_Info };

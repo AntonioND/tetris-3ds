@@ -7,7 +7,7 @@
 #include <nds/arm9/image.h>
 
 // PAGfxConverter Include
-#include "../source/gfx/all_gfx.c"
+//#include "../source/gfx/all_gfx.c"
 #include "../source/gfx/all_gfx.h"
 
 #include "Textura_Tetris_1_pcx.h"
