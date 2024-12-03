@@ -3,7 +3,7 @@
 #ifndef __MY_3D__
 #define __MY_3D__
 
-#include "Funciones_Texturas.cpp"
+#include "funciones_texturas.h"
 #include "OBJETOS/3d_box.h"
 #include "OBJETOS/figura_luz.h"
 #include "TEXTO/numeros.h"
