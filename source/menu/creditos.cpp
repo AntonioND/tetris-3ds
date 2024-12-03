@@ -1,3 +1,12 @@
+#include <PA9.h>
+
+#include "graficos_3d/graphics3d.h"
+#include "menu/creditos.h"
+#include "menu.h"
+#include "music.h"
+
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
 
 void Reload_Creditos_Menu()
 {
