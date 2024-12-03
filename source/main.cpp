@@ -1,7 +1,7 @@
 //#include "as_lib9.h" // include our own as_lib9.h before including the one in PALib!
 #include <PA9.h>
 #include "header.h"
-#include "splash.c"
+#include "splash.h"
 
 //printf("\n\nRam usage: Culling %s", ( held & KEY_A) ? "none" : "back faces" );
 
