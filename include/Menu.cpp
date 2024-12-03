@@ -1,6 +1,12 @@
 
+#include "graficos_3d/graphics3d.h"
+#include "graficos_3d/funciones_texturas.h"
+#include "graficos_3d/objetos/3d_box.h"
+#include "graficos_3d/objetos/figura_luz.h"
+#include "graficos_3d/texto/numeros.h"
+#include "graficos_3d/texto/letras.h"
+
 #include <header.h>
-#include "GRAFICOS_3D/GRAPHICS3D.h"
 
 void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, u8 size)
 {

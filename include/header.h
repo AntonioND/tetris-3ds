@@ -18,7 +18,12 @@
 
 #include "my_fat.h"
 #include "music.cpp"
-#include "GRAFICOS_3D/GRAPHICS3D.h"
+
+#include "graficos_3d/funciones_texturas.h"
+#include "graficos_3d/objetos/3d_box.h"
+#include "graficos_3d/objetos/figura_luz.h"
+#include "graficos_3d/texto/numeros.h"
+#include "graficos_3d/texto/letras.h"
 
 #include "MODOS_DE_JUEGO/JUEGO.h"
 
