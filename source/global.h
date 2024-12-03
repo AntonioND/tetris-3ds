@@ -85,4 +85,34 @@ extern _TEXT_DATA_ Text_Color;
 #define MODO_NORMAL     0
 #define MODO_CONTRA_CPU 1
 
+void PowerOFF_Countdown(u8 seconds);
+
+// Valor absoluto para variables del tipo float
+static inline float Float_Abs(float num)
+{
+    if (num < 0)
+        return -num;
+    return num;
+}
+
+static inline int Limitar_int(int min, int max, int numero)
+{
+    if (numero < min)
+        return min;
+    if (numero > max)
+        return max;
+    return numero;
+}
+
+static inline float Limitar_float(float min, float max, float numero)
+{
+    if (numero < min)
+        return min;
+    if (numero > max)
+        return max;
+    return numero;
+}
+
+void Reset_Records();
+
 #endif // GLOBAL_H__
