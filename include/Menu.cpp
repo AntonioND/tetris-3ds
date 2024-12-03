@@ -5,11 +5,10 @@
 #include "graficos_3d/objetos/figura_luz.h"
 #include "graficos_3d/texto/numeros.h"
 #include "graficos_3d/texto/letras.h"
-
 #include "menu.h"
-
-#include "MENU/opciones.cpp"
+#include "menu/opciones.h"
 #include "menu/creditos.h"
+
 #include "MODOS_DE_JUEGO/records.cpp"
 
 void Menu()

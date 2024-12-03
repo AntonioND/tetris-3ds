@@ -1,5 +1,14 @@
+#include <PA9.h>
 
+#include "global.h"
+#include "graficos_3d/graphics3d.h"
 #include "menu/jukebox.h"
+#include "menu.h"
+#include "music.h"
+#include "my_fat.h"
+
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
 
 void Reload_Opciones_Menu()
 {
