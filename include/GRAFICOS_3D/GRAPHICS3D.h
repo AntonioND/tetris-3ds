@@ -4,7 +4,7 @@
 #define __MY_3D__
 
 #include "Funciones_Texturas.cpp"
-#include "OBJETOS/3D_BOX.cpp"
+#include "OBJETOS/3d_box.h"
 #include "OBJETOS/Figura_Luz.cpp"
 #include "TEXTO/numeros.h"
 #include "TEXTO/letras.h"
