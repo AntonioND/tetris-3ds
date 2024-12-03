@@ -1,32 +1,19 @@
+#include <PA9.h>
 
-#include <nds.h>
-#include <header.h>
+#include "global.h"
 #include "music.h"
-
-#define TEXTURA_SUELO	1
-#define TEXTURA_PAREDES	2
-#define TEXTURA_ASIENTO	3
-#define TEXTURA_METAL	4
-#define TEXTURA_FOCO	5
-
-typedef struct { float red, green, blue, ired, igreen, iblue; } _RGB_I_;
+#include "my_fat.h"
+#include "graficos_3d/escenarios/escenarios.h"
+#include "graficos_3d/escenarios/escenario_discoteca.h"
+#include "graficos_3d/funciones_texturas.h"
+#include "graficos_3d/objetos/figura_luz.h"
 
 _RGB_I_ focoder[3];
 _RGB_I_ focoizq[3];
 
-typedef struct { int rotx, rotz, tiemporestante; } __LUZ__;
-
 __LUZ__ luz[5];
 
-typedef struct { float X, Y, Z; 
-				 float IncX, IncY, IncZ; } __ROT_STRUCT__;
-
 __ROT_STRUCT__ Rot_Sala;
-
-void Dibujar_Discoteca(u8 mover);
-void Iniciar_Focos();
-void Actualizar_Focos();
-
 
 void Draw_Sujetabola()
 {

@@ -2,8 +2,11 @@
 #include <header.h>
 #include "music.h"
 
+// TODO: Remove this
 void Jukebox();
 void Graficos_3D_Juekebox();
+void Iniciar_Focos();
+void Dibujar_Discoteca(u8 pausa, u8 camara);
 
 int numsongs;
 bool movecam = true;

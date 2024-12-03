@@ -7,6 +7,6 @@ extern float girar_bola;
 
 #include "escenario_normal.h"
 #include "escenario_versus.h"
-//#include "Escenario_Discoteca.cpp" // TODO: Uncomment
+#include "escenario_discoteca.h"
 
 #endif // GRAFICOS_3D_ESCENARIOS_ESCENARIOS_H__
