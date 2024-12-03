@@ -10,7 +10,9 @@
 //#include "../source/gfx/all_gfx.c"
 #include "../source/gfx/all_gfx.h"
 
+#include "cambiar_formato_nombre.h"
 #include "graficos_3d/graphics3d.h"
+#include "keys_control.h"
 
 bool MENU_ACTIVO, JUEGO_ACTIVO, PAUSA;
 u8 pausa_lista;
@@ -197,11 +199,9 @@ Record[9].Lineas = 10;
 }
 
 
-#include "keys_control.h"
 #include "My_FAT.h"
 #include "music.cpp"
 #include "GRAFICOS_3D/GRAPHICS3D.h"
-#include "cambiar_formato_nombre.h"
 
 #include "MODOS_DE_JUEGO/JUEGO.h"
 
