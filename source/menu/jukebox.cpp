@@ -1,12 +1,16 @@
+#include <PA9.h>
+#include <PA9.h>
 
-#include <header.h>
+#include "global.h"
+#include "graficos_3d/escenarios/escenario_discoteca.h"
+#include "graficos_3d/graphics3d.h"
+#include "graficos_3d/texto/letras.h"
+#include "menu/jukebox.h"
 #include "music.h"
+#include "my_fat.h"
 
-// TODO: Remove this
-void Jukebox();
-void Graficos_3D_Juekebox();
-void Iniciar_Focos();
-void Dibujar_Discoteca(u8 pausa, u8 camara);
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
 
 int numsongs;
 bool movecam = true;
