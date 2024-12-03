@@ -1,7 +1,7 @@
 
 #include <nds.h>
 #include <header.h>
-#include "../../music.cpp"
+#include "music.h"
 
 #define TEXTURA_SUELO	1
 #define TEXTURA_PAREDES	2

@@ -1,6 +1,6 @@
 
 #include <header.h>
-#include "../music.cpp"
+#include "music.h"
 
 void Jukebox();
 void Graficos_3D_Juekebox();
