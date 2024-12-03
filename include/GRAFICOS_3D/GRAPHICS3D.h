@@ -5,7 +5,7 @@
 
 #include "Funciones_Texturas.cpp"
 #include "OBJETOS/3d_box.h"
-#include "OBJETOS/Figura_Luz.cpp"
+#include "OBJETOS/figura_luz.h"
 #include "TEXTO/numeros.h"
 #include "TEXTO/letras.h"
 #include <header.h>

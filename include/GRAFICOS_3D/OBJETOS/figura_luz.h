@@ -1,0 +1,6 @@
+#ifndef GRAFICOS_3D_OBJETOS_FIGURA_LUZ_H__
+#define GRAFICOS_3D_OBJETOS_FIGURA_LUZ_H__
+
+void Dibujar_Luz(float RED, float GREEN, float BLUE);
+
+#endif // GRAFICOS_3D_OBJETOS_FIGURA_LUZ_H__
