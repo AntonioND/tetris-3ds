@@ -220,7 +220,7 @@ Record[9].Lineas = 10;
 #include "My_FAT.h"
 #include "music.cpp"
 #include "GRAFICOS_3D/GRAPHICS3D.h"
-#include "Cambiar_Formato_Nombre.cpp"
+#include "cambiar_formato_nombre.h"
 
 #include "MODOS_DE_JUEGO/JUEGO.h"
 

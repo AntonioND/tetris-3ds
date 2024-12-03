@@ -1,5 +1,6 @@
 
-#include <header.h>
+#include <PA9.h>
+#include "GRAFICOS_3D/TEXTO/letras.h"
 
 /*
 void Convertir_Nombre(void)
