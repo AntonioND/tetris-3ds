@@ -1,6 +1,6 @@
 #include <nds.h>
-#include "GRAFICOS_3D/TEXTO/letras.h"
-#include "GRAFICOS_3D/TEXTO/numeros.h"
+#include "graficos_3d/texto/letras.h"
+#include "graficos_3d/texto/numeros.h"
 
 void Dibujar_Letra(int NUMERO, float RED, float GREEN, float BLUE)
 {

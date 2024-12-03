@@ -1,5 +1,5 @@
-#include "GRAFICOS_3D/ESCENARIOS/escenarios.h"
-#include "GRAFICOS_3D/funciones_texturas.h"
+#include "graficos_3d/escenarios/escenarios.h"
+#include "graficos_3d/funciones_texturas.h"
 
 void Dibujar_Escenario_Normal(void)
 {

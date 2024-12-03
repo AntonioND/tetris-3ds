@@ -3,11 +3,11 @@
 #ifndef __MY_3D__
 #define __MY_3D__
 
-#include "funciones_texturas.h"
-#include "OBJETOS/3d_box.h"
-#include "OBJETOS/figura_luz.h"
-#include "TEXTO/numeros.h"
-#include "TEXTO/letras.h"
+#include "graficos_3d/funciones_texturas.h"
+#include "graficos_3d/objetos/3d_box.h"
+#include "graficos_3d/objetos/figura_luz.h"
+#include "graficos_3d/texto/numeros.h"
+#include "graficos_3d/texto/letras.h"
 #include <header.h>
 
 void My_Init_3D()

@@ -30,7 +30,7 @@ SDIMAGE		:= image.bin
 # -----------------
 
 SOURCEDIRS	:= source
-INCLUDEDIRS	:= include
+INCLUDEDIRS	:= include source
 GFXDIRS		:=
 BINDIRS		:= data source
 AUDIODIRS	:=

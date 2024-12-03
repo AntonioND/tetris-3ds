@@ -857,7 +857,7 @@ else if(!reservausada)
 #include "CPU_IA.h"
 
 //Escenarios
-#include "../GRAFICOS_3D/ESCENARIOS/escenarios.h"
+#include "graficos_3d/escenarios/escenarios.h"
 #include "../GRAFICOS_3D/ESCENARIOS/Escenario_Discoteca.cpp" // TODO: Remove
 
 //Modos de juego
