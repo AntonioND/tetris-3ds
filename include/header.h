@@ -10,21 +10,7 @@
 //#include "../source/gfx/all_gfx.c"
 #include "../source/gfx/all_gfx.h"
 
-#include "Textura_Tetris_1_pcx.h"
-#include "Textura_Tetris_2_pcx.h"
-#include "Textura_Tetris_3_pcx.h"
-#include "Textura_Tetris_4_pcx.h"
-#include "Textura_Tetris_5_pcx.h"
-
-#include "Textura_Escenario_1_pcx.h"
-#include "Textura_Escenario_2_pcx.h"
-#include "Textura_Escenario_Borde_pcx.h"
-
-#include "Textura_Disco_Foco_pcx.h"
-#include "Textura_Disco_Metal_pcx.h"
-#include "Textura_Disco_Suelo_pcx.h"
-#include "Textura_Disco_Pared_pcx.h"
-#include "Textura_Disco_Asiento_pcx.h"
+#include "graficos_3d/graphics3d.h"
 
 bool MENU_ACTIVO, JUEGO_ACTIVO, PAUSA;
 u8 pausa_lista;
@@ -166,11 +152,6 @@ static inline float Limitar_float(float min, float max, float numero)
         return max;
     return numero;
 }
-
-#define TEXT_SMALL		0
-#define TEXT_MEDIUM		1
-#define TEXT_BIG		2
-
 
 void Reset_Records()
 {
