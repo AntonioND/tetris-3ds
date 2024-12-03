@@ -216,7 +216,7 @@ Record[9].Lineas = 10;
 }
 
 
-#include "keys_control.cpp"
+#include "keys_control.h"
 #include "My_FAT.h"
 #include "music.cpp"
 #include "GRAFICOS_3D/GRAPHICS3D.h"
