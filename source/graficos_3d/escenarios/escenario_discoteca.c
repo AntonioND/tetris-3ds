@@ -1485,15 +1485,15 @@ void Dibujar_Discoteca(u8 pausa, u8 camara)
     glTranslatef(0, 3.65, 0);
 
     Iniciar_Transparencia(20);
-    for (auxiliar = 0; auxiliar < 4; auxiliar++)
+    for (int i = 0; i < 4; i++)
     {
-        if (luz[auxiliar].tiemporestante > 0)
+        if (luz[i].tiemporestante > 0)
         {
-            glRotateZ((int)((luz[auxiliar].rotz * 22.5) + 11.25));
-            glRotateX((int)((luz[auxiliar].rotx * 22.5) + 11.25));
+            glRotateZ((int)((luz[i].rotz * 22.5) + 11.25));
+            glRotateX((int)((luz[i].rotx * 22.5) + 11.25));
             Dibujar_Luz(1, 1, 1);
-            glRotateX((int)(-(luz[auxiliar].rotx * 22.5) - 11.25));
-            glRotateZ((int)(-(luz[auxiliar].rotz * 22.5) - 11.25));
+            glRotateX((int)(-(luz[i].rotx * 22.5) - 11.25));
+            glRotateZ((int)(-(luz[i].rotz * 22.5) - 11.25));
         }
     }
     Finalizar_Transparencia();
@@ -1509,43 +1509,43 @@ void Iniciar_Focos(void)
     Rot_Sala.IncZ = (float)PA_RandMinMax(2, 4)/10;
 
     // Focos
-    for (auxiliar = 0; auxiliar < 3; auxiliar++)
+    for (int i = 0; i < 3; i++)
     {
         /*
-        focoder[auxiliar].red = ((float)PA_RandMinMax(1, 9)) / 10;
-        focoder[auxiliar].green = ((float)PA_RandMinMax(1, 9)) / 10;
-        focoder[auxiliar].blue = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoder[i].red = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoder[i].green = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoder[i].blue = ((float)PA_RandMinMax(1, 9)) / 10;
         */
 
-        focoder[auxiliar].ired = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoder[i].ired = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoder[auxiliar].ired *= -1;
+            focoder[i].ired *= -1;
 
-        focoder[auxiliar].igreen = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoder[i].igreen = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoder[auxiliar].igreen *= -1;
+            focoder[i].igreen *= -1;
 
-        focoder[auxiliar].iblue = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoder[i].iblue = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoder[auxiliar].iblue *= -1;
+            focoder[i].iblue *= -1;
 
         /*
-        focoizq[auxiliar].red = ((float)PA_RandMinMax(1, 9)) / 10;
-        focoizq[auxiliar].green = ((float)PA_RandMinMax(1, 9)) / 10;
-        focoizq[auxiliar].blue = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoizq[i].red = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoizq[i].green = ((float)PA_RandMinMax(1, 9)) / 10;
+        focoizq[i].blue = ((float)PA_RandMinMax(1, 9)) / 10;
         */
 
-        focoizq[auxiliar].ired = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoizq[i].ired = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoizq[auxiliar].ired *= -1;
+            focoizq[i].ired *= -1;
 
-        focoizq[auxiliar].igreen = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoizq[i].igreen = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoizq[auxiliar].igreen *= -1;
+            focoizq[i].igreen *= -1;
 
-        focoizq[auxiliar].iblue = ((float)PA_RandMinMax(3, 10)) / 300;
+        focoizq[i].iblue = ((float)PA_RandMinMax(3, 10)) / 300;
         if (PA_RandMinMax(0, 1))
-            focoizq[auxiliar].iblue *= -1;
+            focoizq[i].iblue *= -1;
     }
 
     // Luces de la bola
@@ -1581,56 +1581,57 @@ void Actualizar_Focos()
         if ((Float_Abs(Rot_Sala.Z) > 5) || (PA_RandMinMax(0, 120) == 0))
             Rot_Sala.IncZ *= -1;
 
-        for (auxiliar = 0; auxiliar < 3; auxiliar++)
+        for (int i = 0; i < 3; i++)
         {
-            focoder[auxiliar].red += focoder[auxiliar].ired;
-            focoder[auxiliar].green += focoder[auxiliar].igreen;
-            focoder[auxiliar].blue += focoder[auxiliar].iblue;
-            if (focoder[auxiliar].red > 1 || focoder[auxiliar].red < 0)
+            focoder[i].red += focoder[i].ired;
+            focoder[i].green += focoder[i].igreen;
+            focoder[i].blue += focoder[i].iblue;
+            if (focoder[i].red > 1 || focoder[i].red < 0)
             {
-                focoder[auxiliar].ired *= -1;
-                focoder[auxiliar].red += focoder[auxiliar].ired;
+                focoder[i].ired *= -1;
+                focoder[i].red += focoder[i].ired;
             }
-            if (focoder[auxiliar].green > 1 || focoder[auxiliar].green < 0)
+            if (focoder[i].green > 1 || focoder[i].green < 0)
             {
-                focoder[auxiliar].igreen *= -1;
-                focoder[auxiliar].green += focoder[auxiliar].igreen;
+                focoder[i].igreen *= -1;
+                focoder[i].green += focoder[i].igreen;
             }
-            if (focoder[auxiliar].blue > 1 || focoder[auxiliar].blue < 0)
+            if (focoder[i].blue > 1 || focoder[i].blue < 0)
             {
-                focoder[auxiliar].iblue *= -1;
-                focoder[auxiliar].blue += focoder[auxiliar].iblue;
+                focoder[i].iblue *= -1;
+                focoder[i].blue += focoder[i].iblue;
             }
 
-            focoizq[auxiliar].red += focoizq[auxiliar].ired;
-            focoizq[auxiliar].green += focoizq[auxiliar].igreen;
-            focoizq[auxiliar].blue += focoizq[auxiliar].iblue;
-            if (focoizq[auxiliar].red > 1 || focoizq[auxiliar].red < 0)
+            focoizq[i].red += focoizq[i].ired;
+            focoizq[i].green += focoizq[i].igreen;
+            focoizq[i].blue += focoizq[i].iblue;
+            if (focoizq[i].red > 1 || focoizq[i].red < 0)
             {
-                focoizq[auxiliar].ired *= -1;
-                focoizq[auxiliar].red += focoizq[auxiliar].ired;
+                focoizq[i].ired *= -1;
+                focoizq[i].red += focoizq[i].ired;
             }
-            if (focoizq[auxiliar].green > 1 || focoizq[auxiliar].green < 0)
+            if (focoizq[i].green > 1 || focoizq[i].green < 0)
             {
-                focoizq[auxiliar].igreen *= -1;
-                focoizq[auxiliar].green += focoizq[auxiliar].igreen;
+                focoizq[i].igreen *= -1;
+                focoizq[i].green += focoizq[i].igreen;
             }
-            if (focoizq[auxiliar].blue > 1 || focoizq[auxiliar].blue < 0)
+            if (focoizq[i].blue > 1 || focoizq[i].blue < 0)
             {
-                focoizq[auxiliar].iblue *= -1;
-                focoizq[auxiliar].blue += focoizq[auxiliar].iblue;
+                focoizq[i].iblue *= -1;
+                focoizq[i].blue += focoizq[i].iblue;
             }
         }
-        for (auxiliar = 0; auxiliar < 5; auxiliar++)
+
+        for (int i = 0; i < 5; i++)
         {
-            luz[auxiliar].tiemporestante--;
+            luz[i].tiemporestante--;
 
             // Nueva luz
-            if ((luz[auxiliar].tiemporestante < -30) && (PA_RandMinMax(0, 10) == 0))
+            if ((luz[i].tiemporestante < -30) && (PA_RandMinMax(0, 10) == 0))
             {
-                luz[auxiliar].rotz = PA_RandMinMax(2, 5);
-                luz[auxiliar].rotx = PA_RandMinMax(0, 15);
-                luz[auxiliar].tiemporestante = PA_RandMinMax(45, 60);
+                luz[i].rotz = PA_RandMinMax(2, 5);
+                luz[i].rotx = PA_RandMinMax(0, 15);
+                luz[i].tiemporestante = PA_RandMinMax(45, 60);
             }
         }
 
@@ -1654,95 +1655,95 @@ void Actualizar_Focos()
         if ((Float_Abs(Rot_Sala.Z) > 5) || (PA_RandMinMax(0, 120) == 0))
             Rot_Sala.IncZ *= -1;
 
-        for (auxiliar = 0; auxiliar < 3; auxiliar++)
+        for (int i = 0; i < 3; i++)
         {
-            focoder[auxiliar].red += focoder[auxiliar].ired;
-            focoder[auxiliar].green += focoder[auxiliar].igreen;
-            focoder[auxiliar].blue += focoder[auxiliar].iblue;
+            focoder[i].red += focoder[i].ired;
+            focoder[i].green += focoder[i].igreen;
+            focoder[i].blue += focoder[i].iblue;
 
-            focoizq[auxiliar].red += focoizq[auxiliar].ired;
-            focoizq[auxiliar].green += focoizq[auxiliar].igreen;
-            focoizq[auxiliar].blue += focoizq[auxiliar].iblue;
+            focoizq[i].red += focoizq[i].ired;
+            focoizq[i].green += focoizq[i].igreen;
+            focoizq[i].blue += focoizq[i].iblue;
 
-            if ((focoder[auxiliar].ired > 0) && (focoder[auxiliar].red > ((float)Limitar_int(0, 192,value_song)/192)))
+            if ((focoder[i].ired > 0) && (focoder[i].red > ((float)Limitar_int(0, 192,value_song)/192)))
             {
-                focoder[auxiliar].ired *= -1;
-                focoder[auxiliar].red += focoder[auxiliar].ired;
+                focoder[i].ired *= -1;
+                focoder[i].red += focoder[i].ired;
             }
-            if ((focoder[auxiliar].ired < 0) && (focoder[auxiliar].red < 0))
+            if ((focoder[i].ired < 0) && (focoder[i].red < 0))
             {
-                focoder[auxiliar].ired *= -1;
-                focoder[auxiliar].red += focoder[auxiliar].ired;
+                focoder[i].ired *= -1;
+                focoder[i].red += focoder[i].ired;
             }
-            if ((focoizq[auxiliar].ired > 0) && (focoizq[auxiliar].red > ((float)Limitar_int(0, 192,value_song)/192)))
+            if ((focoizq[i].ired > 0) && (focoizq[i].red > ((float)Limitar_int(0, 192,value_song)/192)))
             {
-                focoizq[auxiliar].ired *= -1;
-                focoizq[auxiliar].red += focoizq[auxiliar].ired;
+                focoizq[i].ired *= -1;
+                focoizq[i].red += focoizq[i].ired;
             }
-            if ((focoizq[auxiliar].ired < 0) && (focoizq[auxiliar].red < 0))
+            if ((focoizq[i].ired < 0) && (focoizq[i].red < 0))
             {
-                focoizq[auxiliar].ired *= -1;
-                focoizq[auxiliar].red += focoizq[auxiliar].ired;
-            }
-
-            if ((focoder[auxiliar].igreen > 0) && (focoder[auxiliar].green > (1 - Float_Abs((float)(value_song - 128))/192)))
-            {
-                focoder[auxiliar].igreen *= -1;
-                focoder[auxiliar].green += focoder[auxiliar].igreen;
-            }
-            if ((focoder[auxiliar].igreen < 0) && (focoder[auxiliar].green < 0))
-            {
-                focoder[auxiliar].igreen *= -1;
-                focoder[auxiliar].green += focoder[auxiliar].igreen;
-            }
-            if ((focoizq[auxiliar].igreen > 0) && (focoizq[auxiliar].green > (1 - Float_Abs((float)(value_song - 128))/192)))
-            {
-                focoizq[auxiliar].igreen *= -1;
-                focoizq[auxiliar].green += focoizq[auxiliar].igreen;
-            }
-            if ((focoizq[auxiliar].igreen < 0) && (focoizq[auxiliar].green < 0))
-            {
-                focoizq[auxiliar].igreen *= -1;
-                focoizq[auxiliar].green += focoizq[auxiliar].igreen;
+                focoizq[i].ired *= -1;
+                focoizq[i].red += focoizq[i].ired;
             }
 
-            if ((focoder[auxiliar].iblue > 0) && (focoder[auxiliar].blue > (1 - ((float)(Limitar_int(0, 192,value_song - 64))/192))))
+            if ((focoder[i].igreen > 0) && (focoder[i].green > (1 - Float_Abs((float)(value_song - 128))/192)))
             {
-                focoder[auxiliar].iblue *= -1;
-                focoder[auxiliar].blue += focoder[auxiliar].iblue;
+                focoder[i].igreen *= -1;
+                focoder[i].green += focoder[i].igreen;
             }
-            if ((focoder[auxiliar].iblue < 0) && (focoder[auxiliar].blue < 0))
+            if ((focoder[i].igreen < 0) && (focoder[i].green < 0))
             {
-                focoder[auxiliar].iblue *= -1;
-                focoder[auxiliar].blue += focoder[auxiliar].iblue;
+                focoder[i].igreen *= -1;
+                focoder[i].green += focoder[i].igreen;
             }
-            if ((focoizq[auxiliar].iblue > 0) && (focoizq[auxiliar].blue > (1 - ((float)(Limitar_int(0, 192,value_song - 64))/192))))
+            if ((focoizq[i].igreen > 0) && (focoizq[i].green > (1 - Float_Abs((float)(value_song - 128))/192)))
             {
-                focoizq[auxiliar].iblue *= -1;
-                focoizq[auxiliar].blue += focoizq[auxiliar].iblue;
+                focoizq[i].igreen *= -1;
+                focoizq[i].green += focoizq[i].igreen;
             }
-            if ((focoizq[auxiliar].iblue < 0) && (focoizq[auxiliar].blue < 0))
+            if ((focoizq[i].igreen < 0) && (focoizq[i].green < 0))
             {
-                focoizq[auxiliar].iblue *= -1;
-                focoizq[auxiliar].blue += focoizq[auxiliar].iblue;
+                focoizq[i].igreen *= -1;
+                focoizq[i].green += focoizq[i].igreen;
+            }
+
+            if ((focoder[i].iblue > 0) && (focoder[i].blue > (1 - ((float)(Limitar_int(0, 192,value_song - 64))/192))))
+            {
+                focoder[i].iblue *= -1;
+                focoder[i].blue += focoder[i].iblue;
+            }
+            if ((focoder[i].iblue < 0) && (focoder[i].blue < 0))
+            {
+                focoder[i].iblue *= -1;
+                focoder[i].blue += focoder[i].iblue;
+            }
+            if ((focoizq[i].iblue > 0) && (focoizq[i].blue > (1 - ((float)(Limitar_int(0, 192,value_song - 64))/192))))
+            {
+                focoizq[i].iblue *= -1;
+                focoizq[i].blue += focoizq[i].iblue;
+            }
+            if ((focoizq[i].iblue < 0) && (focoizq[i].blue < 0))
+            {
+                focoizq[i].iblue *= -1;
+                focoizq[i].blue += focoizq[i].iblue;
             }
         }
 
         // Reducir tiempo de luz
-        for (auxiliar = 0; auxiliar < 5; auxiliar++)
+        for (int i = 0; i < 5; i++)
         {
-            luz[auxiliar].tiemporestante--;
+            luz[i].tiemporestante--;
         }
 
         // Si el valor de la musica lo permite, encender focos
-        for (auxiliar = 0; auxiliar < Limitar_int(1, 5, value_song / 32); auxiliar++)
+        for (int i = 0; i < Limitar_int(1, 5, value_song / 32); i++)
         {
             // Nueva luz
-            if ((luz[auxiliar].tiemporestante < -30) && (PA_RandMinMax(0, 10) == 0))
+            if ((luz[i].tiemporestante < -30) && (PA_RandMinMax(0, 10) == 0))
             {
-                luz[auxiliar].rotz = PA_RandMinMax(2, 5);
-                luz[auxiliar].rotx = PA_RandMinMax(0, 15);
-                luz[auxiliar].tiemporestante = PA_RandMinMax(45, 60);
+                luz[i].rotz = PA_RandMinMax(2, 5);
+                luz[i].rotx = PA_RandMinMax(0, 15);
+                luz[i].tiemporestante = PA_RandMinMax(45, 60);
             }
         }
 
@@ -1759,28 +1760,28 @@ void Actualizar_Focos()
         if (Rot_Sala.Z < 0)
             Rot_Sala.Z = Limitar_float(-5, 0,Rot_Sala.Z + Float_Abs(Rot_Sala.IncZ / 5));
 
-        for (auxiliar = 0; auxiliar < 3; auxiliar++)
+        for (int i = 0; i < 3; i++)
         {
-            if (focoder[auxiliar].red > 0.01)
-                focoder[auxiliar].red -= 0.01;
-            if (focoder[auxiliar].green > 0.01)
-                focoder[auxiliar].green -= 0.01;
-            if (focoder[auxiliar].blue > 0.01)
-                focoder[auxiliar].blue -= 0.01;
-            if (focoizq[auxiliar].red > 0.01)
-                focoizq[auxiliar].red -= 0.01;
-            if (focoizq[auxiliar].green > 0.01)
-                focoizq[auxiliar].green -= 0.01;
-            if (focoizq[auxiliar].blue > 0.01)
-                focoizq[auxiliar].blue -= 0.01;
+            if (focoder[i].red > 0.01)
+                focoder[i].red -= 0.01;
+            if (focoder[i].green > 0.01)
+                focoder[i].green -= 0.01;
+            if (focoder[i].blue > 0.01)
+                focoder[i].blue -= 0.01;
+            if (focoizq[i].red > 0.01)
+                focoizq[i].red -= 0.01;
+            if (focoizq[i].green > 0.01)
+                focoizq[i].green -= 0.01;
+            if (focoizq[i].blue > 0.01)
+                focoizq[i].blue -= 0.01;
         }
 
         value_song = 0;
 
         // Reducir tiempo de luz
-        for (auxiliar = 0; auxiliar < 5; auxiliar++)
+        for (int i = 0; i < 5; i++)
         {
-            luz[auxiliar].tiemporestante--;
+            luz[i].tiemporestante--;
         }
     }
 }
