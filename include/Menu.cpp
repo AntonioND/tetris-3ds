@@ -9,7 +9,7 @@
 #include "menu/opciones.h"
 #include "menu/creditos.h"
 
-#include "MODOS_DE_JUEGO/records.cpp"
+#include "modos_de_juego/records.h"
 
 void Menu()
 {
