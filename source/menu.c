@@ -17,10 +17,10 @@ __FONDO_MENU__ Fondo_Menu;
 
 void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, u8 size)
 {
-    PA_Draw16bitLineEx(screen, x1,y1, x2,y1, color, size);
-    PA_Draw16bitLineEx(screen, x1,y1, x1,y2, color, size);
-    PA_Draw16bitLineEx(screen, x1,y2, x2,y2, color, size);
-    PA_Draw16bitLineEx(screen, x2,y1, x2,y2, color, size);
+    PA_Draw16bitLineEx(screen, x1, y1, x2, y1, color, size);
+    PA_Draw16bitLineEx(screen, x1, y1, x1, y2, color, size);
+    PA_Draw16bitLineEx(screen, x1, y2, x2, y2, color, size);
+    PA_Draw16bitLineEx(screen, x2, y1, x2, y2, color, size);
 }
 
 void Iniciar_3D_Menu()
@@ -105,7 +105,7 @@ void Reload_Menu()
     Iniciar_3D_Menu();
 
     PA_Init16bitBg(1, 3);
-    PA_Load16bitBitmap(1,menu_inferior_Bitmap);
+    PA_Load16bitBitmap(1, menu_inferior_Bitmap);
 
     // Fade up
     for (auxiliar = -31; auxiliar < 0; auxiliar++)
@@ -155,35 +155,35 @@ void Menu()
 
         if (Stylus.Newpress) // Tactil
         {
-            if (PA_StylusInZone(2,2, 154,46)) // Normal
+            if (PA_StylusInZone(2, 2, 154, 46)) // Normal
             {
-                Draw16bitRectangleEx(1, 2,2,154,46, PA_RGB(31,31,31),4);
+                Draw16bitRectangleEx(1, 2, 2, 154, 46, PA_RGB(31, 31, 31), 4);
 
                 MODO_DE_JUEGO = MODO_NORMAL;
                 JUEGO_ACTIVO = true;
                 MENU_ACTIVO = false;
                 PAUSA = false;
             }
-            else if(PA_StylusInZone(20,53, 169,96)) // Vs CPU
+            else if (PA_StylusInZone(20, 53, 169, 96)) // Vs CPU
             {
-                Draw16bitRectangleEx(1, 20,53,169,96, PA_RGB(31,31,31),4);
+                Draw16bitRectangleEx(1, 20, 53, 169, 96, PA_RGB(31, 31, 31), 4);
 
                 MODO_DE_JUEGO = MODO_CONTRA_CPU;
                 JUEGO_ACTIVO = true;
                 MENU_ACTIVO = false;
                 PAUSA = false;
             }
-            else if(PA_StylusInZone(35,105, 186,148)) // Opciones
+            else if (PA_StylusInZone(35, 105, 186, 148)) // Opciones
             {
-                Draw16bitRectangleEx(1, 35,105,186,148, PA_RGB(31,31,31),4);
+                Draw16bitRectangleEx(1, 35, 105, 186, 148, PA_RGB(31, 31, 31), 4);
 
                 End_Menu();
                 Opciones_Menu();
                 Reload_Menu();
             }
-            else if(PA_StylusInZone(197,168, 255,191)) // Créditos
+            else if (PA_StylusInZone(197, 168, 255, 191)) // Créditos
             {
-                Draw16bitRectangleEx(1, 197,168,255,191, PA_RGB(31,31,31),4);
+                Draw16bitRectangleEx(1, 197, 168, 255, 191, PA_RGB(31, 31, 31), 4);
 
                 End_Menu();
                 Creditos();
@@ -218,21 +218,21 @@ void Menu()
 
 void Graficos_3D_Menu()
 {
-    Escribir_3D_Char(TEXT_MEDIUM, 0, 0, CHAR_T,  0,1.0,0.5);
-    Escribir_3D_Char(TEXT_MEDIUM, 1, 0, CHAR_E,  0,0.9,0.6);
-    Escribir_3D_Char(TEXT_MEDIUM, 2, 0, CHAR_T,  0,0.8,0.7);
-    Escribir_3D_Char(TEXT_MEDIUM, 3, 0, CHAR_R,  0,0.7,0.8);
-    Escribir_3D_Char(TEXT_MEDIUM, 4, 0, CHAR_I,  0,0.6,0.9);
-    Escribir_3D_Char(TEXT_MEDIUM, 5, 0, CHAR_S,  0,0.5,1.0);
+    Escribir_3D_Char(TEXT_MEDIUM, 0, 0, CHAR_T,  0, 1.0, 0.5);
+    Escribir_3D_Char(TEXT_MEDIUM, 1, 0, CHAR_E,  0, 0.9, 0.6);
+    Escribir_3D_Char(TEXT_MEDIUM, 2, 0, CHAR_T,  0, 0.8, 0.7);
+    Escribir_3D_Char(TEXT_MEDIUM, 3, 0, CHAR_R,  0, 0.7, 0.8);
+    Escribir_3D_Char(TEXT_MEDIUM, 4, 0, CHAR_I,  0, 0.6, 0.9);
+    Escribir_3D_Char(TEXT_MEDIUM, 5, 0, CHAR_S,  0, 0.5, 1.0);
 
-    Escribir_3D_Char(TEXT_BIG, 2, 3, NUM_3,   0.6,0,0);
-    Escribir_3D_Char(TEXT_BIG, 3, 3, CHAR_D,  0.8,0,0);
-    Escribir_3D_Char(TEXT_BIG, 4, 3, CHAR_S,  1.0,0,0);
+    Escribir_3D_Char(TEXT_BIG, 2, 3, NUM_3,   0.6, 0, 0);
+    Escribir_3D_Char(TEXT_BIG, 3, 3, CHAR_D,  0.8, 0, 0);
+    Escribir_3D_Char(TEXT_BIG, 4, 3, CHAR_S,  1.0, 0, 0);
 
-    Escribir_3D_Char(TEXT_SMALL, 0, 10, CHAR_V,     1.0,1.0,1.0);
-    Escribir_3D_Char(TEXT_SMALL, 1, 10, NUM_1,      0.9,0.9,0.9);
-    Escribir_3D_Char(TEXT_SMALL, 2, 10, CHAR_PUNTO, 0.8,0.8,0.8);
-    Escribir_3D_Char(TEXT_SMALL, 3, 10, NUM_3,      0.7,0.7,0.7);
+    Escribir_3D_Char(TEXT_SMALL, 0, 10, CHAR_V,     1.0, 1.0, 1.0);
+    Escribir_3D_Char(TEXT_SMALL, 1, 10, NUM_1,      0.9, 0.9, 0.9);
+    Escribir_3D_Char(TEXT_SMALL, 2, 10, CHAR_PUNTO, 0.8, 0.8, 0.8);
+    Escribir_3D_Char(TEXT_SMALL, 3, 10, NUM_3,      0.7, 0.7, 0.7);
 
     glPushMatrix();
     // not a real gl function and will likely change
@@ -252,79 +252,79 @@ void Graficos_3D_Menu()
     switch (Figura_Menu.tipopieza) // Color
     {
         case 0:
-            glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,1);
+            glTranslatef(0, -1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9 ,0.9, 0.9, 1, 1, 1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 1);
             break;
 
         case 1:
             glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,0);
-            glTranslatef(1,0,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,1,0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 0);
+            glTranslatef(1, 0, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 1, 0);
             break;
 
         case 2:
-            glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0.5,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0.5,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0.5,0);
-            glTranslatef(-1,0,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0.5,0);
+            glTranslatef(0, -1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0.5, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0.5, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0.5, 0);
+            glTranslatef(-1, 0, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0.5, 0);
             break;
 
         case 3:
-            glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0,0);
-            glTranslatef(-1,0,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 1,0,0);
+            glTranslatef(0, -1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0, 0);
+            glTranslatef(-1, 0, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 1, 0, 0);
             break;
 
         case 4:
-            glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,1,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,1,0);
-            glTranslatef(1,0,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,1,0);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,1,0);
+            glTranslatef(0, -1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0, 1, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0, 1, 0);
+            glTranslatef(1, 0, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0, 1, 0);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0, 1, 0);
             break;
 
         case 5:
-            glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,0,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,0,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,0,1);
+            glTranslatef(0, -1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0,0,1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0,0,1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0,0,1);
             glTranslatef(1,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0,0,1);
+            Draw3D_Box(0.9, 0.9, 0.9, 0,0,1);
             break;
 
         case 6:
-            Draw3D_Box(0.9,0.9,0.9, 0.75,0,1);
-            glTranslatef(0,1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0.75,0,1);
-            glTranslatef(1,0,0);
-            Draw3D_Box(0.9,0.9,0.9, 0.75,0,1);
+            Draw3D_Box(0.9, 0.9, 0.9, 0.75, 0, 1);
+            glTranslatef(0, 1, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0.75, 0, 1);
+            glTranslatef(1, 0, 0);
+            Draw3D_Box(0.9, 0.9, 0.9, 0.75, 0, 1);
             glTranslatef(0,-1,0);
-            Draw3D_Box(0.9,0.9,0.9, 0.75,0,1);
+            Draw3D_Box(0.9, 0.9, 0.9, 0.75, 0, 1);
             break;
     }
 

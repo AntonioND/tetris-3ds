@@ -6,8 +6,7 @@ u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
     Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
     Right_Pressed, Anykey_Pressed;
 
-
-void Anular_Newpress() //:P
+void Anular_Newpress() // :P
 {
     Pad.Newpress.A = 0;
     Pad.Newpress.B = 0;
@@ -170,7 +169,7 @@ void My_Press_Buttons()
         }
         else // No se ha tocado
         {
-            /*Nada*/
+            // Nada
         }
     }
 
@@ -192,11 +191,11 @@ void My_Press_Buttons()
             KI.A.AlreadyPressed = 1;
             KI.A.Held = 0;
         }
-        else //Ya estaba pulsado
+        else // Ya estaba pulsado
         {
-            if (KI.A.Held) //Si estaba pulsado...
+            if (KI.A.Held) // Si estaba pulsado...
             {
-                /*Nada*/
+                // Nada
             }
             else // Si no estaba pulsado
             {
@@ -214,7 +213,7 @@ void My_Press_Buttons()
         }
         else // No se ha tocado
         {
-            /*Nada*/
+            // Nada
         }
     }
 }

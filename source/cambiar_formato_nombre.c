@@ -1,5 +1,6 @@
 
 #include <PA9.h>
+
 #include "graficos_3d/texto/letras.h"
 
 /*
@@ -12,7 +13,7 @@ void Convertir_Nombre(void)
     // Convertir
     for (int i = 0; i <= PA_UserInfo.NameLength; i++)
     {
-        switch(PA_UserInfo.Name[i])
+        switch (PA_UserInfo.Name[i])
         {
             case 33:
                 nombre_jugador[i] = CHAR_CERRARINTERROGACION;
@@ -221,7 +222,7 @@ int Convertir_Letra(int letra)
 {
     int letraaux = 0;
 
-    switch(letra)
+    switch (letra)
     {
         case 33:
             letraaux = CHAR_CERRARINTERROGACION;

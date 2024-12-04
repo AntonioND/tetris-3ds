@@ -1,6 +1,6 @@
 #include <nds.h>
 
-int texture[10];  //Diez slots, el primero debe quedarse vacio.
+int texture[10]; // Diez slots, el primero debe quedarse vacio.
 
 int LoadGLTexture_PCX_8bit(u8 * adress, u8 slot, int sizex, int sizey)
 {

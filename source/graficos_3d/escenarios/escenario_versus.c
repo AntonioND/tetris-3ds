@@ -89,13 +89,13 @@ void Dibujar_Escenario_Versus_J1(void)
     glEnd();
 
     glBindTexture(GL_TEXTURE_2D,texture[0]);
-    }
+}
 
-    void Dibujar_Escenario_Versus_J2( void )
-    {
+void Dibujar_Escenario_Versus_J2(void)
+{
     scrolly_CPU += 0.005;
-    if(scrolly_CPU > 0.5) scrolly_CPU -=0.5;
-
+    if (scrolly_CPU > 0.5)
+        scrolly_CPU -= 0.5;
 
     glBegin(GL_QUADS);
 

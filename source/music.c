@@ -195,7 +195,7 @@ void Check_Song_End()
                 {
                     AS_MP3StreamPlay(Song_Path);
                     AS_SetMP3Loop(false);
-                    Wait_Time = -64; //No importa el numero...
+                    Wait_Time = -64; // No importa el numero...
                 }
 
             }

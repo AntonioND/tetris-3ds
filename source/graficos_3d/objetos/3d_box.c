@@ -10,41 +10,41 @@ void Draw3D_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, float GREEN
 
     glColor3f(RED,GREEN,BLUE);
 
-    //DERECHA
+        // DERECHA
         glVertex3f(-SIZE_X,  SIZE_Y, -SIZE_Z);
         glVertex3f( SIZE_X,  SIZE_Y, -SIZE_Z);
         glVertex3f( SIZE_X, -SIZE_Y, -SIZE_Z);
         glVertex3f(-SIZE_X, -SIZE_Y, -SIZE_Z);
 
-    //IZQUIERDA
+        // IZQUIERDA
         glVertex3f(SIZE_X,   SIZE_Y,  SIZE_Z);
         glVertex3f(-SIZE_X,  SIZE_Y,  SIZE_Z);
         glVertex3f(-SIZE_X, -SIZE_Y,  SIZE_Z);
         glVertex3f(SIZE_X,  -SIZE_Y,  SIZE_Z);
 
-    glColor3f(RED - 0.2 ,GREEN - 0.2,BLUE - 0.2);
+    glColor3f(RED - 0.2, GREEN - 0.2, BLUE - 0.2);
 
-    //ATRAS
+        // ATRAS
         glVertex3f(-SIZE_X,  SIZE_Y,  SIZE_Z);
         glVertex3f(-SIZE_X,  SIZE_Y, -SIZE_Z);
         glVertex3f(-SIZE_X, -SIZE_Y, -SIZE_Z);
         glVertex3f(-SIZE_X, -SIZE_Y,  SIZE_Z);
 
-    //FRENTE
+        // FRENTE
         glVertex3f(SIZE_X,   SIZE_Y, -SIZE_Z);
         glVertex3f(SIZE_X,   SIZE_Y,  SIZE_Z);
         glVertex3f(SIZE_X,  -SIZE_Y,  SIZE_Z);
         glVertex3f(SIZE_X,  -SIZE_Y, -SIZE_Z);
 
-    glColor3f(RED - 0.1 ,GREEN - 0.1,BLUE - 0.1);
+    glColor3f(RED - 0.1 , GREEN - 0.1, BLUE - 0.1);
 
-    //SUPERIOR
+        // SUPERIOR
         glVertex3f(-SIZE_X,  SIZE_Y, -SIZE_Z);
         glVertex3f(-SIZE_X,  SIZE_Y,  SIZE_Z);
         glVertex3f(SIZE_X,   SIZE_Y,  SIZE_Z);
         glVertex3f(SIZE_X,   SIZE_Y, -SIZE_Z);
 
-    //INFERIOR
+        // INFERIOR
         glVertex3f(-SIZE_X, -SIZE_Y,  SIZE_Z);
         glVertex3f(-SIZE_X, -SIZE_Y, -SIZE_Z);
         glVertex3f(SIZE_X,  -SIZE_Y, -SIZE_Z);
@@ -61,9 +61,9 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
 
     glBegin(GL_QUADS);
 
-    glColor3f(RED - 0.2 ,GREEN - 0.2,BLUE - 0.2);
+    glColor3f(RED - 0.2, GREEN - 0.2, BLUE - 0.2);
 
-    //DERECHA
+        // DERECHA
         glTexCoord2f(1,1);
         glVertex3v16(-SIZE_X_,  SIZE_Y_, -SIZE_Z_);
         glTexCoord2f(1,0);
@@ -73,7 +73,7 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
         glTexCoord2f(0,1);
         glVertex3v16(-SIZE_X_, -SIZE_Y_, -SIZE_Z_);
 
-    //IZQUIERDA
+        // IZQUIERDA
         glTexCoord2f(1,1);
         glVertex3v16(SIZE_X_,   SIZE_Y_,  SIZE_Z_);
         glTexCoord2f(1,0);
@@ -85,7 +85,7 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
 
     glColor3f(RED,GREEN,BLUE);
 
-    //ATRAS
+        // ATRAS
         glTexCoord2f(1,1);
         glVertex3v16(-SIZE_X_,  SIZE_Y_,  SIZE_Z_);
         glTexCoord2f(1,0);
@@ -96,7 +96,7 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
         glVertex3v16(-SIZE_X_, -SIZE_Y_,  SIZE_Z_);
 
     /*
-    //FRENTE
+        // FRENTE
         glTexCoord2f(1,1);
         glVertex3v16(SIZE_X_,   SIZE_Y_, -SIZE_Z);
         glTexCoord2f(1,0);
@@ -109,7 +109,7 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
     */
     glColor3f(RED - 0.1 ,GREEN - 0.1,BLUE - 0.1);
 
-    //SUPERIOR
+        // SUPERIOR
         glTexCoord2f(1,1);
         glVertex3v16(-SIZE_X_,  SIZE_Y_, -SIZE_Z_);
         glTexCoord2f(1,0);
@@ -119,7 +119,7 @@ void Draw3D_Textured_Box(float SIZE_X, float SIZE_Y, float SIZE_Z, float RED, fl
         glTexCoord2f(0,1);
         glVertex3v16(SIZE_X_,   SIZE_Y_, -SIZE_Z_);
 
-    //INFERIOR
+        // INFERIOR
         glTexCoord2f(1,1);
         glVertex3v16(-SIZE_X_, -SIZE_Y_,  SIZE_Z_);
         glTexCoord2f(1,0);

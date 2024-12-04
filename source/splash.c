@@ -1,6 +1,6 @@
-#include <math.h>
-
 #include <PA9.h>
+
+#include <math.h>
 
 #include "splash_down_bmp_bin.h"
 #include "splash_up_bmp_bin.h"
