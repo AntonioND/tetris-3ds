@@ -30,11 +30,10 @@ SDIMAGE		:= image.bin
 # -----------------
 
 SOURCEDIRS	:= source
-INCLUDEDIRS	:= include source
+INCLUDEDIRS	:= source
 GFXDIRS		:=
 BINDIRS		:= data source
 AUDIODIRS	:=
-# A single directory that is the root of NitroFS:
 NITROFSDIR	:=
 
 # Defines passed to all files

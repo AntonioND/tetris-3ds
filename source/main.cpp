@@ -1,9 +1,28 @@
 //#include "as_lib9.h" // include our own as_lib9.h before including the one in PALib!
+
 #include <PA9.h>
-#include "header.h"
+
+#include "cambiar_formato_nombre.h"
+#include "global.h"
+#include "graficos_3d/escenarios/escenarios.h"
+#include "graficos_3d/funciones_texturas.h"
+#include "graficos_3d/graphics3d.h"
+#include "graficos_3d/objetos/3d_box.h"
+#include "graficos_3d/objetos/figura_luz.h"
+#include "graficos_3d/texto/letras.h"
+#include "graficos_3d/texto/numeros.h"
+#include "keys_control.h"
 #include "menu.h"
+#include "modos_de_juego/contra_cpu/contra_cpu.h"
+#include "modos_de_juego/cpu_ia.h"
+#include "modos_de_juego/juego.h"
+#include "modos_de_juego/normal/normal.h"
 #include "modos_de_juego/records.h"
+#include "my_fat.h"
 #include "splash.h"
+
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
 
 //printf("\n\nRam usage: Culling %s", ( held & KEY_A) ? "none" : "back faces" );
 
