@@ -860,7 +860,7 @@ else if(!reservausada)
 #include "graficos_3d/escenarios/escenarios.h"
 
 //Modos de juego
-#include "NORMAL/Normal.cpp"
+#include "modos_de_juego/normal/normal.h"
 #include "CONTRA_CPU/Contra_CPU.cpp"
 
 #endif

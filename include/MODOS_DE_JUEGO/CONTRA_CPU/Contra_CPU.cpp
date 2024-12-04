@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "music.h"
+
 void Graficos_2D_Contra_CPU();
 void Graficos_3D_Contra_CPU();
 
