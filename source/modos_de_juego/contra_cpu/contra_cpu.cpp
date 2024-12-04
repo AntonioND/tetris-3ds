@@ -1,12 +1,52 @@
+#include <PA9.h>
 
-#include <header.h>
-#include <string.h>
-#include <stdlib.h>
-
+#include "global.h"
+#include "graficos_3d/graphics3d.h"
+#include "graficos_3d/escenarios/escenario_versus.h"
+#include "graficos_3d/texto/letras.h"
+#include "keys_control.h"
+#include "modos_de_juego/contra_cpu/contra_cpu.h"
 #include "music.h"
 
-void Graficos_2D_Contra_CPU();
-void Graficos_3D_Contra_CPU();
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
+
+// TODO Delete v
+void Controles_Tactiles_Horizontal();
+void Controles_Tactiles_Vertical();
+void Autofire_Keys_Horizontal();
+void Autofire_Keys_Vertical();
+u8 Borrar_Lineas_Completas();
+u8 Borrar_Lineas_Completas_CPU();
+void Borrar_Linea(u8 altura);
+void Cancelar_Animacion_Eliminar_Lineas();
+void Cancelar_Animacion_Eliminar_Lineas_CPU();
+u8 Comprobar_Lineas_Completas();
+u8 Comprobar_Lineas_Completas_CPU();
+u8 Comprobar_Linea(u8 altura);
+void Ajustar_Colisiones_Actuales();
+void Ajustar_Colisiones_Actuales_CPU();
+u8 Estado_Cuadricula(int x, int y);
+u8 Comprobar_Colisiones_Inferior();
+u8 Comprobar_Colisiones_Derecha();
+u8 Comprobar_Colisiones_Izquierda();
+u8 Comprobar_Colisiones_Giro();
+u8 Comprobar_Colisiones_Inferior_CPU();
+u8 Comprobar_Colisiones_Derecha_CPU();
+u8 Comprobar_Colisiones_Izquierda_CPU();
+u8 Comprobar_Colisiones_Giro_CPU();
+void Borrar_Pieza_Actual();
+void Borrar_Pieza_Actual_CPU();
+void Dibujar_Pieza_Actual();
+void Dibujar_Pieza_Actual_CPU();
+void Iniciar_Juego();
+void Iniciar_Juego_CPU();
+void Nueva_Pieza();
+void Nueva_Pieza_CPU();
+void Reservar_Pieza();
+void IA_CPU();
+void Mover_IA_CPU();
+// TODO Delete ^
 
 void Modo_Contra_CPU()
 {
@@ -23,8 +63,8 @@ PA_WaitForVBL();
 PA_WaitForVBL();
 
 PA_Init8bitBg(1,3);
-PA_EasyBgLoad(1,2,inferior_versus); 
-PA_SetBgPalCol(1, 1, PA_RGB(31, 0, 0));	
+PA_EasyBgLoad(1,2,inferior_versus);
+PA_SetBgPalCol(1, 1, PA_RGB(31, 0, 0));
 PA_SetBgPalCol(1, 2, PA_RGB(0, 31, 0));
 PA_SetBgPalCol(1, 3, PA_RGB(31, 31, 31));
 PA_SetBgPalCol(1, 4, PA_RGB(31, 31, 0));
@@ -33,12 +73,12 @@ PA_SetBgColor(1, PA_RGB(0, 0, 0));
 My_Init_3D();
 
 //Fade up
-for (auxiliar = -31; auxiliar < 0; auxiliar++) 
+for (auxiliar = -31; auxiliar < 0; auxiliar++)
 	{
 	PA_SetBrightness(0, auxiliar);
 	PA_SetBrightness(1, auxiliar);
-	PA_WaitForVBL(); 
-	}	
+	PA_WaitForVBL();
+	}
 
 PA_SetBrightness(0, 0);
 PA_SetBrightness(1, 0);
@@ -58,12 +98,12 @@ while(JUEGO_ACTIVO)
     //JUEGO
     //-----
 	Custom_Newpress();
-	
+
 	if(PAUSA) //Para la pausa
 		{
 		if(pausa_lista == 0)
 			{
-			if(Pad.Newpress.Start) 
+			if(Pad.Newpress.Start)
 				{
 				PAUSA = false;
 				Unpause_Song();
@@ -74,13 +114,13 @@ while(JUEGO_ACTIVO)
 			{
 			pausa_lista --;
 			}
-		
+
 		Escribir_3D_Char_Moved(TEXT_MEDIUM, 2,3, 1,0, CHAR_P,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_MEDIUM, 3,3, 1,0, CHAR_A,  Text_Color.red - 0.2,Text_Color.green - 0.2,Text_Color.blue - 0.2);
 		Escribir_3D_Char_Moved(TEXT_MEDIUM, 4,3, 1,0, CHAR_U,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_MEDIUM, 5,3, 1,0, CHAR_S,  Text_Color.red - 0.2,Text_Color.green - 0.2,Text_Color.blue - 0.2);
 		Escribir_3D_Char_Moved(TEXT_MEDIUM, 6,3, 1,0, CHAR_E,  Text_Color.red,Text_Color.green,Text_Color.blue);
-		
+
 		Update_3D_Text_Colors();
 		}
 	else
@@ -93,10 +133,10 @@ while(JUEGO_ACTIVO)
 		//Escribir_3D_Char(TEXT_SMALL, 1,0, 100 + (auxiliar % 100) / 10,  1,1,1);
 		//Escribir_3D_Char(TEXT_SMALL, 2,0, 100 + auxiliar % 10,  1,1,1);
 
-		
+
 		if(pausa_lista == 0)
 			{
-			if(Pad.Newpress.Start) 
+			if(Pad.Newpress.Start)
 				{
 				Init_3D_Text_Colors(0.5,0.01, 0.6,0.02, 0.8,0.03);
 				Pause_Song();
@@ -112,28 +152,28 @@ while(JUEGO_ACTIVO)
 		//My_Press_Buttons();
 		Autofire_Keys_Vertical();
 		Controles_Tactiles_Vertical();
-		
+
 		Borrar_Lineas_Completas();
 		Borrar_Lineas_Completas_CPU();
-		
+
 		Ajustar_Colisiones_Actuales();
 		Dibujar_Pieza_Actual();
-	
+
 		Ajustar_Colisiones_Actuales_CPU();
 		Dibujar_Pieza_Actual_CPU();
-	
-	
+
+
 		if(Comprobar_Colisiones_Inferior() == 0)
 			{
 			girarcount = 30;
-			
-			if((Pad.Held.Down) && (framecount % 5 == 0)) 
+
+			if((Pad.Held.Down) && (framecount % 5 == 0))
 				{
-				Borrar_Pieza_Actual(); 
-				velocidadcount = 0; 
-				Pieza.Y --; 
+				Borrar_Pieza_Actual();
+				velocidadcount = 0;
+				Pieza.Y --;
 				}
-			
+
 			if(Pad.Newpress.Up)
 				{
 				velocidadcount = 0;
@@ -149,40 +189,40 @@ while(JUEGO_ACTIVO)
 				Ajustar_Colisiones_Actuales();
 				}
 			}
-		
+
 		if(Comprobar_Colisiones_Inferior_CPU() == 0)
 			{
 			girarcount_CPU = 30;
-			
-			if((Caida_rapida_CPU) && (framecount % 5 == 0)) 
+
+			if((Caida_rapida_CPU) && (framecount % 5 == 0))
 				{
-				Borrar_Pieza_Actual_CPU(); 
-				velocidadcount_CPU = 0; 
-				Pieza_CPU.Y --; 
+				Borrar_Pieza_Actual_CPU();
+				velocidadcount_CPU = 0;
+				Pieza_CPU.Y --;
 				}
 			}
-		
+
 		Ajustar_Colisiones_Actuales();
 		Dibujar_Pieza_Actual();
-		
+
 		Ajustar_Colisiones_Actuales_CPU();
 		Dibujar_Pieza_Actual_CPU();
-		
+
 		//-----------------
 		//CONTROLES JUGADOR
 		//-----------------
-		
+
 		if((Pad.Newpress.Right && !Comprobar_Colisiones_Derecha()) || (Pad.Newpress.Left && !Comprobar_Colisiones_Izquierda()))
 			{
 			girarcount = 30;
 			Borrar_Pieza_Actual();
 			Pieza.X +=Pad.Newpress.Right - Pad.Newpress.Left;
 			}
-			
+
 		Dibujar_Pieza_Actual();
-		
+
 		if(Pad.Newpress.X) Reservar_Pieza();
-		
+
 		if((Pad.Newpress.A) && (Tipo_Pieza[0] != 6))
 			{
 			if(Comprobar_Colisiones_Inferior() == 0)  girarcount = 30;
@@ -190,7 +230,7 @@ while(JUEGO_ACTIVO)
 				{
 				case 0: //Giro normal
 					girarcount = 30;
-					Borrar_Pieza_Actual(); 
+					Borrar_Pieza_Actual();
 					Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
 					break;
 				case 1:
@@ -199,36 +239,36 @@ while(JUEGO_ACTIVO)
 					break;
 				case 2: //Hacia arriba
 					girarcount = 30;
-					Borrar_Pieza_Actual(); 
+					Borrar_Pieza_Actual();
 					Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
 					Pieza.Y ++;
 					break;
 				case 3: //A la derecha
 					girarcount = 30;
-					Borrar_Pieza_Actual(); 
+					Borrar_Pieza_Actual();
 					Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
 					Pieza.X ++;
 					break;
 				case 4: //A la izquierda
 					girarcount = 30;
-					Borrar_Pieza_Actual(); 
+					Borrar_Pieza_Actual();
 					Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
 					Pieza.X --;
 					if(Tipo_Pieza[0] == 0) Pieza.X --;
 					break;
 				}
 			}
-		
+
 		Ajustar_Colisiones_Actuales();
 		Dibujar_Pieza_Actual();
-		
+
 		//------------------------
 		//FIN DE CONTROLES JUGADOR
 		//------------------------
-		
+
 		//-------------
 		//CONTROLES CPU
-		//-------------	
+		//-------------
 		Borrar_Pieza_Actual_CPU();
 		Mover_IA_CPU();
 		Ajustar_Colisiones_Actuales_CPU();
@@ -236,9 +276,9 @@ while(JUEGO_ACTIVO)
 		//--------------------
 		//FIN DE CONTROLES CPU
 		//--------------------
-		
+
 		velocidad = Limitar_float(1, 40, 40 -  1.25 * ((linecount / 5) + 1) );
-		
+
 		velocidadcount ++;
 		girarcount --;
 		if(velocidadcount > velocidad)
@@ -254,7 +294,7 @@ while(JUEGO_ACTIVO)
 				}
 			else if((girarcount < 0) && (Comprobar_Colisiones_Inferior() == 1))
 				{
-				if(Pieza.Y == 16) 
+				if(Pieza.Y == 16)
 					{
 					JUEGO_ACTIVO = false; //Fin del juego
 					jugador_ganador = 2;
@@ -263,15 +303,15 @@ while(JUEGO_ACTIVO)
 				Dibujar_Pieza_Actual();
 				Nueva_Pieza();
 				}
-			}	
-		
-		
+			}
+
+
 		velocidadcount_CPU ++;
 		girarcount_CPU --;
 		if(velocidadcount_CPU > velocidad)
 			{
 			Borrar_Pieza_Actual_CPU();
-			
+
 			if(Comprobar_Colisiones_Inferior_CPU() == 0)
 				{
 				if(!(Caida_rapida_CPU))
@@ -283,7 +323,7 @@ while(JUEGO_ACTIVO)
 				}
 			else if((Comprobar_Colisiones_Inferior_CPU() == 1) && (girarcount_CPU < 0))
 				{
-				if(Pieza_CPU.Y == 16) 
+				if(Pieza_CPU.Y == 16)
 					{
 					JUEGO_ACTIVO = false; //Fin del juego
 					jugador_ganador = 1;
@@ -296,15 +336,15 @@ while(JUEGO_ACTIVO)
 			IA_CPU();
 			Ajustar_Colisiones_Actuales_CPU();
 			Dibujar_Pieza_Actual_CPU();
-			}	
-	
-	
-		Borrar_Pieza_Actual(); 
-		Borrar_Pieza_Actual_CPU(); 
-		
+			}
+
+
+		Borrar_Pieza_Actual();
+		Borrar_Pieza_Actual_CPU();
+
 		Ajustar_Colisiones_Actuales();
 		Ajustar_Colisiones_Actuales_CPU();
-				
+
 		switch(Comprobar_Lineas_Completas())//Numero de filas completas
 			{
 			case 1:
@@ -328,7 +368,7 @@ while(JUEGO_ACTIVO)
 				UPDATE_2D = true;
 				break;
 			}
-			
+
 		switch(Comprobar_Lineas_Completas_CPU())//Numero de filas completas
 			{
 			case 1:
@@ -352,18 +392,18 @@ while(JUEGO_ACTIVO)
 				UPDATE_2D = true;
 				break;
 			}
-			
+
 		}//Fin de control
-			
+
 
     Dibujar_Pieza_Actual();
 	Dibujar_Pieza_Actual_CPU();
-	
+
 	//-----------
     //Gráficos 2D
     //-----------
 	Graficos_2D_Contra_CPU();
-	
+
 	//-----------
 	//Gráficos 3D
 	//-----------
@@ -387,10 +427,10 @@ while(JUEGO_ACTIVO)
 					 (int)(fondoverde * Limitar_float(0,1, (500 - (float)linecount) / 300)),
 					 (int)(fondoazul *  Limitar_float(0,1, (350 - (float)linecount) / 150)) ,31);
 		}
-		
-	
+
+
 	Check_Song_End();
-	
+
 	framecount ++;
 	framecount %= 60;
 	PA_WaitForVBL();
@@ -398,7 +438,7 @@ while(JUEGO_ACTIVO)
 //Fin del juego
 
 Stop_Song();
-	
+
 Cancelar_Animacion_Eliminar_Lineas_CPU();
 Cancelar_Animacion_Eliminar_Lineas();
 
@@ -420,29 +460,29 @@ else if(jugador_ganador == 2)
 //ESPERAR
 while(JUEGO_ACTIVO)
 	{
-	if(velocidadcount < 17) 
+	if(velocidadcount < 17)
 		{
 		Piezas_Aleatorias(velocidadcount);
 		Piezas_Aleatorias_CPU(velocidadcount);
 		if((framecount % 6 == 0)) velocidadcount++;
 		}
 	else if(girarcount == 0) girarcount = 1;
-	
+
 	if(girarcount != 0) girarcount++;
-	
+
 	if((girarcount > 30) && (girarcount < 100))
-		{ 
-		rotarsalaZ--;  
+		{
+		rotarsalaZ--;
 		if(girarcount > 60) rotarsalaZ--;
 		}
-	
+
 	if((Pad.Held.Anykey || Stylus.Held) && (girarcount > 98)) JUEGO_ACTIVO = false;
-	
+
 	//-----------
     //Gráficos 2D
     //-----------
 	Graficos_2D_Contra_CPU();
-	
+
 	//-----------
 	//Gráficos 3D
 	//-----------
@@ -453,7 +493,7 @@ while(JUEGO_ACTIVO)
 		Escribir_3D_Char_Moved(TEXT_BIG, 1,0, 0,1, CHAR_Y,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_BIG, 2,0, 0,1, CHAR_O,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		Escribir_3D_Char_Moved(TEXT_BIG, 3,0, 0,1, CHAR_U,  Text_Color.red,Text_Color.green,Text_Color.blue);
-		
+
 		Escribir_3D_Char_Moved(TEXT_BIG, 1,2, 0,1, CHAR_W,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		Escribir_3D_Char_Moved(TEXT_BIG, 2,2, 0,1, CHAR_I,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_BIG, 3,2, 0,1, CHAR_N,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
@@ -464,19 +504,19 @@ while(JUEGO_ACTIVO)
 		Escribir_3D_Char_Moved(TEXT_BIG, 1,0, 1,1, CHAR_A,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		Escribir_3D_Char_Moved(TEXT_BIG, 2,0, 1,1, CHAR_M,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		Escribir_3D_Char_Moved(TEXT_BIG, 3,0, 1,1, CHAR_E,  Text_Color.red,Text_Color.green,Text_Color.blue);
-		
+
 		Escribir_3D_Char_Moved(TEXT_BIG, 0,2, 1,1, CHAR_O,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		Escribir_3D_Char_Moved(TEXT_BIG, 1,2, 1,1, CHAR_V,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_BIG, 2,2, 1,1, CHAR_E,  Text_Color.red,Text_Color.green,Text_Color.blue);
 		Escribir_3D_Char_Moved(TEXT_BIG, 3,2, 1,1, CHAR_R,  Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
 		}
-		
+
 	Update_3D_Text_Colors();
 
-	if(fondorojo > 0.5) fondorojo -= 0.1; 
-	if(fondoverde > 0.5) fondoverde -= 0.1; 
-	if(fondoazul > 0.5) fondoazul -= 0.1; 
-	
+	if(fondorojo > 0.5) fondorojo -= 0.1;
+	if(fondoverde > 0.5) fondoverde -= 0.1;
+	if(fondoazul > 0.5) fondoazul -= 0.1;
+
 	if(linecount < 200)
 		{
 		glClearColor((int)(fondorojo *  Limitar_float(0,1, (float)linecount / 200)),
@@ -489,12 +529,12 @@ while(JUEGO_ACTIVO)
 					 (int)(fondoverde * Limitar_float(0,1, (500 - (float)linecount) / 300)),
 					 (int)(fondoazul *  Limitar_float(0,1, (350 - (float)linecount) / 150)) ,31);
 		}
-	
+
 	framecount ++;
 	framecount %= 60;
 	PA_WaitForVBL();
 	}
-	
+
 glFlush(0);
 glFlush(0);
 PA_WaitForVBL();

@@ -856,11 +856,11 @@ else if(!reservausada)
 
 #include "CPU_IA.h"
 
-//Escenarios
+// Escenarios
 #include "graficos_3d/escenarios/escenarios.h"
 
-//Modos de juego
+// Modos de juego
 #include "modos_de_juego/normal/normal.h"
-#include "CONTRA_CPU/Contra_CPU.cpp"
+#include "modos_de_juego/contra_cpu/contra_cpu.h"
 
 #endif
