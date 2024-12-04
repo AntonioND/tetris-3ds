@@ -8,12 +8,31 @@
 #include "graficos_3d/funciones_texturas.h"
 #include "graficos_3d/objetos/figura_luz.h"
 
-_RGB_I_ focoder[3];
-_RGB_I_ focoizq[3];
+#define TEXTURA_SUELO   1
+#define TEXTURA_PAREDES 2
+#define TEXTURA_ASIENTO 3
+#define TEXTURA_METAL   4
+#define TEXTURA_FOCO    5
 
-__LUZ__ luz[5];
+typedef struct {
+    float red, green, blue, ired, igreen, iblue;
+} _RGB_I_;
 
-__ROT_STRUCT__ Rot_Sala;
+static _RGB_I_ focoder[3];
+static _RGB_I_ focoizq[3];
+
+typedef struct {
+    int rotx, rotz, tiemporestante;
+} __LUZ__;
+
+static __LUZ__ luz[5];
+
+typedef struct {
+    float X, Y, Z;
+    float IncX, IncY, IncZ;
+} __ROT_STRUCT__;
+
+static __ROT_STRUCT__ Rot_Sala;
 
 static float girar_bola;
 

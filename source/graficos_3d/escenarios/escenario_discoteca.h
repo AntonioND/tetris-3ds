@@ -3,35 +3,6 @@
 
 #include <nds.h>
 
-#define TEXTURA_SUELO	1
-#define TEXTURA_PAREDES	2
-#define TEXTURA_ASIENTO	3
-#define TEXTURA_METAL	4
-#define TEXTURA_FOCO	5
-
-typedef struct
-{
-    float red, green, blue, ired, igreen, iblue;
-} _RGB_I_;
-
-extern _RGB_I_ focoder[3];
-extern _RGB_I_ focoizq[3];
-
-typedef struct
-{
-    int rotx, rotz, tiemporestante;
-} __LUZ__;
-
-extern __LUZ__ luz[5];
-
-typedef struct
-{
-    float X, Y, Z;
-    float IncX, IncY, IncZ;
-} __ROT_STRUCT__;
-
-extern __ROT_STRUCT__ Rot_Sala;
-
 void Draw_Sujetabola(void);
 
 void Draw_Foco1Izq(float red, float green, float blue);
