@@ -147,20 +147,20 @@ void Dibujar_Tetris(void)
 
     glBindTexture(GL_TEXTURE_2D, texture[texture_selected]);
 
-    for (auxiliar = 0;auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int x = 0; x < ANCHO_PIEZAS; x++)
     {
-        for (auxiliar2 = 0;auxiliar2 < ALTO_PIEZAS; auxiliar2++)
+        for (int y = 0; y < ALTO_PIEZAS; y++)
         {
-            if (Escenario_Tetris[auxiliar][auxiliar2].dibujar != 0)
+            if (Escenario_Tetris[x][y].dibujar != 0)
             {
-                if (Escenario_Tetris[auxiliar][auxiliar2].dibujar == 1)
+                if (Escenario_Tetris[x][y].dibujar == 1)
                     Iniciar_Transparencia(10);
 
-                Dibujar_Caja(Escenario_Tetris[auxiliar][auxiliar2].red,
-                             Escenario_Tetris[auxiliar][auxiliar2].green,
-                             Escenario_Tetris[auxiliar][auxiliar2].blue);
+                Dibujar_Caja(Escenario_Tetris[x][y].red,
+                             Escenario_Tetris[x][y].green,
+                             Escenario_Tetris[x][y].blue);
 
-                if (Escenario_Tetris[auxiliar][auxiliar2].dibujar == 1)
+                if (Escenario_Tetris[x][y].dibujar == 1)
                     Finalizar_Transparencia();
             }
             glTranslatef(0.0, 0.5, 0.0);
@@ -186,22 +186,22 @@ void Dibujar_Tetris_CPU(void)
     0, 0, 0 ------ 0, 4.5, 0
     */
 
-    glBindTexture(GL_TEXTURE_2D,texture[texture_selected]);
+    glBindTexture(GL_TEXTURE_2D, texture[texture_selected]);
 
-    for (auxiliar = 0;auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int x = 0; x < ANCHO_PIEZAS; x++)
     {
-        for (auxiliar2 = 0;auxiliar2 < ALTO_PIEZAS; auxiliar2++)
+        for (int y = 0; y < ALTO_PIEZAS; y++)
         {
-            if (Escenario_Tetris_CPU[auxiliar][auxiliar2].dibujar != 0)
+            if (Escenario_Tetris_CPU[x][y].dibujar != 0)
             {
-                if (Escenario_Tetris_CPU[auxiliar][auxiliar2].dibujar == 1)
+                if (Escenario_Tetris_CPU[x][y].dibujar == 1)
                     Iniciar_Transparencia(10);
 
-                Dibujar_Caja(Escenario_Tetris_CPU[auxiliar][auxiliar2].red,
-                             Escenario_Tetris_CPU[auxiliar][auxiliar2].green,
-                             Escenario_Tetris_CPU[auxiliar][auxiliar2].blue);
+                Dibujar_Caja(Escenario_Tetris_CPU[x][y].red,
+                             Escenario_Tetris_CPU[x][y].green,
+                             Escenario_Tetris_CPU[x][y].blue);
 
-                if (Escenario_Tetris_CPU[auxiliar][auxiliar2].dibujar == 1)
+                if (Escenario_Tetris_CPU[x][y].dibujar == 1)
                     Finalizar_Transparencia();
             }
             glTranslatef(0.0, 0.5, 0.0);
@@ -221,13 +221,14 @@ void Dibujar_Explosiones(void)
     glBindTexture(GL_TEXTURE_2D, texture[2]);
 
     glTranslatef(0.0, 0.0, 2.25);
-    for (auxiliar = 0; auxiliar < ALTO_PIEZAS; auxiliar++)
+
+    for (int y = 0; y < ALTO_PIEZAS; y++)
     {
-        if (Fila_Eliminada[auxiliar] > 0)
+        if (Fila_Eliminada[y] > 0)
         {
-            //Draw3D_Box(0.5, 0.5, (float)Fila_Eliminada[auxiliar] / 6,  1,1,1);
-            Draw3D_Textured_Box(0.5, 0.5, (float)Fila_Eliminada[auxiliar] / 6, 1,1,1);
-            //Dibujar_Explosion(Fila_Eliminada[auxiliar]);
+            //Draw3D_Box(0.5, 0.5, (float)Fila_Eliminada[y] / 6,  1, 1, 1);
+            Draw3D_Textured_Box(0.5, 0.5, (float)Fila_Eliminada[y] / 6, 1, 1, 1);
+            //Dibujar_Explosion(Fila_Eliminada[y]);
         }
 
         glTranslatef(0.0,0.5,0.0);
@@ -248,13 +249,13 @@ void Dibujar_Explosiones_CPU(void)
 
     glTranslatef(0.0, 0.0, 2.25);
 
-    for (auxiliar = 0;auxiliar < ALTO_PIEZAS; auxiliar++)
+    for (int y = 0; y < ALTO_PIEZAS; y++)
     {
-        if (Fila_Eliminada_CPU[auxiliar] > 0)
+        if (Fila_Eliminada_CPU[y] > 0)
         {
-            //Draw3D_Box(0.5, 0.5, (float)Fila_Eliminada[auxiliar] / 6,  1,1,1);
-            Draw3D_Textured_Box(0.5, 0.5, (float)Fila_Eliminada_CPU[auxiliar] / 6, 1,1,1);
-            //Dibujar_Explosion(Fila_Eliminada[auxiliar]);
+            //Draw3D_Box(0.5, 0.5, (float)Fila_Eliminada[y] / 6,  1, 1, 1);
+            Draw3D_Textured_Box(0.5, 0.5, (float)Fila_Eliminada_CPU[y] / 6, 1, 1, 1);
+            //Dibujar_Explosion(Fila_Eliminada[y]);
         }
 
         glTranslatef(0.0, 0.5, 0.0);
@@ -271,23 +272,24 @@ void Dibujar_Explosiones_CPU(void)
 void Piezas_Aleatorias(int altura)
 {
     altura = Limitar_int(0, 15, altura);
-    for (auxiliar = 0; auxiliar < ANCHO_PIEZAS; auxiliar++)
+
+    for (int x = 0; x < ANCHO_PIEZAS; x++)
     {
-        for (auxiliar2 = 0; auxiliar2 < altura; auxiliar2++)
+        for (int y = 0; y < altura; y++)
         {
-            Escenario_Tetris[auxiliar][auxiliar2].dibujar = PA_RandMinMax(0, 2);
+            Escenario_Tetris[x][y].dibujar = PA_RandMinMax(0, 2);
 
-            Escenario_Tetris[auxiliar][auxiliar2].red = PA_RandMinMax(0, 1);
-            Escenario_Tetris[auxiliar][auxiliar2].green = PA_RandMinMax(0, 1);
-            Escenario_Tetris[auxiliar][auxiliar2].blue = PA_RandMinMax(0, 1);
+            Escenario_Tetris[x][y].red = PA_RandMinMax(0, 1);
+            Escenario_Tetris[x][y].green = PA_RandMinMax(0, 1);
+            Escenario_Tetris[x][y].blue = PA_RandMinMax(0, 1);
 
-            while ((Escenario_Tetris[auxiliar][auxiliar2].red == 0) &&
-                   (Escenario_Tetris[auxiliar][auxiliar2].green == 0) &&
-                   (Escenario_Tetris[auxiliar][auxiliar2].blue == 0))
+            while ((Escenario_Tetris[x][y].red == 0) &&
+                   (Escenario_Tetris[x][y].green == 0) &&
+                   (Escenario_Tetris[x][y].blue == 0))
             {
-                Escenario_Tetris[auxiliar][auxiliar2].red = PA_RandMinMax(0, 1);
-                Escenario_Tetris[auxiliar][auxiliar2].green = PA_RandMinMax(0, 1);
-                Escenario_Tetris[auxiliar][auxiliar2].blue = PA_RandMinMax(0, 1);
+                Escenario_Tetris[x][y].red = PA_RandMinMax(0, 1);
+                Escenario_Tetris[x][y].green = PA_RandMinMax(0, 1);
+                Escenario_Tetris[x][y].blue = PA_RandMinMax(0, 1);
             }
         }
     }
@@ -295,24 +297,25 @@ void Piezas_Aleatorias(int altura)
 
 void Piezas_Aleatorias_CPU(int altura)
 {
-    altura = Limitar_int(0,15,altura);
-    for (auxiliar = 0;auxiliar < ANCHO_PIEZAS; auxiliar++)
+    altura = Limitar_int(0, 15, altura);
+
+    for (int x = 0; x < ANCHO_PIEZAS; x++)
     {
-        for (auxiliar2 = 0;auxiliar2 < altura; auxiliar2++)
+        for (int y = 0; y < altura; y++)
         {
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].dibujar = PA_RandMinMax(0, 2);
+            Escenario_Tetris_CPU[x][y].dibujar = PA_RandMinMax(0, 2);
 
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].red = PA_RandMinMax(0, 1);
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].green = PA_RandMinMax(0, 1);
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].blue = PA_RandMinMax(0, 1);
+            Escenario_Tetris_CPU[x][y].red = PA_RandMinMax(0, 1);
+            Escenario_Tetris_CPU[x][y].green = PA_RandMinMax(0, 1);
+            Escenario_Tetris_CPU[x][y].blue = PA_RandMinMax(0, 1);
 
-            while ((Escenario_Tetris_CPU[auxiliar][auxiliar2].red == 0) &&
-                   (Escenario_Tetris_CPU[auxiliar][auxiliar2].green == 0) &&
-                   (Escenario_Tetris_CPU[auxiliar][auxiliar2].blue == 0))
+            while ((Escenario_Tetris_CPU[x][y].red == 0) &&
+                   (Escenario_Tetris_CPU[x][y].green == 0) &&
+                   (Escenario_Tetris_CPU[x][y].blue == 0))
             {
-                Escenario_Tetris_CPU[auxiliar][auxiliar2].red = PA_RandMinMax(0, 1);
-                Escenario_Tetris_CPU[auxiliar][auxiliar2].green = PA_RandMinMax(0, 1);
-                Escenario_Tetris_CPU[auxiliar][auxiliar2].blue = PA_RandMinMax(0, 1);
+                Escenario_Tetris_CPU[x][y].red = PA_RandMinMax(0, 1);
+                Escenario_Tetris_CPU[x][y].green = PA_RandMinMax(0, 1);
+                Escenario_Tetris_CPU[x][y].blue = PA_RandMinMax(0, 1);
             }
         }
     }
