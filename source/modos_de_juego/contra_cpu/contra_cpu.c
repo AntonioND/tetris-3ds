@@ -6,47 +6,12 @@
 #include "graficos_3d/texto/letras.h"
 #include "keys_control.h"
 #include "modos_de_juego/contra_cpu/contra_cpu.h"
+#include "modos_de_juego/cpu_ia.h"
+#include "modos_de_juego/juego.h"
 #include "music.h"
 
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
-
-// TODO Delete v
-void Controles_Tactiles_Horizontal();
-void Controles_Tactiles_Vertical();
-void Autofire_Keys_Horizontal();
-void Autofire_Keys_Vertical();
-u8 Borrar_Lineas_Completas();
-u8 Borrar_Lineas_Completas_CPU();
-void Borrar_Linea(u8 altura);
-void Cancelar_Animacion_Eliminar_Lineas();
-void Cancelar_Animacion_Eliminar_Lineas_CPU();
-u8 Comprobar_Lineas_Completas();
-u8 Comprobar_Lineas_Completas_CPU();
-u8 Comprobar_Linea(u8 altura);
-void Ajustar_Colisiones_Actuales();
-void Ajustar_Colisiones_Actuales_CPU();
-u8 Estado_Cuadricula(int x, int y);
-u8 Comprobar_Colisiones_Inferior();
-u8 Comprobar_Colisiones_Derecha();
-u8 Comprobar_Colisiones_Izquierda();
-u8 Comprobar_Colisiones_Giro();
-u8 Comprobar_Colisiones_Inferior_CPU();
-u8 Comprobar_Colisiones_Derecha_CPU();
-u8 Comprobar_Colisiones_Izquierda_CPU();
-u8 Comprobar_Colisiones_Giro_CPU();
-void Borrar_Pieza_Actual();
-void Borrar_Pieza_Actual_CPU();
-void Dibujar_Pieza_Actual();
-void Dibujar_Pieza_Actual_CPU();
-void Iniciar_Juego();
-void Iniciar_Juego_CPU();
-void Nueva_Pieza();
-void Nueva_Pieza_CPU();
-void Reservar_Pieza();
-void IA_CPU();
-void Mover_IA_CPU();
-// TODO Delete ^
 
 void Modo_Contra_CPU()
 {
