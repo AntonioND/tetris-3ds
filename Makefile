@@ -136,12 +136,12 @@ ASFLAGS		+= -x assembler-with-cpp $(INCLUDEFLAGS) $(DEFINES) \
 
 CFLAGS		+= -std=gnu17 $(WARNFLAGS) $(INCLUDEFLAGS) $(DEFINES) \
 		   $(ARCH) -O2 -ffunction-sections -fdata-sections \
-		   -specs=$(SPECS) -fcommon
+		   -specs=$(SPECS)
 
 CXXFLAGS	+= -std=gnu++17 $(WARNFLAGS) $(INCLUDEFLAGS) $(DEFINES) \
 		   $(ARCH) -O2 -ffunction-sections -fdata-sections \
 		   -fno-exceptions -fno-rtti \
-		   -specs=$(SPECS) -fcommon
+		   -specs=$(SPECS)
 
 LDFLAGS		:= $(ARCH) $(LIBDIRSFLAGS) -Wl,-Map,$(MAP) $(DEFINES) \
 		   -Wl,--start-group $(LIBS) -Wl,--end-group -specs=$(SPECS)
