@@ -30,7 +30,7 @@ void Actualizar_3D_Menu();
 void Reload_Menu();
 void End_Menu();
 
-// TODO: void Menu() goes here
+void Menu();
 
 void Graficos_3D_Menu();
 
