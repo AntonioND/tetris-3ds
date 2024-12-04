@@ -17,6 +17,8 @@ __ROT_STRUCT__ Rot_Sala;
 
 static float girar_bola;
 
+static int value_song;
+
 void Draw_Sujetabola(void)
 {
     glBindTexture(GL_TEXTURE_2D, texture[0]);
@@ -1449,8 +1451,6 @@ void Draw_AsientoIzq(void)
 
     glBindTexture(GL_TEXTURE_2D, texture[0]);
 }
-
-int value_song;
 
 void Dibujar_Discoteca(u8 pausa, u8 camara)
 {

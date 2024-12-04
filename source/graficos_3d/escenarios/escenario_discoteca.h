@@ -49,8 +49,6 @@ void Draw_Sala(void);
 void Draw_AsientoDer(void);
 void Draw_AsientoIzq(void);
 
-extern int value_song;
-
 void Dibujar_Discoteca(u8 pausa, u8 camara);
 
 void Iniciar_Focos(void);
