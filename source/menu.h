@@ -27,11 +27,8 @@ void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, 
 
 void Iniciar_3D_Menu();
 void Actualizar_3D_Menu();
-void Reload_Menu();
-void End_Menu();
+void Graficos_3D_Menu();
 
 void Menu();
-
-void Graficos_3D_Menu();
 
 #endif // MENU_H__

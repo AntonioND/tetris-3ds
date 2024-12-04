@@ -4,10 +4,7 @@
 #include <nds.h>
 
 extern u8 Current_Song;
-extern char Song_Path[50];
 extern bool SONG_ERROR;
-extern s8 Wait_Time;
-extern char* Error_Log;
 
 void Wait_To_Stop_Song();
 

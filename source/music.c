@@ -4,10 +4,10 @@
 #include "my_fat.h"
 
 u8 Current_Song;
-char Song_Path[50];
 bool SONG_ERROR;
-s8 Wait_Time;
-char *Error_Log;
+
+static char Song_Path[50];
+static s8 Wait_Time;
 
 void Wait_To_Stop_Song()
 {

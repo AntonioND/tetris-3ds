@@ -25,7 +25,7 @@ Datos que se guardan:
 bool FAT_ERROR = 0; //Activa/desactiva el acceso al FAT
 
 // Rutina de checksum
-int Checksum(u32 datos)
+static int Checksum(u32 datos)
 {
     u16 checksum = 0;
     for (u8 aux_checksum = 0; aux_checksum < 32; aux_checksum++)
