@@ -6,17 +6,7 @@ static u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
           Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
           Right_Pressed;
 
-typedef struct {
-    u8 AlreadyPressed, Held;
-} _KEY_STATE_;
-
-typedef struct {
-    _KEY_STATE_ A, B, X, Y, Select, Start, L, R, Up, Down, Right, Left, Anykey, Touch;
-} _KEYSINFO_;
-
-static _KEYSINFO_ KI;
-
-void Anular_Newpress() // :P
+void Anular_Newpress(void) // :P
 {
     Pad.Newpress.A = 0;
     Pad.Newpress.B = 0;
@@ -33,7 +23,7 @@ void Anular_Newpress() // :P
     Pad.Newpress.Anykey = 0;
 }
 
-void My_Newpress()
+void My_Newpress(void)
 {
     if ((Pad.Held.A) && (!A_Pressed))
     {
@@ -132,98 +122,8 @@ void My_Newpress()
         Start_Pressed = 0;
 }
 
-void Custom_Newpress()
+void Custom_Newpress(void)
 {
     Anular_Newpress();
     My_Newpress();
-}
-
-void My_Press_Buttons()
-{
-    if (Pad.Newpress.Anykey) // Preparar boton
-    {
-        KI.Anykey.AlreadyPressed = 1;
-        KI.Anykey.Held = 0;
-    }
-    if (Pad.Released.Anykey) //Reset
-    {
-        KI.Anykey.AlreadyPressed = 0;
-        KI.Anykey.Held = 0;
-    }
-    if (Pad.Held.Anykey)
-    {
-        if (!KI.Anykey.AlreadyPressed) // Si no estaba pulsado
-        {
-            Pad.Newpress.Anykey = 1;
-            KI.Anykey.AlreadyPressed = 1;
-            KI.Anykey.Held = 0;
-        }
-        else // Ya estaba pulsado
-        {
-            if (KI.Anykey.Held) // Si estaba pulsado...
-            {
-                /*Nada*/
-            }
-            else // Si no estaba pulsado
-            {
-                KI.Anykey.Held = 1;
-            }
-        }
-    }
-    else // Si no esta pulsado
-    {
-        if (KI.Anykey.Held) // Se acaba de soltar
-        {
-            KI.Anykey.Held = 0;
-            Pad.Released.Anykey = 1;
-        }
-        else // No se ha tocado
-        {
-            // Nada
-        }
-    }
-
-    if (Pad.Newpress.A) // Preparar boton
-    {
-        KI.A.AlreadyPressed = 1;
-        KI.A.Held = 0;
-    }
-    if (Pad.Released.A) // Reset
-    {
-        KI.A.AlreadyPressed = 0;
-        KI.A.Held = 0;
-    }
-    if (Pad.Held.A)
-    {
-        if ((!KI.A.AlreadyPressed) && (!Pad.Newpress.A)) // Si no estaba pulsado
-        {
-            Pad.Newpress.A = 1;
-            KI.A.AlreadyPressed = 1;
-            KI.A.Held = 0;
-        }
-        else // Ya estaba pulsado
-        {
-            if (KI.A.Held) // Si estaba pulsado...
-            {
-                // Nada
-            }
-            else // Si no estaba pulsado
-            {
-                KI.A.Held = 1;
-            }
-        }
-    }
-    else // Si no esta pulsado
-    {
-        if ((KI.A.Held) && (!Pad.Released.A)) // Se acaba de soltar
-        {
-            KI.A.Held = 0;
-            Pad.Released.A = 1;
-            KI.A.AlreadyPressed = 0;
-        }
-        else // No se ha tocado
-        {
-            // Nada
-        }
-    }
 }
