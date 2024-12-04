@@ -3,7 +3,6 @@
 
 extern float scrolly;
 extern float scrolly_CPU;
-extern float girar_bola;
 
 #include "escenario_normal.h"
 #include "escenario_versus.h"

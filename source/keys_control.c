@@ -2,9 +2,9 @@
 
 #include "keys_control.h"
 
-u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
-    Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
-    Right_Pressed, Anykey_Pressed;
+static u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
+          Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
+          Right_Pressed;
 
 void Anular_Newpress() // :P
 {

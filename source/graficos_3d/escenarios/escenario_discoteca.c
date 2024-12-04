@@ -15,6 +15,8 @@ __LUZ__ luz[5];
 
 __ROT_STRUCT__ Rot_Sala;
 
+static float girar_bola;
+
 void Draw_Sujetabola()
 {
     glBindTexture(GL_TEXTURE_2D, texture[0]);

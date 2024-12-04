@@ -3,10 +3,6 @@
 
 #include <PA9.h>
 
-extern u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
-   Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
-   Right_Pressed, Anykey_Pressed;
-
 typedef struct
 {
     u8 AlreadyPressed, Held;
