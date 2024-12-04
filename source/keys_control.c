@@ -6,6 +6,16 @@ static u8 A_Pressed, B_Pressed, X_Pressed, Y_Pressed, L_Pressed, R_Pressed,
           Select_Pressed, Start_Pressed, Up_Pressed, Down_Pressed, Left_Pressed,
           Right_Pressed;
 
+typedef struct {
+    u8 AlreadyPressed, Held;
+} _KEY_STATE_;
+
+typedef struct {
+    _KEY_STATE_ A, B, X, Y, Select, Start, L, R, Up, Down, Right, Left, Anykey, Touch;
+} _KEYSINFO_;
+
+static _KEYSINFO_ KI;
+
 void Anular_Newpress() // :P
 {
     Pad.Newpress.A = 0;
