@@ -108,10 +108,10 @@ void Reload_Menu()
     PA_Load16bitBitmap(1, menu_inferior_Bitmap);
 
     // Fade up
-    for (auxiliar = -31; auxiliar < 0; auxiliar++)
+    for (int i = -31; i < 0; i++)
     {
-        PA_SetBrightness(0, auxiliar);
-        PA_SetBrightness(1, auxiliar);
+        PA_SetBrightness(0, i);
+        PA_SetBrightness(1, i);
         PA_WaitForVBL();
     }
 
@@ -128,10 +128,10 @@ void End_Menu()
     PA_WaitForVBL();
 
     // Fade down
-    for (auxiliar = 0; auxiliar < 32; auxiliar++)
+    for (int i = 0; i < 32; i++)
     {
-        PA_SetBrightness(0, -auxiliar);
-        PA_SetBrightness(1, -auxiliar);
+        PA_SetBrightness(0, -i);
+        PA_SetBrightness(1, -i);
         PA_WaitForVBL(); // To slow down the fades, we wait a frame...
         PA_WaitForVBL();
     }
