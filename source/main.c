@@ -26,20 +26,8 @@
 
 //printf("\n\nRam usage: Culling %s", ( held & KEY_A) ? "none" : "back faces" );
 
-int main(int argc, char** argv)
+void Tetris3DSSplashScreen(void)
 {
-    defaultExceptionHandler();
-
-    PA_Init();
-
-    // Init AS_Lib for mp3
-    PA_VBLFunctionInit(AS_SoundVBL);
-    AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
-    AS_SetDefaultSettings(AS_PCM_8BIT, 11025, AS_SURROUND);
-
-    //Splash_Screen();
-
-    //------------MY SPLASH----------------
     PA_SetBrightness(0, -31);
     PA_SetBrightness(1, -31);
 
@@ -58,7 +46,7 @@ int main(int argc, char** argv)
     while (!(Pad.Newpress.Anykey || Stylus.Newpress))
         PA_WaitForVBL();
 
-    //Fade down
+    // Fade down
     for (int i = 0; i < 32; i++)
     {
         PA_SetBrightness(0, -i);
@@ -71,20 +59,35 @@ int main(int argc, char** argv)
     PA_SetBrightness(1, 0);
 
     PA_ResetBgSys();
-    //------------MY SPLASH-----------------
+}
 
+int main(int argc, char** argv)
+{
+    defaultExceptionHandler();
+
+    PA_Init();
+
+    // Init AS_Lib for mp3
+    PA_VBLFunctionInit(AS_SoundVBL);
+    AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
+    AS_SetDefaultSettings(AS_PCM_8BIT, 11025, AS_SURROUND);
+
+    // Compo splash screen
+    //Splash_Screen();
+
+    Tetris3DSSplashScreen();
 
     for (int i = 0; i < 30; i++)
         PA_WaitForVBL();
 
-    PA_InitCustomText(1, 0, custom_font); //2º = background number
+    PA_InitCustomText(1, 0, custom_font); // 2º = background number
 
-    if (Pad.Held.L && Pad.Held.R) //No iniciar FAT
+    if (Pad.Held.L && Pad.Held.R) // No iniciar FAT
     {
-        PA_OutputSimpleText(1,0,10,"     FAT will not be accesed.");
-        PA_OutputSimpleText(1,0,14,"          Press START");
+        PA_OutputSimpleText(1, 0, 10, "     FAT will not be accesed.");
+        PA_OutputSimpleText(1, 0, 14, "          Press START");
         FAT_ERROR = true;
-        //Default
+        // Default
         texture_selected = 2;
         camera_selected = 2;
         MASTER_SOUND = 64;
@@ -94,8 +97,8 @@ int main(int argc, char** argv)
         while (!Pad.Newpress.Start)
             PA_WaitForVBL();
 
-        PA_OutputSimpleText(1,0,10,"                             ");
-        PA_OutputSimpleText(1,0,14,"                     ");
+        PA_OutputSimpleText(1, 0, 10, "                             ");
+        PA_OutputSimpleText(1, 0, 14, "                     ");
     }
     else
     {
@@ -109,7 +112,7 @@ int main(int argc, char** argv)
         }
 
         Comprobar_FAT();
-        //Convertir_Nombre(); //Convertir de ASCII a el formato de este juego de 3D.
+        //Convertir_Nombre(); // Convertir de ASCII a el formato de este juego de 3D.
 
         AS_SetMasterVolume(MASTER_SOUND);
     }
@@ -123,9 +126,9 @@ int main(int argc, char** argv)
     MENU_ACTIVO = true;
     JUEGO_ACTIVO = false;
 
-    //INICIO DEL JUEGO
+    // INICIO DEL JUEGO
 
-    while(1)
+    while (1)
     {
         if (MENU_ACTIVO)
         {
