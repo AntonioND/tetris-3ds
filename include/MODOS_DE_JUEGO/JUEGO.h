@@ -3,13 +3,7 @@
 
 #include <header.h>
 
-float red_,green_,blue_;
-int temp_y, temp_x, temp_giro;
-
-#define NUMSPRITE_RESERVA 15
-
-u8 piezareserva;
-bool reservallena, reservausada;
+#include "modos_de_juego/juego.h"
 
 void Controles_Tactiles_Horizontal();
 void Controles_Tactiles_Vertical();
@@ -854,7 +848,7 @@ else if(!reservausada)
 	}
 }
 
-#include "CPU_IA.h"
+#include "modos_de_juego/cpu_ia.h"
 
 // Escenarios
 #include "graficos_3d/escenarios/escenarios.h"
