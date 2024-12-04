@@ -283,12 +283,12 @@ int Get_Song_Number()
 {
     if (!FAT_ERROR)
     {
-        auxiliar4 = Current_Song;
+        int old_song = Current_Song;
         for (auxiliar = 0; auxiliar < 100; auxiliar ++)
         {
             Current_Song = auxiliar;
             Set_New_Song_Path();
-            Current_Song = auxiliar4;
+            Current_Song = old_song;
             MP3FILE *file = FILE_OPEN(Song_Path);
             if (!file)
             {

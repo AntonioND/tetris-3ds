@@ -31,9 +31,7 @@ float rotarsalaX, rotarsalaY, rotarsalaZ;
 float fondorojo = 10, fondoverde = 15, fondoazul = 20;
 float incrementorojo = 0.2, incrementoverde = 0.15, incrementoazul = 0.1;
 
-//char nombre_record[10], nombre_jugador[10];
-
-int auxiliar, acumulador, auxiliar2, auxiliar3, auxiliar4;
+int auxiliar, acumulador, auxiliar2, auxiliar3;
 
 int Fila_Eliminada[ALTO_PIEZAS + 2];
 int Fila_Eliminada_CPU[ALTO_PIEZAS + 2];

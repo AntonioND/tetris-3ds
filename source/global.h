@@ -38,9 +38,7 @@ extern float rotarsalaX, rotarsalaY, rotarsalaZ;
 extern float fondorojo, fondoverde, fondoazul;
 extern float incrementorojo, incrementoverde, incrementoazul;
 
-//char nombre_record[10], nombre_jugador[10];
-
-extern int auxiliar, acumulador, auxiliar2, auxiliar3, auxiliar4;
+extern int auxiliar, acumulador, auxiliar2, auxiliar3;
 
 #define ANCHO_PIEZAS    10
 #define ALTO_PIEZAS     15

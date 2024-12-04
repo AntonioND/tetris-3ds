@@ -240,12 +240,12 @@ u8 Borrar_Lineas_Completas()
     Borrar_Pieza_Actual();
 
     auxiliar3 = 0;
-    for (auxiliar4 = ALTO_PIEZAS; auxiliar4 > 0; auxiliar4--)
+    for (int linea = ALTO_PIEZAS; linea > 0; linea--)
     {
-        if (Comprobar_Linea(auxiliar4-1))
+        if (Comprobar_Linea(linea - 1))
         {
             auxiliar3 = 1;
-            Borrar_Linea(auxiliar4-1);
+            Borrar_Linea(linea - 1);
         }
     }
 
@@ -286,14 +286,14 @@ void Borrar_Linea(u8 altura)
 // Devuelve las líneas completas
 u8 Comprobar_Lineas_Completas()
 {
-    auxiliar4 = 0;
+    int count = 0;
 
     for (auxiliar3 = 0;auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
     {
         if (Comprobar_Linea(auxiliar3) == 1)
         {
             Fila_Eliminada[auxiliar3] = 30;
-            auxiliar4 ++;
+            count++;
         }
         else
         {
@@ -301,7 +301,7 @@ u8 Comprobar_Lineas_Completas()
         }
     }
 
-    return auxiliar4;
+    return count;
 }
 
 u8 Comprobar_Linea(u8 altura)

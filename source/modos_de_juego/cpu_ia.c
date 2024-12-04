@@ -174,9 +174,9 @@ void IA_CPU()
                 Pieza_CPU.X++; //Poner a la derecha
         }
 
-        auxiliar4 = 0;
+        int counter = 0;
 
-        while (auxiliar4 < 2) // Hasta llegar a la izquierda
+        while (counter < 2) // Hasta llegar a la izquierda
         {
             if (!Comprobar_Colisiones_Inferior_CPU())
             {
@@ -196,10 +196,10 @@ void IA_CPU()
             if (Pieza_CPU.X > 0)
                 Pieza_CPU.X--;
             else
-                auxiliar4 = 2; //Si se sale
+                counter = 2; //Si se sale
 
             if (Comprobar_Colisiones_Izquierda_CPU())
-                auxiliar4++;
+                counter++;
         }
 
         Pieza_CPU.Y = Almacen_CPU.Y;
@@ -219,12 +219,12 @@ void IA_CPU()
     huecostotal_ = 100;
     huecosdebajo_ = 100;
     /*
-    auxiliar4 = 100; //Temporal, por si no va bien lo nuevo
+    int counter = 100; //Temporal, por si no va bien lo nuevo
     auxiliar3 = 100;
     */
     /*
     (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar].altura)
-    (Posicion_CPU[auxiliar].huecosdebajo <= auxiliar4)
+    (Posicion_CPU[auxiliar].huecosdebajo <= counter)
     (Posicion_CPU[auxiliar].huecostotal <= auxiliar3)
     */
 
@@ -367,18 +367,18 @@ void IA_CPU()
             // Temporal, por si no va bien lo nuevo
             if ((Posicion_Ideal_CPU.Y > Posicion_CPU[auxiliar][auxiliar2].altura))
             {
-                if (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < auxiliar4)
+                if (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < counter)
                 {
                     auxiliar3 = Posicion_CPU[auxiliar][auxiliar2].huecostotal;
-                    auxiliar4 = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
+                    counter = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
                     Posicion_Ideal_CPU.X = auxiliar;
                     Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
                     Posicion_Ideal_CPU.Rotacion = auxiliar2;
                 }
-                else if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == auxiliar4) && (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= auxiliar3))
+                else if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == counter) && (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= auxiliar3))
                 {
                     auxiliar3 = Posicion_CPU[auxiliar][auxiliar2].huecostotal;
-                    auxiliar4 = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
+                    counter = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
                     Posicion_Ideal_CPU.X = auxiliar;
                     Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
                     Posicion_Ideal_CPU.Rotacion =auxiliar2;
@@ -472,12 +472,12 @@ u8 Borrar_Lineas_Completas_CPU()
     Borrar_Pieza_Actual_CPU();
 
     auxiliar3 = 0;
-    for (auxiliar4 = ALTO_PIEZAS;auxiliar4 > 0; auxiliar4--)
+    for (int linea = ALTO_PIEZAS; linea > 0; linea--)
     {
-        if (Comprobar_Linea_CPU(auxiliar4-1))
+        if (Comprobar_Linea_CPU(linea - 1))
         {
             auxiliar3 = 1;
-            Borrar_Linea_CPU(auxiliar4-1);
+            Borrar_Linea_CPU(linea - 1);
         }
     }
 
@@ -518,20 +518,20 @@ void Borrar_Linea_CPU(u8 altura)
 // Devuelve las líneas completas
 u8 Comprobar_Lineas_Completas_CPU()
 {
-    auxiliar4 = 0;
-    for (auxiliar3 = 0;auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
+    int count = 0;
+    for (auxiliar3 = 0; auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
     {
         if (Comprobar_Linea_CPU(auxiliar3) == 1)
         {
             Fila_Eliminada_CPU[auxiliar3] = 30;
-            auxiliar4 ++;
+            count++;
         }
         else
         {
             Fila_Eliminada_CPU[auxiliar3] --;
         }
     }
-    return auxiliar4;
+    return count;
 }
 
 u8 Comprobar_Linea_CPU(u8 altura)
