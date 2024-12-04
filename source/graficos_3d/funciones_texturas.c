@@ -2,7 +2,7 @@
 
 int texture[10]; // Diez slots, el primero debe quedarse vacio.
 
-int LoadGLTexture_PCX_8bit(u8 * adress, u8 slot, int sizex, int sizey)
+int LoadGLTexture_PCX_8bit(u8 *adress, u8 slot, int sizex, int sizey)
 {
     sImage pcx;
 
@@ -25,7 +25,7 @@ void Iniciar_Transparencia(int ALPHA)
     glPolyFmt(POLY_ALPHA(ALPHA) | POLY_CULL_BACK);
 }
 
-void Finalizar_Transparencia()
+void Finalizar_Transparencia(void)
 {
     glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
 }
