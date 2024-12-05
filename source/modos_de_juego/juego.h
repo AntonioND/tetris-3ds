@@ -6,17 +6,6 @@
 extern float red_,green_,blue_;
 extern int temp_y, temp_x, temp_giro;
 
-#define NUMSPRITE_RESERVA 15
-
-extern u8 piezareserva;
-extern bool reservallena, reservausada;
-
-#define PAD_UP      1
-#define PAD_DOWN    2
-
-extern u8 stylus_usedgravity, stylus_reservausada, stylus_dblclicused;
-extern u8 stylus_time, stylus_piezax;
-
 void Controles_Tactiles_Horizontal();
 void Controles_Tactiles_Vertical();
 

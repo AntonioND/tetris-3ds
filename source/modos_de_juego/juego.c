@@ -9,11 +9,16 @@
 float red_,green_,blue_;
 int temp_y, temp_x, temp_giro;
 
-u8 piezareserva;
-bool reservallena, reservausada;
+#define NUMSPRITE_RESERVA 15
 
-u8 stylus_usedgravity, stylus_reservausada, stylus_dblclicused;
-u8 stylus_time, stylus_piezax;
+static u8 piezareserva;
+static bool reservallena, reservausada;
+
+#define PAD_UP      1
+#define PAD_DOWN    2
+
+static u8 stylus_usedgravity, stylus_reservausada, stylus_dblclicused;
+static u8 stylus_time, stylus_piezax;
 
 void Controles_Tactiles_Horizontal()
 {
