@@ -13,6 +13,77 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
+static void Graficos_2D_Contra_CPU()
+{
+    if (lasttime != (u8)PA_RTC.Minutes)
+        UPDATE_2D = true;
+
+    lasttime = (u8)PA_RTC.Minutes;
+
+    if (!UPDATE_2D)
+        return;
+
+    UPDATE_2D = false;
+    //PA_Clear8bitBg(1);
+
+    // Dibujar puntuaciones
+    char str[50];
+    snprintf(str, sizeof(str), "Score J1: %d  ", (int)puntuacion_total);
+    PA_SmartText(1, 55, 15, 210, 30, str, 1, // Color
+                 3, 0, 25);
+
+    snprintf(str, sizeof(str), "Score J2: %d  ", (int)puntuacion_total_CPU);
+    PA_SmartText(1, 55, 44, 210, 59, str, 4, // Color
+                 3, 0, 25);
+
+    // Dibujar lineas
+    snprintf(str, sizeof(str), "Lines: %d  ", (int)linecount);
+    PA_SmartText(1, 31, 87, 124, 102, str, 1, 3, 0, 18);
+
+    snprintf(str, sizeof(str), "Lines: %d  ", (int)linecount_CPU);
+    PA_SmartText(1, 131, 87, 224, 102, str, 4, 3, 0, 18);
+
+    // Dibujar nombre
+    snprintf(str, sizeof(str), " Player:  %s  ", (char*)PA_UserInfo.Name);
+    PA_SmartText(1, 12, 172, 175, 184, str, 2, // Color
+                 3, 0, PA_UserInfo.NameLength + 11);
+
+    // Dibujar hora
+    char hora[20];
+    snprintf(hora, sizeof(hora), " %02d:%02d ", (int)PA_RTC.Hour, (int)PA_RTC.Minutes);
+    PA_CenterSmartText(1, 180, 171, 242, 185, hora, 3 /*Color*/, 3, 0); //, 12);
+}
+
+static void Graficos_3D_Contra_CPU()
+{
+    glPushMatrix();
+
+    // not a real gl function and will likely change
+    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
+    // ds uses a table for shinyness..this generates a half-ass one
+    glMaterialShinyness();
+
+    glRotateZ(rotarsalaZ);
+
+    glTranslatef(6.5, -3.5, -5.5); // Ajustar camara J1
+    Dibujar_Escenario_Versus_J1();
+    glTranslatef(0, 0, 6.625); // Ajustar camara J2
+    Dibujar_Escenario_Versus_J2();
+
+    glTranslatef(0, 0, -6.625); // Ajustar camara J1
+
+    Dibujar_Explosiones();
+    Dibujar_Tetris();
+
+    glTranslatef(0, 0, 6.625); // Ajustar camara J2
+
+    Dibujar_Explosiones_CPU();
+    Dibujar_Tetris_CPU();
+
+    glPopMatrix(1);
+    glFlush(0);
+}
+
 void Modo_Contra_CPU()
 {
     PA_SetBrightness(0, -31);
@@ -37,7 +108,7 @@ void Modo_Contra_CPU()
 
     My_Init_3D();
 
-    //Fade up
+    // Fade up
     for (auxiliar = -31; auxiliar < 0; auxiliar++)
     {
         PA_SetBrightness(0, auxiliar);
@@ -81,11 +152,16 @@ void Modo_Contra_CPU()
                 pausa_lista --;
             }
 
-            Escribir_3D_Char_Moved(TEXT_MEDIUM, 2,3, 1,0, CHAR_P, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_MEDIUM, 3,3, 1,0, CHAR_A, Text_Color.red - 0.2,Text_Color.green - 0.2,Text_Color.blue - 0.2);
-            Escribir_3D_Char_Moved(TEXT_MEDIUM, 4,3, 1,0, CHAR_U, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_MEDIUM, 5,3, 1,0, CHAR_S, Text_Color.red - 0.2,Text_Color.green - 0.2,Text_Color.blue - 0.2);
-            Escribir_3D_Char_Moved(TEXT_MEDIUM, 6,3, 1,0, CHAR_E, Text_Color.red,Text_Color.green,Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_MEDIUM, 2,3, 1,0, CHAR_P,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_MEDIUM, 3,3, 1,0, CHAR_A,
+                                   Text_Color.red - 0.2, Text_Color.green - 0.2, Text_Color.blue - 0.2);
+            Escribir_3D_Char_Moved(TEXT_MEDIUM, 4,3, 1,0, CHAR_U,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_MEDIUM, 5,3, 1,0, CHAR_S,
+                                   Text_Color.red - 0.2, Text_Color.green - 0.2, Text_Color.blue - 0.2);
+            Escribir_3D_Char_Moved(TEXT_MEDIUM, 6,3, 1,0, CHAR_E,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
 
             Update_3D_Text_Colors();
         }
@@ -96,15 +172,15 @@ void Modo_Contra_CPU()
             //    linecount++;
             //puntuacion_total = PA_RTC.FPS;
             //auxiliar = Comprobar_Huecos_Inferior_CPU();
-            //Escribir_3D_Char(TEXT_SMALL, 0,0, 100 + auxiliar / 100,  1,1,1);
-            //Escribir_3D_Char(TEXT_SMALL, 1,0, 100 + (auxiliar % 100) / 10,  1,1,1);
-            //Escribir_3D_Char(TEXT_SMALL, 2,0, 100 + auxiliar % 10,  1,1,1);
+            //Escribir_3D_Char(TEXT_SMALL, 0,0, 100 + auxiliar / 100, 1, 1, 1);
+            //Escribir_3D_Char(TEXT_SMALL, 1,0, 100 + (auxiliar % 100) / 10,  1, 1, 1);
+            //Escribir_3D_Char(TEXT_SMALL, 2,0, 100 + auxiliar % 10, 1, 1, 1);
 
             if (pausa_lista == 0)
             {
                 if (Pad.Newpress.Start)
                 {
-                    Init_3D_Text_Colors(0.5,0.01, 0.6,0.02, 0.8,0.03);
+                    Init_3D_Text_Colors(0.5, 0.01, 0.6, 0.02, 0.8, 0.03);
                     Pause_Song();
                     PAUSA = true;
                     pausa_lista = 20;
@@ -115,7 +191,7 @@ void Modo_Contra_CPU()
                 pausa_lista --;
             }
 
-            //My_Press_Buttons();
+            // My_Press_Buttons();
             Autofire_Keys_Vertical();
             Controles_Tactiles_Vertical();
 
@@ -177,7 +253,8 @@ void Modo_Contra_CPU()
             // CONTROLES JUGADOR
             // -----------------
 
-            if ((Pad.Newpress.Right && !Comprobar_Colisiones_Derecha()) || (Pad.Newpress.Left && !Comprobar_Colisiones_Izquierda()))
+            if ((Pad.Newpress.Right && !Comprobar_Colisiones_Derecha()) ||
+                (Pad.Newpress.Left && !Comprobar_Colisiones_Izquierda()))
             {
                 girarcount = 30;
                 Borrar_Pieza_Actual();
@@ -201,22 +278,26 @@ void Modo_Contra_CPU()
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         break;
+
                     case 1: // Nada
                         if (Comprobar_Colisiones_Inferior() == 0)
                             girarcount = 0;
                         break;
+
                     case 2: // Hacia arriba
                         girarcount = 30;
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         Pieza.Y++;
                         break;
+
                     case 3: // A la derecha
                         girarcount = 30;
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         Pieza.X++;
                         break;
+
                     case 4: // A la izquierda
                         girarcount = 30;
                         Borrar_Pieza_Actual();
@@ -238,15 +319,17 @@ void Modo_Contra_CPU()
             // -------------
             // CONTROLES CPU
             // -------------
+
             Borrar_Pieza_Actual_CPU();
             Mover_IA_CPU();
             Ajustar_Colisiones_Actuales_CPU();
             Dibujar_Pieza_Actual_CPU();
+
             // --------------------
             // FIN DE CONTROLES CPU
             // --------------------
 
-            velocidad = Limitar_float(1, 40, 40 -  1.25 * ((linecount / 5) + 1) );
+            velocidad = Limitar_float(1, 40, 40 -  1.25 * ((linecount / 5) + 1));
 
             velocidadcount++;
             girarcount--;
@@ -265,7 +348,7 @@ void Modo_Contra_CPU()
                 {
                     if (Pieza.Y == 16)
                     {
-                        JUEGO_ACTIVO = false; //Fin del juego
+                        JUEGO_ACTIVO = false; // Fin del juego
                         jugador_ganador = 2;
                     }
                     Ajustar_Colisiones_Actuales();
@@ -294,7 +377,7 @@ void Modo_Contra_CPU()
                 {
                     if (Pieza_CPU.Y == 16)
                     {
-                        JUEGO_ACTIVO = false; //Fin del juego
+                        JUEGO_ACTIVO = false; // Fin del juego
                         jugador_ganador = 1;
                     }
                     Ajustar_Colisiones_Actuales_CPU();
@@ -320,16 +403,19 @@ void Modo_Contra_CPU()
                     combo = 0;
                     UPDATE_2D = true;
                     break;
+
                 case 2:
                     puntuacion_total += 4 * (combo + 1);
                     combo += 1;
                     UPDATE_2D = true;
                     break;
+
                 case 3:
                     puntuacion_total += 9 * (combo + 1);
                     combo += 2;
                     UPDATE_2D = true;
                     break;
+
                 case 4:
                     puntuacion_total += 16 * (combo + 1);
                     combo += 3;
@@ -344,16 +430,19 @@ void Modo_Contra_CPU()
                     combo_CPU = 0;
                     UPDATE_2D = true;
                     break;
+
                 case 2:
                     puntuacion_total_CPU += 4 * (combo_CPU + 1);
                     combo_CPU += 1;
                     UPDATE_2D = true;
                     break;
+
                 case 3:
                     puntuacion_total_CPU += 9 * (combo_CPU + 1);
                     combo_CPU += 2;
                     UPDATE_2D = true;
                     break;
+
                 case 4:
                     puntuacion_total_CPU += 16 * (combo_CPU + 1);
                     combo_CPU += 3;
@@ -369,11 +458,13 @@ void Modo_Contra_CPU()
         // -----------
         // Gráficos 2D
         // -----------
+
         Graficos_2D_Contra_CPU();
 
         // -----------
         // Gráficos 3D
         // -----------
+
         Graficos_3D_Contra_CPU();
 
         fondoazul += incrementoazul;
@@ -458,34 +549,50 @@ void Modo_Contra_CPU()
         // -----------
         // Gráficos 2D
         // -----------
+
         Graficos_2D_Contra_CPU();
 
         // -----------
         // Gráficos 3D
         // -----------
+
         Graficos_3D_Contra_CPU();
 
         if (jugador_ganador == 1)
         {
-            Escribir_3D_Char_Moved(TEXT_BIG, 1,0, 0,1, CHAR_Y, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_BIG, 2,0, 0,1, CHAR_O, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
-            Escribir_3D_Char_Moved(TEXT_BIG, 3,0, 0,1, CHAR_U, Text_Color.red,Text_Color.green,Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 1, 0, 0, 1, CHAR_Y,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 2, 0, 0, 1, CHAR_O,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 3, 0, 0, 1, CHAR_U,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
 
-            Escribir_3D_Char_Moved(TEXT_BIG, 1,2, 0,1, CHAR_W, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
-            Escribir_3D_Char_Moved(TEXT_BIG, 2,2, 0,1, CHAR_I, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_BIG, 3,2, 0,1, CHAR_N, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 1, 2, 0, 1, CHAR_W,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 2, 2, 0, 1, CHAR_I,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 3, 2, 0, 1, CHAR_N,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
         }
         else if (jugador_ganador == 2)
         {
-            Escribir_3D_Char_Moved(TEXT_BIG, 0,0, 1,1, CHAR_G, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_BIG, 1,0, 1,1, CHAR_A, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
-            Escribir_3D_Char_Moved(TEXT_BIG, 2,0, 1,1, CHAR_M, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
-            Escribir_3D_Char_Moved(TEXT_BIG, 3,0, 1,1, CHAR_E, Text_Color.red,Text_Color.green,Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 0, 0, 1, 1, CHAR_G,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 1, 0, 1, 1, CHAR_A,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 2, 0, 1, 1, CHAR_M,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 3, 0, 1, 1, CHAR_E,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
 
-            Escribir_3D_Char_Moved(TEXT_BIG, 0,2, 1,1, CHAR_O, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
-            Escribir_3D_Char_Moved(TEXT_BIG, 1,2, 1,1, CHAR_V, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_BIG, 2,2, 1,1, CHAR_E, Text_Color.red,Text_Color.green,Text_Color.blue);
-            Escribir_3D_Char_Moved(TEXT_BIG, 3,2, 1,1, CHAR_R, Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 0, 2, 1, 1, CHAR_O,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
+            Escribir_3D_Char_Moved(TEXT_BIG, 1, 2, 1, 1, CHAR_V,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 2, 2, 1, 1, CHAR_E,
+                                   Text_Color.red, Text_Color.green, Text_Color.blue);
+            Escribir_3D_Char_Moved(TEXT_BIG, 3, 2, 1, 1, CHAR_R,
+                                   Text_Color.red - 0.1, Text_Color.green  - 0.1, Text_Color.blue  - 0.1);
         }
 
         Update_3D_Text_Colors();
@@ -499,15 +606,15 @@ void Modo_Contra_CPU()
 
         if (linecount < 200)
         {
-            glClearColor((int)(fondorojo *  Limitar_float(0,1, (float)linecount / 200)),
-                         (int)(fondoverde * Limitar_float(0,1, (float)linecount / 90)),
-                         (int)(fondoazul *  Limitar_float(0,1, (float)linecount / 30 )) ,31);
+            glClearColor((int)(fondorojo *  Limitar_float(0, 1, (float)linecount / 200)),
+                         (int)(fondoverde * Limitar_float(0, 1, (float)linecount / 90)),
+                         (int)(fondoazul *  Limitar_float(0, 1, (float)linecount / 30 )), 31);
         }
         if (linecount > 200)
         {
-            glClearColor((int)(fondorojo *  Limitar_float(0,1, (float)linecount / 200)),
-                         (int)(fondoverde * Limitar_float(0,1, (500 - (float)linecount) / 300)),
-                         (int)(fondoazul *  Limitar_float(0,1, (350 - (float)linecount) / 150)) ,31);
+            glClearColor((int)(fondorojo *  Limitar_float(0, 1, (float)linecount / 200)),
+                         (int)(fondoverde * Limitar_float(0, 1, (500 - (float)linecount) / 300)),
+                         (int)(fondoazul *  Limitar_float(0, 1, (350 - (float)linecount) / 150)), 31);
         }
 
         framecount++;
@@ -519,79 +626,4 @@ void Modo_Contra_CPU()
     glFlush(0);
     PA_WaitForVBL();
     PA_WaitForVBL();
-}
-
-// Funciones de graficos
-// ---------------------
-
-void Graficos_2D_Contra_CPU()
-{
-    if (lasttime != (u8)PA_RTC.Minutes)
-        UPDATE_2D = true;
-    lasttime = (u8)PA_RTC.Minutes;
-
-    if (UPDATE_2D)
-    {
-        UPDATE_2D = false;
-        //PA_Clear8bitBg(1);
-
-        // Dibujar puntuaciones
-        char str[50];
-        snprintf(str, sizeof(str), "Score J1: %d  ", (int)puntuacion_total);
-        PA_SmartText(1, 55, 15, 210, 30, str, 1, // Color
-                     3, 0, 25);
-
-        snprintf(str, sizeof(str), "Score J2: %d  ", (int)puntuacion_total_CPU);
-        PA_SmartText(1, 55, 44, 210, 59, str, 4, // Color
-                     3, 0, 25);
-
-
-        //Dibujar lineas
-        snprintf(str, sizeof(str), "Lines: %d  ", (int)linecount);
-        PA_SmartText(1, 31, 87, 124, 102, str, 1, 3, 0, 18);
-
-        snprintf(str, sizeof(str), "Lines: %d  ", (int)linecount_CPU);
-        PA_SmartText(1, 131, 87, 224, 102, str, 4, 3, 0, 18);
-
-        //Dibujar nombre
-        snprintf(str, sizeof(str), " Player:  %s  ", (char*)PA_UserInfo.Name);
-        PA_SmartText(1, 12, 172, 175, 184, str, 2, // Color
-                     3, 0, PA_UserInfo.NameLength + 11);
-
-        //Dibujar hora
-        char hora[20];
-        snprintf(hora, sizeof(hora), " %02d:%02d ", (int)PA_RTC.Hour, (int)PA_RTC.Minutes);
-        PA_CenterSmartText(1, 180, 171, 242, 185, hora, 3 /*Color*/, 3, 0);//, 12);
-    }
-}
-
-//glScalef (1.2, 1.2, 1.2);
-
-void Graficos_3D_Contra_CPU()
-{
-    glPushMatrix();
-    //not a real gl function and will likely change
-    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
-    //ds uses a table for shinyness..this generates a half-ass one
-    glMaterialShinyness();
-
-    glRotateZ(rotarsalaZ);
-
-    glTranslatef(6.5, -3.5, -5.5); // Ajustar camara J1
-    Dibujar_Escenario_Versus_J1();
-    glTranslatef(0, 0, 6.625); // Ajustar camara J2
-    Dibujar_Escenario_Versus_J2();
-
-    glTranslatef(0, 0, -6.625); // Ajustar camara J1
-
-    Dibujar_Explosiones();
-    Dibujar_Tetris();
-
-    glTranslatef(0, 0, 6.625); // Ajustar camara J2
-
-    Dibujar_Explosiones_CPU();
-    Dibujar_Tetris_CPU();
-
-    glPopMatrix(1);
-    glFlush(0);
 }

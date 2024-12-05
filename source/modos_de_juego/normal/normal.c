@@ -13,6 +13,61 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
+static void Graficos_2D_Normal()
+{
+    if (lasttime != (u8)PA_RTC.Minutes)
+        UPDATE_2D = true;
+
+    lasttime = (u8)PA_RTC.Minutes;
+
+    if (!UPDATE_2D)
+        return;
+
+    // Dibujar puntuación
+    char str[50];
+    snprintf(str, sizeof(str), " Score: %d  ", (int)puntuacion_total);
+    PA_SmartText(1, 8,8,183,16 ,str, 1, // Color
+                 4, 3, 25);
+
+    // Dibujar lineas
+    snprintf(str, sizeof(str), "Lines: %d  ", (int)linecount);
+    PA_SmartText(1, 13,35,119,249 ,str, 1 /*Color*/, 3, 3, 18);
+
+    // Dibujar nombre
+    snprintf(str, sizeof(str), " Player:  %s  ", (char *)PA_UserInfo.Name);
+    PA_SmartText(1, 8,239,183,247 ,str, 2, // Color
+                 3, 3, PA_UserInfo.NameLength + 11);
+
+    // Dibujar hora
+    char hora[20];
+    snprintf(hora, sizeof(hora), " %02d:%02d ", (int)PA_RTC.Hour, (int)PA_RTC.Minutes);
+    PA_CenterSmartText(1, 106,214,152,255 ,hora, 3 /*Color*/ , 3, 3); //, 12);
+}
+
+static void Graficos_3D_Normal()
+{
+    glPushMatrix();
+    // not a real gl function and will likely change
+    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
+    // ds uses a table for shinyness..this generates a half-ass one
+    glMaterialShinyness();
+
+    glRotateX(90);
+
+    glRotateZ(rotarsalaZ);
+
+    glRotateY((int)rotarsalaY);
+
+    glTranslatef(4.0, -3.5, -2.2 /*5*/); // Ajustar camara
+
+    Dibujar_Explosiones();
+    Dibujar_Escenario_Normal();
+    Dibujar_Tetris();
+
+    glPopMatrix(1);
+    glFlush(0);
+}
+
 void Modo_Normal()
 {
     PA_SetBrightness(0, -31);
@@ -59,6 +114,7 @@ void Modo_Normal()
         //-----
         //JUEGO
         //-----
+
         Custom_Newpress();
 
         if (PAUSA) // Para la pausa
@@ -100,7 +156,7 @@ void Modo_Normal()
             {
                 if (Pad.Newpress.Start)
                 {
-                    Init_3D_Text_Colors(0.5,0.01, 0.6,0.02, 0.8,0.03);
+                    Init_3D_Text_Colors(0.5, 0.01, 0.6, 0.02, 0.8, 0.03);
                     Pause_Song();
                     PAUSA = true;
                     pausa_lista = 20;
@@ -127,7 +183,7 @@ void Modo_Normal()
                 {
                     Borrar_Pieza_Actual();
                     velocidadcount = 0;
-                    Pieza.Y --;
+                    Pieza.Y--;
                 }
 
                 if (Pad.Newpress.Right)
@@ -149,11 +205,12 @@ void Modo_Normal()
             Ajustar_Colisiones_Actuales();
             Dibujar_Pieza_Actual();
 
-            if ((Pad.Newpress.Down && !Comprobar_Colisiones_Derecha()) || (Pad.Newpress.Up && !Comprobar_Colisiones_Izquierda()))
+            if ((Pad.Newpress.Down && !Comprobar_Colisiones_Derecha()) ||
+                (Pad.Newpress.Up && !Comprobar_Colisiones_Izquierda()))
             {
                 girarcount = 30;
                 Borrar_Pieza_Actual();
-                Pieza.X +=Pad.Newpress.Down - Pad.Newpress.Up;
+                Pieza.X += Pad.Newpress.Down - Pad.Newpress.Up;
             }
 
             Dibujar_Pieza_Actual();
@@ -173,22 +230,26 @@ void Modo_Normal()
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         break;
+
                     case 1: // Nada
                         if (Comprobar_Colisiones_Inferior() == 0)
                             girarcount = 0;
                         break;
+
                     case 2: // Hacia arriba
                         girarcount = 30;
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         Pieza.Y++;
                         break;
+
                     case 3: // A la derecha
                         girarcount = 30;
                         Borrar_Pieza_Actual();
                         Pieza.Rotacion = (Pieza.Rotacion + Pad.Newpress.A) % 4;
                         Pieza.X++;
                         break;
+
                     case 4: // A la izquierda
                         girarcount = 30;
                         Borrar_Pieza_Actual();
@@ -205,8 +266,8 @@ void Modo_Normal()
 
             velocidad = Limitar_float(1, 40, 40 -  1.25 * ((linecount / 5) + 1) );
 
-            velocidadcount ++;
-            girarcount --;
+            velocidadcount++;
+            girarcount--;
             if (velocidadcount > velocidad)
             {
                 if (Comprobar_Colisiones_Inferior() == 0)
@@ -239,19 +300,22 @@ void Modo_Normal()
                     combo = 0;
                     UPDATE_2D = true;
                     break;
+
                 case 2:
                     puntuacion_total += 4 * (combo + 1);
-                    combo +=1;
+                    combo += 1;
                     UPDATE_2D = true;
                     break;
+
                 case 3:
                     puntuacion_total += 9 * (combo + 1);
-                    combo +=2;
+                    combo += 2;
                     UPDATE_2D = true;
                     break;
+
                 case 4:
                     puntuacion_total += 16 * (combo + 1);
-                    combo +=3;
+                    combo += 3;
                     UPDATE_2D = true;
                     break;
             }
@@ -267,12 +331,14 @@ void Modo_Normal()
             case CAMERA_DISABLED:
                 rotarsalaY = 0;
                 break;
+
             case CAMERA_SLOW:
                 if (rotarsalaY > (Pieza.X - 4.5) * -1)
                     rotarsalaY -= 0.1;
                 else if (rotarsalaY < (Pieza.X - 4.5) * -1)
                     rotarsalaY += 0.1;
                 break;
+
             case CAMERA_QUICK:
                 rotarsalaY = ((Pieza.X - 4.5) * -1);
                 break;
@@ -281,11 +347,13 @@ void Modo_Normal()
         //-----------
         //Gráficos 2D
         //-----------
+
         Graficos_2D_Normal();
 
         //-----------
         //Gráficos 3D
         //-----------
+
         Graficos_3D_Normal();
 
         fondoazul += incrementoazul;
@@ -316,6 +384,7 @@ void Modo_Normal()
         framecount %= 60;
         PA_WaitForVBL();
     }
+
     // Fin del juego
 
     Stop_Song();
@@ -328,9 +397,9 @@ void Modo_Normal()
     velocidadcount = 0;
     girarcount = 0;
 
-    Init_3D_Text_Colors(0.5,0.01, 0.3,0, 0.3,0);
+    Init_3D_Text_Colors(0.5, 0.01, 0.3, 0, 0.3, 0);
 
-    //ESPERAR
+    // ESPERAR
     while (JUEGO_ACTIVO)
     {
         if (velocidadcount < 17)
@@ -340,7 +409,9 @@ void Modo_Normal()
                 velocidadcount++;
         }
         else if (girarcount == 0)
+        {
             girarcount = 1;
+        }
 
         if (girarcount != 0)
             girarcount++;
@@ -358,11 +429,13 @@ void Modo_Normal()
         //-----------
         //Gráficos 2D
         //-----------
+
         Graficos_2D_Normal();
 
         //-----------
         //Gráficos 3D
         //-----------
+
         Graficos_3D_Normal();
 
 
@@ -395,15 +468,15 @@ void Modo_Normal()
 
         if (linecount < 200)
         {
-            glClearColor((int)(fondorojo *  Limitar_float(0,1, (float)linecount / 200)),
-                         (int)(fondoverde * Limitar_float(0,1, (float)linecount / 90)),
-                         (int)(fondoazul *  Limitar_float(0,1, (float)linecount / 30 )) ,31);
+            glClearColor((int)(fondorojo *  Limitar_float(0, 1, (float)linecount / 200)),
+                         (int)(fondoverde * Limitar_float(0, 1, (float)linecount / 90)),
+                         (int)(fondoazul *  Limitar_float(0, 1, (float)linecount / 30 )), 31);
         }
         if (linecount > 200)
         {
-            glClearColor((int)(fondorojo *  Limitar_float(0,1, (float)linecount / 200)),
-                         (int)(fondoverde * Limitar_float(0,1, (500 - (float)linecount) / 300)),
-                         (int)(fondoazul *  Limitar_float(0,1, (350 - (float)linecount) / 150)) ,31);
+            glClearColor((int)(fondorojo *  Limitar_float(0, 1, (float)linecount / 200)),
+                         (int)(fondoverde * Limitar_float(0, 1, (500 - (float)linecount) / 300)),
+                         (int)(fondoazul *  Limitar_float(0, 1, (350 - (float)linecount) / 150)), 31);
         }
 
         framecount++;
@@ -415,62 +488,4 @@ void Modo_Normal()
     glFlush(0);
     PA_WaitForVBL();
     PA_WaitForVBL();
-}
-
-//Funciones de graficos
-//---------------------
-
-void Graficos_2D_Normal()
-{
-    if (lasttime != (u8)PA_RTC.Minutes)
-        UPDATE_2D = true;
-
-    lasttime = (u8)PA_RTC.Minutes;
-
-    if (UPDATE_2D)
-    {
-        //Dibujar puntuación
-        char str[50];
-        snprintf(str, sizeof(str), " Score: %d  ",(int)puntuacion_total);
-        PA_SmartText(1, 8,8,183,16 ,str, 1, // Color
-                     4, 3, 25);
-
-        //Dibujar lineas
-        snprintf(str, sizeof(str), "Lines: %d  ",(int)linecount);
-        PA_SmartText(1, 13,35,119,249 ,str, 1 /*Color*/, 3, 3, 18);
-
-        //Dibujar nombre
-        snprintf(str, sizeof(str), " Player:  %s  ",  (char*)PA_UserInfo.Name);
-        PA_SmartText(1, 8,239,183,247 ,str, 2, // Color
-                     3, 3, PA_UserInfo.NameLength + 11);
-
-        //Dibujar hora
-        char hora[20];
-        snprintf(hora, sizeof(hora), " %02d:%02d ",(int)PA_RTC.Hour, (int)PA_RTC.Minutes);
-        PA_CenterSmartText(1, 106,214,152,255 ,hora, 3 /*Color*/ , 3, 3   ); //, 12);
-    }
-}
-
-void Graficos_3D_Normal()
-{
-    glPushMatrix();
-    // not a real gl function and will likely change
-    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
-    // ds uses a table for shinyness..this generates a half-ass one
-    glMaterialShinyness();
-
-    glRotateX(90);
-
-    glRotateZ(rotarsalaZ);
-
-    glRotateY((int)rotarsalaY);
-
-    glTranslatef(4.0, -3.5, -2.2 /*5*/); // Ajustar camara
-
-    Dibujar_Explosiones();
-    Dibujar_Escenario_Normal();
-    Dibujar_Tetris();
-
-    glPopMatrix(1);
-    glFlush(0);
 }
