@@ -287,15 +287,14 @@ int Get_Song_Number(void)
     int old_song = Current_Song;
     for (int i = 0; i < 100; i++)
     {
-        Current_Song = auxiliar;
+        Current_Song = i;
         Set_New_Song_Path();
         Current_Song = old_song;
+
         MP3FILE *file = FILE_OPEN(Song_Path);
         if (!file)
-        {
-            //FILE_CLOSE(file);
-            return (auxiliar - 1);
-        }
+            return (i - 1);
+
         FILE_CLOSE(file);
     }
 
