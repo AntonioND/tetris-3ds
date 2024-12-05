@@ -76,9 +76,9 @@ void Records(void)
     // Escribir records
     for (int i = 0; i < 10; i++)
     {
-        char str[30];
+        char str[200];
 
-        snprintf(str, sizeof(str), "%s", (char *)Record[i].Nombre);
+        snprintf(str, sizeof(str), "%s", Record[i].Nombre);
         PA_CenterSmartText(1, 7, 6 + (19 * i), 119, 15 + (19 * i), str, i + 1 /*Color*/, 2, 0);
 
         snprintf(str, sizeof(str), "%d", (int)Record[i].Puntuacion);
