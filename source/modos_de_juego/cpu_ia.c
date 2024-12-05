@@ -7,16 +7,26 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-static float red_,green_,blue_;
+#define NUMSPRITE_RESERVA_CPU   16
+#define NUM_ROTACIONES          4
 
-u8 piezareserva_CPU;
-bool reservallena_CPU, reservausada_CPU;
+typedef struct {
+    u8 altura;
+    u8 huecosdebajo;
+    u8 huecostotal;
+    u8 superficie;
+} _POSICION_IA_;
 
-_POSICION_IA_ Posicion_CPU[ANCHO_PIEZAS][NUM_ROTACIONES];
-PIEZA_TETRIS Almacen_CPU;
-PIEZA_TETRIS Posicion_Ideal_CPU;
+static u8 piezareserva_CPU;
+static bool reservallena_CPU, reservausada_CPU;
 
-int superficie_, huecostotal_, huecosdebajo_;
+static _POSICION_IA_ Posicion_CPU[ANCHO_PIEZAS][NUM_ROTACIONES];
+static PIEZA_TETRIS Almacen_CPU;
+static PIEZA_TETRIS Posicion_Ideal_CPU;
+
+static int superficie_, huecostotal_, huecosdebajo_;
+
+static u8 activarreserva;
 
 u8 Comprobar_Superficie_CPU()
 {
@@ -144,8 +154,6 @@ static void Set_Position_CPU() // Ayuda para IA_CPU()
     Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
     Posicion_Ideal_CPU.Rotacion = auxiliar2;
 }
-
-u8 activarreserva;
 
 // Maravilla creada por mi XD
 void IA_CPU()
@@ -911,43 +919,45 @@ void Borrar_Pieza_Actual_CPU()
 
 void Dibujar_Pieza_Actual_CPU()
 {
+    float red = 0, green = 0, blue = 0;
+
     // Pieza actual
     switch (Tipo_Pieza_CPU[0]) // Color
     {
         case 0:
-            red_ = 1;
-            green_ = 1;
-            blue_ = 1;
+            red = 1;
+            green = 1;
+            blue = 1;
             break;
         case 1:
-            red_ = 1;
-            green_ = 1;
-            blue_ = 0;
+            red = 1;
+            green = 1;
+            blue = 0;
             break;
         case 2:
-            red_ = 1;
-            green_ = 0.5;
-            blue_ = 0;
+            red = 1;
+            green = 0.5;
+            blue = 0;
             break;
         case 3:
-            red_ = 1;
-            green_ = 0;
-            blue_ = 0;
+            red = 1;
+            green = 0;
+            blue = 0;
             break;
         case 4:
-            red_ = 0;
-            green_ = 1;
-            blue_ = 0;
+            red = 0;
+            green = 1;
+            blue = 0;
             break;
         case 5:
-            red_ = 0;
-            green_ = 0;
-            blue_ = 1;
+            red = 0;
+            green = 0;
+            blue = 1;
             break;
         case 6:
-            red_ = 0.75;
-            green_ = 0;
-            blue_ = 1;
+            red = 0.75;
+            green = 0;
+            blue = 1;
             break;
     }
 
@@ -968,9 +978,9 @@ void Dibujar_Pieza_Actual_CPU()
             if ((Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
             {
                 Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 1;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red_;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green_;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue_;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue;
             }
         }
     }
@@ -984,9 +994,9 @@ void Dibujar_Pieza_Actual_CPU()
             if ((Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
             {
                 Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 2;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red_;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green_;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue_;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue;
             }
         }
     }

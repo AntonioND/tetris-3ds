@@ -1,28 +1,6 @@
 #ifndef MODOS_DE_JUEGO_CPU_IA_H__
 #define MODOS_DE_JUEGO_CPU_IA_H__
 
-#define NUMSPRITE_RESERVA_CPU 16
-#define NUM_ROTACIONES		   4
-
-typedef struct
-{
-    u8 altura;
-    u8 huecosdebajo;
-    u8 huecostotal;
-    u8 superficie;
-} _POSICION_IA_;
-
-extern u8 piezareserva_CPU;
-extern bool reservallena_CPU, reservausada_CPU;
-
-extern _POSICION_IA_ Posicion_CPU[ANCHO_PIEZAS][NUM_ROTACIONES];
-extern PIEZA_TETRIS Almacen_CPU;
-extern PIEZA_TETRIS Posicion_Ideal_CPU;
-
-extern int superficie_, huecostotal_, huecosdebajo_;
-
-extern u8 activarreserva;
-
 u8 Comprobar_Superficie_CPU();
 u8 Comprobar_Huecos_Inferior_CPU();
 u8 Comprobar_Huecos_CPU();
