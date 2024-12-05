@@ -12,11 +12,28 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-int numsongs;
-bool movecam = true;
-bool logwrote;
+static int numsongs;
+static bool movecam = true;
+static bool logwrote;
 
-void Jukebox()
+static void Graficos_3D_Juekebox(void)
+{
+    glPushMatrix();
+    // not a real gl function and will likely change
+    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
+    // ds uses a table for shinyness..this generates a half-ass one
+    glMaterialShinyness();
+
+    glTranslatef(5, -2.5, 0); // Ajustar camara
+    glRotateY(90);
+
+    Dibujar_Discoteca((AS_GetMP3Status() & MP3ST_PAUSED), movecam); // pausa, mover camara
+
+    glPopMatrix(1);
+    glFlush(0);
+}
+
+void Jukebox(void)
 {
     PA_SetBrightness(0, -31);
     PA_SetBrightness(1, -31);
@@ -89,7 +106,7 @@ void Jukebox()
             {
                 char songnum[6];
                 snprintf(songnum, sizeof(songnum), " %02d ", Current_Song);
-                PA_CenterSmartText(1, 193, 19, 244, 50 ,songnum, 1 /*Color*/ , 4, 0);
+                PA_CenterSmartText(1, 193, 19, 244, 50, songnum, 1 /*Color*/ , 4, 0);
             }
 
             if ((AS_GetMP3Status() & MP3ST_DECODE_ERROR) && !logwrote)
@@ -161,21 +178,4 @@ void Jukebox()
         PA_WaitForVBL();
 
     Init_Menu_Song_Loop();
-}
-
-void Graficos_3D_Juekebox()
-{
-    glPushMatrix();
-    // not a real gl function and will likely change
-    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK);
-    // ds uses a table for shinyness..this generates a half-ass one
-    glMaterialShinyness();
-
-    glTranslatef(5, -2.5, 0); // Ajustar camara
-    glRotateY(90);
-
-    Dibujar_Discoteca((AS_GetMP3Status() & MP3ST_PAUSED), movecam); // pausa, mover camara
-
-    glPopMatrix(1);
-    glFlush(0);
 }

@@ -10,7 +10,7 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-void Reload_Opciones_Menu(void)
+static void Reload_Opciones_Menu(void)
 {
     PA_ResetBgSys();
     PA_Init2D();
@@ -53,7 +53,7 @@ void Reload_Opciones_Menu(void)
     PA_SetBrightness(1, 0);
 }
 
-void End_Opciones_Menu(void)
+static void End_Opciones_Menu(void)
 {
     PA_WaitForVBL();
     PA_WaitForVBL();
