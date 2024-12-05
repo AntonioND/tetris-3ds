@@ -30,119 +30,117 @@ static u8 activarreserva;
 
 u8 Comprobar_Superficie_CPU()
 {
-    acumulador = 0;
+    u32 count = 0;
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Si el de abajo esta vacio o esta en el borde
-            if (((Colisiones_Actual_CPU[auxiliar + 4] == 0) && (auxiliar < 12)) || (auxiliar == 12))
-            {
-                acumulador++;
-            }
+            if (((Colisiones_Actual_CPU[i + 4] == 0) && (i < 12)) || (i == 12))
+                count++;
         }
     }
 
-    return acumulador;
+    return count;
 }
 
 u8 Comprobar_Huecos_Inferior_CPU()
 {
-    acumulador = 0;
+    u32 count = 0;
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Si el de abajo esta vacio o esta en el borde
-            if (((Colisiones_Actual_CPU[auxiliar + 4] == 0) && (auxiliar < 12)) || (auxiliar > 12))
+            if (((Colisiones_Actual_CPU[i + 4] == 0) && (i < 12)) || (i > 12))
             {
                 // Si está dentro del escenario a lo ancho
-                if (Limitar_int(0,9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
+                if (Limitar_int(0,9,Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1)
                 {
 
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4)) == 0)
-                        acumulador++;
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4)) == 0)
+                        count++;
 
                 }
             }
         }
     }
 
-    return acumulador;
+    return count;
 }
 
-u8 Comprobar_Huecos_CPU()
+u8 Comprobar_Huecos_CPU(void)
 {
-    acumulador = 0;
+    u32 count = 0;
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Arriba
             // Si está dentro del escenario
-            if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
+            if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1)
             {
-                if (Limitar_int(0, 16, Pieza_CPU.Y + (auxiliar / 4) + 2) == Pieza_CPU.Y + (auxiliar / 4) + 2)
+                if (Limitar_int(0, 16, Pieza_CPU.Y + (i / 4) + 2) == Pieza_CPU.Y + (i / 4) + 2)
                 {
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4) + 2) == 0)
-                        acumulador++;
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4) + 2) == 0)
+                        count++;
                 }
             }
 
             // Abajo
             // Si está dentro del escenario
-            if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
+            if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1)
             {
-                if (Limitar_int(0, 16, Pieza_CPU.Y + (auxiliar / 4)) == Pieza_CPU.Y + (auxiliar / 4))
+                if (Limitar_int(0, 16, Pieza_CPU.Y + (i / 4)) == Pieza_CPU.Y + (i / 4))
                 {
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4)) == 0)
-                        acumulador++;
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4)) == 0)
+                        count++;
                 }
             }
 
             // Derecha
             // Si está dentro del escenario
-            if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4)) == Pieza_CPU.X + (auxiliar % 4))
+            if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4)) == Pieza_CPU.X + (i % 4))
             {
-                if (Limitar_int(0, 16, Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)
+                if (Limitar_int(0, 16, Pieza_CPU.Y + (i / 4) + 1) == Pieza_CPU.Y + (i / 4) + 1)
                 {
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4), Pieza_CPU.Y - (auxiliar / 4) + 1) == 0)
-                        acumulador++;
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4), Pieza_CPU.Y - (i / 4) + 1) == 0)
+                        count++;
                 }
             }
 
             // Izquierda
             // Si está dentro del escenario
-            if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 2) == Pieza_CPU.X + (auxiliar % 4) - 2)
+            if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 2) == Pieza_CPU.X + (i % 4) - 2)
             {
-                if (Limitar_int(0, 16, Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)
+                if (Limitar_int(0, 16, Pieza_CPU.Y + (i / 4) + 1) == Pieza_CPU.Y + (i / 4) + 1)
                 {
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 2, Pieza_CPU.Y - (auxiliar / 4) + 1) == 0)
-                        acumulador++;
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 2, Pieza_CPU.Y - (i / 4) + 1) == 0)
+                        count++;
                 }
             }
 
-/*
-            if (Colisiones_Actual_CPU[auxiliar] == 0)
+        /*
+            if (Colisiones_Actual_CPU[i] == 0)
             {
                 // Si está dentro del escenario a lo ancho
-                if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
+                if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1)
                 {
-                    if (Limitar_int(0, 16, Pieza_CPU.Y + (auxiliar / 4) + 1) == Pieza_CPU.Y + (auxiliar / 4) + 1)
+                    if (Limitar_int(0, 16, Pieza_CPU.Y + (i / 4) + 1) == Pieza_CPU.Y + (i / 4) + 1)
                     {
-                        if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4) + 1) == 0)
+                        if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4) + 1) == 0)
                             cumulador++;
                     }
                 }
             }
-*/
+        */
         }
     }
 
-    return acumulador;
+    return count;
 }
 
 static void Set_Position_CPU() // Ayuda para IA_CPU()
