@@ -92,10 +92,10 @@ void Modo_Normal()
     My_Init_3D();
 
     // Fade up
-    for (auxiliar = -31; auxiliar < 0; auxiliar++)
+    for (int i = -31; i < 0; i++)
     {
-        PA_SetBrightness(0, auxiliar);
-        PA_SetBrightness(1, auxiliar);
+        PA_SetBrightness(0, i);
+        PA_SetBrightness(1, i);
         PA_WaitForVBL();
     }
 
