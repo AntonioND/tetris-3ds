@@ -11,19 +11,19 @@
 
 u8 Add_Record(char *name, u32 score, u16 lines)
 {
-    for (auxiliar = 0; auxiliar < 10; auxiliar ++)
+    for (int i = 0; i < 10; i++)
     {
-        if (Record[auxiliar].Puntuacion < score) // Puntuacion superada!
+        if (Record[i].Puntuacion < score) // Puntuacion superada!
         {
-            for (auxiliar2 = 9; auxiliar2 > auxiliar; auxiliar2 --)
+            for (int j = 9; j > i; j--)
             {
-                Record[auxiliar2].Puntuacion = Record[auxiliar2 - 1].Puntuacion;
-                Record[auxiliar2].Lineas = Record[auxiliar2 - 1].Lineas;
-                sprintf(Record[auxiliar2].Nombre, "%s", (char*)Record[auxiliar2 - 1].Nombre);
+                Record[j].Puntuacion = Record[j - 1].Puntuacion;
+                Record[j].Lineas = Record[j - 1].Lineas;
+                sprintf(Record[j].Nombre, "%s", (char *)Record[j - 1].Nombre);
             }
-            Record[auxiliar].Puntuacion = score;
-            Record[auxiliar].Lineas = lines;
-            sprintf(Record[auxiliar].Nombre, "%s", name);
+            Record[i].Puntuacion = score;
+            Record[i].Lineas = lines;
+            sprintf(Record[i].Nombre, "%s", name);
 
             return 1;
         }
@@ -60,10 +60,10 @@ void Records(void)
     PA_SetBgColor(1, PA_RGB(0, 0, 0));
 
     //Fade up
-    for (auxiliar = -31; auxiliar < 0; auxiliar++)
+    for (int i = -31; i < 0; i++)
     {
-        PA_SetBrightness(0, auxiliar);
-        PA_SetBrightness(1, auxiliar);
+        PA_SetBrightness(0, i);
+        PA_SetBrightness(1, i);
         PA_WaitForVBL();
     }
 
@@ -74,19 +74,19 @@ void Records(void)
     Guardar_Datos();
 
     // Escribir records
-    for (auxiliar = 0; auxiliar < 10; auxiliar++)
+    for (int i = 0; i < 10; i++)
     {
         char str[30];
 
-        snprintf(str, sizeof(str), "%s", (char *)Record[auxiliar].Nombre);
-        PA_CenterSmartText(1, 7,6 + (19 * auxiliar),119,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0);
+        snprintf(str, sizeof(str), "%s", (char *)Record[i].Nombre);
+        PA_CenterSmartText(1, 7, 6 + (19 * i), 119, 15 + (19 * i), str, i + 1 /*Color*/, 2, 0);
 
-        snprintf(str, sizeof(str), "%d", (int)Record[auxiliar].Puntuacion);
-        PA_CenterSmartText(1, 127,6 + (19 * auxiliar),199,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0);
+        snprintf(str, sizeof(str), "%d", (int)Record[i].Puntuacion);
+        PA_CenterSmartText(1, 127, 6 + (19 * i), 199, 15 + (19 * i), str, i + 1 /*Color*/, 2, 0);
 
-        snprintf(str, sizeof(str), "%d", (int)Record[auxiliar].Lineas);
-        PA_CenterSmartText(1, 207,6 + (19 * auxiliar),248,15 + (19 * auxiliar), str, auxiliar + 1 /*Color*/ , 2, 0);
-        }
+        snprintf(str, sizeof(str), "%d", (int)Record[i].Lineas);
+        PA_CenterSmartText(1, 207, 6 + (19 * i), 248, 15 + (19 * i), str, i + 1 /*Color*/, 2, 0);
+    }
 
     // Bucle de espera
     while (!(Stylus.Newpress || Pad.Newpress.Anykey))
@@ -120,10 +120,10 @@ void Records(void)
     PA_WaitForVBL();
 
     // Fade down
-    for (auxiliar = 0; auxiliar < 32; auxiliar++)
+    for (int i = 0; i < 32; i++)
     {
-        PA_SetBrightness(0, -auxiliar);
-        PA_SetBrightness(1, -auxiliar);
+        PA_SetBrightness(0, -i);
+        PA_SetBrightness(1, -i);
         PA_WaitForVBL(); // To slow down the fades, we wait a frame...
         PA_WaitForVBL();
     }
