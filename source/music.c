@@ -134,16 +134,14 @@ void Check_Song_End(void)
                 if (!file)
                 {
                     SONG_ERROR = true;
+                    return;
                 }
             }
             FILE_CLOSE(file);
 
-            if (!SONG_ERROR)
-            {
-                AS_MP3StreamPlay(Song_Path);
-                AS_SetMP3Loop(false);
-                Wait_Time = -64; //No importa el numero...
-            }
+            AS_MP3StreamPlay(Song_Path);
+            AS_SetMP3Loop(false);
+            Wait_Time = -64; //No importa el numero...
         }
         else if (Wait_Time >= 0)
         {
@@ -161,7 +159,7 @@ void Check_Song_End(void)
             snprintf(Error_Log, sizeof(Error_Log), "Error decoding SONG_%02d.mp3 \r\n", Current_Song);
 
             // Guardar informacion en un archivo
-            FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
+            FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "a");
             if (ERROR_LOG_WRITE_FILE)
             {
                 fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
@@ -169,11 +167,12 @@ void Check_Song_End(void)
             }
             else
             {
-                fclose(ERROR_LOG_WRITE_FILE);
-
-                FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb"); //wb = create/truncate & write
-                fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
-                fclose(ERROR_LOG_WRITE_FILE);
+                ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb");
+                if (ERROR_LOG_WRITE_FILE)
+                {
+                    fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
+                    fclose(ERROR_LOG_WRITE_FILE);
+                }
             }
 
             // Nueva cancion
@@ -186,19 +185,19 @@ void Check_Song_End(void)
                 Reset_Song_Loop();
                 Set_New_Song_Path();
                 FILE_CLOSE(file);
+
                 MP3FILE *file = FILE_OPEN(Song_Path);
                 if (!file)
                 {
                     SONG_ERROR = true;
+                    return;
                 }
             }
             FILE_CLOSE(file);
-            if (!SONG_ERROR)
-            {
-                AS_MP3StreamPlay(Song_Path);
-                AS_SetMP3Loop(false);
-                Wait_Time = -64; // No importa el numero...
-            }
+
+            AS_MP3StreamPlay(Song_Path);
+            AS_SetMP3Loop(false);
+            Wait_Time = -64; // No importa el numero...
         }
     }
 }
@@ -217,18 +216,18 @@ void Menu_Song(void)
         {
             AS_MP3Stop();
             Set_Menu_Song_Path();
+
             MP3FILE *file = FILE_OPEN(Song_Path);
             if (!file)
             {
                 SONG_ERROR = true;
+                return;
             }
             FILE_CLOSE(file);
-            if (!SONG_ERROR)
-            {
-                AS_MP3StreamPlay(Song_Path);
-                AS_SetMP3Loop(false);
-                Wait_Time = -64; //No importa el numero...
-            }
+
+            AS_MP3StreamPlay(Song_Path);
+            AS_SetMP3Loop(false);
+            Wait_Time = -64; //No importa el numero...
         }
         else if (Wait_Time >= 0)
         {
@@ -258,10 +257,12 @@ void Menu_Song(void)
             }
             else
             {
-                fclose(ERROR_LOG_WRITE_FILE);
-                FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb"); //wb = create/truncate & write
-                fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
-                fclose(ERROR_LOG_WRITE_FILE);
+                ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb");
+                if (ERROR_LOG_WRITE_FILE)
+                {
+                    fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
+                    fclose(ERROR_LOG_WRITE_FILE);
+                }
             }
         }
     }
@@ -310,8 +311,8 @@ void Write_Error_Log(int numero)
     char Error_Log[100];
     snprintf(Error_Log, sizeof(Error_Log), "Error decoding SONG_%02d.mp3 \r\n ", numero);
 
-    //Guardar informacion en un archivo
-    FILE* ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
+    // Guardar informacion en un archivo
+    FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "a");
     if (ERROR_LOG_WRITE_FILE)
     {
         fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
@@ -319,9 +320,11 @@ void Write_Error_Log(int numero)
     }
     else
     {
-        fclose(ERROR_LOG_WRITE_FILE);
         FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb");
-        fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
-        fclose(ERROR_LOG_WRITE_FILE);
+        if (ERROR_LOG_WRITE_FILE)
+        {
+            fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
+            fclose(ERROR_LOG_WRITE_FILE);
+        }
     }
 }
