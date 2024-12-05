@@ -7,6 +7,8 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
+static float red_,green_,blue_;
+
 u8 piezareserva_CPU;
 bool reservallena_CPU, reservausada_CPU;
 

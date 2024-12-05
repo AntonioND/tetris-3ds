@@ -6,7 +6,6 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-float red_,green_,blue_;
 int temp_y, temp_x, temp_giro;
 
 #define NUMSPRITE_RESERVA 15
@@ -20,7 +19,7 @@ static bool reservallena, reservausada;
 static u8 stylus_usedgravity, stylus_reservausada, stylus_dblclicused;
 static u8 stylus_time, stylus_piezax;
 
-void Controles_Tactiles_Horizontal()
+void Controles_Tactiles_Horizontal(void)
 {
     stylus_piezax = Stylus.Y * 10 / 192;
 
@@ -67,7 +66,7 @@ void Controles_Tactiles_Horizontal()
         stylus_usedgravity = 0;
     }
 
-    //Guardar pieza en la reserva
+    // Guardar pieza en la reserva
     if ((Stylus.Vx > 15) && (Stylus.X > 191) && (Stylus.Held) && (stylus_reservausada == 0))
     {
         stylus_reservausada = 1;
@@ -85,7 +84,7 @@ void Controles_Tactiles_Horizontal()
     }
 }
 
-void Controles_Tactiles_Vertical()
+void Controles_Tactiles_Vertical(void)
 {
     stylus_piezax = Stylus.X * 10 / 256;
 
@@ -152,13 +151,13 @@ void Controles_Tactiles_Vertical()
 
 int lastkeypressed, timepressed;
 
-void Autofire_Keys_Horizontal()
+void Autofire_Keys_Horizontal(void)
 {
     if (Pad.Held.Up)
     {
         if (lastkeypressed == PAD_UP)
         {
-            timepressed ++;
+            timepressed++;
         }
         else
         {
@@ -170,7 +169,7 @@ void Autofire_Keys_Horizontal()
     {
         if (lastkeypressed == PAD_DOWN)
         {
-            timepressed ++;
+            timepressed++;
         }
         else
         {
@@ -192,13 +191,13 @@ void Autofire_Keys_Horizontal()
     }
 }
 
-void Autofire_Keys_Vertical()
+void Autofire_Keys_Vertical(void)
 {
     if (Pad.Held.Left)
     {
         if (lastkeypressed == PAD_UP)
         {
-            timepressed ++;
+            timepressed++;
         }
         else
         {
@@ -210,7 +209,7 @@ void Autofire_Keys_Vertical()
     {
         if (lastkeypressed == PAD_DOWN)
         {
-            timepressed ++;
+            timepressed++;
         }
         else
         {
@@ -232,24 +231,22 @@ void Autofire_Keys_Vertical()
     }
 }
 
-void Cancelar_Animacion_Eliminar_Lineas()
+void Cancelar_Animacion_Eliminar_Lineas(void)
 {
-    for (auxiliar3 = 0;auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
-    {
-        Fila_Eliminada[auxiliar3] = 0;
-    }
+    for (int i = 0; i < ALTO_PIEZAS + 2; i++)
+        Fila_Eliminada[i] = 0;
 }
 
-u8 Borrar_Lineas_Completas()
+u8 Borrar_Lineas_Completas(void)
 {
     Borrar_Pieza_Actual();
 
-    auxiliar3 = 0;
+    int result = 0;
     for (int linea = ALTO_PIEZAS; linea > 0; linea--)
     {
         if (Comprobar_Linea(linea - 1))
         {
-            auxiliar3 = 1;
+            result = 1;
             Borrar_Linea(linea - 1);
         }
     }
@@ -257,52 +254,48 @@ u8 Borrar_Lineas_Completas()
     // Ajustar_Colisiones_Actuales();
     Dibujar_Pieza_Actual();
 
-    return auxiliar3;
+    return result;
 }
 
 void Borrar_Linea(u8 altura)
 {
     linecount += 1;
 
-    for (auxiliar2 = 0; auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
-    {
-        Escenario_Tetris[auxiliar2][altura].dibujar = 0;
-    }
+    for (int j = 0; j < ANCHO_PIEZAS; j++)
+        Escenario_Tetris[j][altura].dibujar = 0;
 
     // Desplazar líneas hacia abajo
-    for (auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar++)
+    for (int j = altura; j < ALTO_PIEZAS + 2; j++)
     {
-        for (auxiliar2 = 0; auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
+        for (int i = 0; i < ANCHO_PIEZAS; i++)
         {
-            Escenario_Tetris[auxiliar2][auxiliar].dibujar = Escenario_Tetris[auxiliar2][Limitar_int(0, 16, auxiliar + 1)].dibujar;
-            Escenario_Tetris[auxiliar2][auxiliar].red = Escenario_Tetris[auxiliar2][Limitar_int(0, 16, auxiliar + 1)].red;
-            Escenario_Tetris[auxiliar2][auxiliar].green = Escenario_Tetris[auxiliar2][Limitar_int(0, 16, auxiliar + 1)].green;
-            Escenario_Tetris[auxiliar2][auxiliar].blue = Escenario_Tetris[auxiliar2][Limitar_int(0, 16, auxiliar + 1)].blue;
+            Escenario_Tetris[i][j].dibujar = Escenario_Tetris[i][Limitar_int(0, 16, j + 1)].dibujar;
+            Escenario_Tetris[i][j].red = Escenario_Tetris[i][Limitar_int(0, 16, j + 1)].red;
+            Escenario_Tetris[i][j].green = Escenario_Tetris[i][Limitar_int(0, 16, j + 1)].green;
+            Escenario_Tetris[i][j].blue = Escenario_Tetris[i][Limitar_int(0, 16, j + 1)].blue;
         }
     }
 
     // Borrar última linea
-    for (auxiliar2 = 0; auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
-    {
-        Escenario_Tetris[auxiliar2][16].dibujar = 0;
-    }
+    for (int j = 0; j < ANCHO_PIEZAS; j++)
+        Escenario_Tetris[j][16].dibujar = 0;
 }
 
 // Devuelve las líneas completas
-u8 Comprobar_Lineas_Completas()
+u8 Comprobar_Lineas_Completas(void)
 {
     int count = 0;
 
-    for (auxiliar3 = 0;auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
+    for (int j = 0; j < ALTO_PIEZAS + 2; j++)
     {
-        if (Comprobar_Linea(auxiliar3) == 1)
+        if (Comprobar_Linea(j) == 1)
         {
-            Fila_Eliminada[auxiliar3] = 30;
+            Fila_Eliminada[j] = 30;
             count++;
         }
         else
         {
-            Fila_Eliminada[auxiliar3] --;
+            Fila_Eliminada[j] --;
         }
     }
 
@@ -311,22 +304,21 @@ u8 Comprobar_Lineas_Completas()
 
 u8 Comprobar_Linea(u8 altura)
 {
-    auxiliar2 = 0;
+    u32 sum = 0;
 
-    for (auxiliar = 0; auxiliar < ANCHO_PIEZAS; auxiliar++)
-    {
-        auxiliar2 += Estado_Cuadricula(auxiliar, altura);
-    }
+    for (int j = 0; j < ANCHO_PIEZAS; j++)
+        sum += Estado_Cuadricula(j, altura);
 
-    if (auxiliar2 > 9)
+    if (sum > 9)
         return 1;
+
     return 0;
 }
 
-void Ajustar_Colisiones_Actuales()
+void Ajustar_Colisiones_Actuales(void)
 {
-    for (auxiliar = 0; auxiliar < 16; auxiliar++)
-        Colisiones_Actual[auxiliar] = 0;
+    for (int i = 0; i < 16; i++)
+        Colisiones_Actual[i] = 0;
 
     switch (Tipo_Pieza[0])
     {
@@ -494,18 +486,18 @@ u8 Estado_Cuadricula(int x, int y)
         return (Limitar_int(0, 1, Escenario_Tetris[x][y].dibujar - 1));
 }
 
-u8 Comprobar_Colisiones_Inferior()
+u8 Comprobar_Colisiones_Inferior(void)
 {
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
             // Si el siguiente esta vacio y está a la abajo
-            if ((Colisiones_Actual[auxiliar + 4] == 0) || (auxiliar / 4 == 3) )
+            if ((Colisiones_Actual[i + 4] == 0) || (i / 4 == 3) )
             {
-                if (Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1)
+                if (Limitar_int(0, 9, Pieza.X + (i % 4) - 1) == Pieza.X + (i % 4) - 1)
                 {
-                    if (Estado_Cuadricula(Pieza.X + (auxiliar % 4) - 1, Pieza.Y - (auxiliar / 4)))
+                    if (Estado_Cuadricula(Pieza.X + (i % 4) - 1, Pieza.Y - (i / 4)))
                         return 1;
                 }
             }
@@ -515,18 +507,18 @@ u8 Comprobar_Colisiones_Inferior()
     return 0;
 }
 
-u8 Comprobar_Colisiones_Derecha()
+u8 Comprobar_Colisiones_Derecha(void)
 {
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
             // Si el siguiente esta vacio y está a la derecha
-            if ((Colisiones_Actual[auxiliar + 1] == 0) || (auxiliar % 4 == 3) )
+            if ((Colisiones_Actual[i + 1] == 0) || (i % 4 == 3) )
             {
-                //if (Limitar_int(0, 16, Pieza.Y + (auxiliar / 4) - 1) == Pieza.Y + (auxiliar / 4) - 1)
+                //if (Limitar_int(0, 16, Pieza.Y + (i / 4) - 1) == Pieza.Y + (i / 4) - 1)
                 //{
-                    if (Estado_Cuadricula(Pieza.X + (auxiliar % 4), Pieza.Y - (auxiliar / 4) + 1))
+                    if (Estado_Cuadricula(Pieza.X + (i % 4), Pieza.Y - (i / 4) + 1))
                         return 1;
                 //}
             }
@@ -536,18 +528,18 @@ u8 Comprobar_Colisiones_Derecha()
     return 0;
 }
 
-u8 Comprobar_Colisiones_Izquierda()
+u8 Comprobar_Colisiones_Izquierda(void)
 {
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
             // Si el siguiente esta vacio y está a la derecha
-            if ((Colisiones_Actual[auxiliar - 1] == 0) || (auxiliar % 4 == 0) )
+            if ((Colisiones_Actual[i - 1] == 0) || (i % 4 == 0) )
             {
-                //if (Limitar_int(0, 16, Pieza.Y + (auxiliar / 4) - 1) == Pieza.Y + (auxiliar / 4) - 1)
+                //if (Limitar_int(0, 16, Pieza.Y + (i / 4) - 1) == Pieza.Y + (i / 4) - 1)
                 //{
-                    if (Estado_Cuadricula(Pieza.X + (auxiliar % 4) - 2, Pieza.Y - (auxiliar / 4) + 1))
+                    if (Estado_Cuadricula(Pieza.X + (i % 4) - 2, Pieza.Y - (i / 4) + 1))
                         return 1;
                 //}
             }
@@ -557,11 +549,10 @@ u8 Comprobar_Colisiones_Izquierda()
     return 0;
 }
 
-u8 Comprobar_Colisiones_Giro()
+u8 Comprobar_Colisiones_Giro(void)
 {
     Borrar_Pieza_Actual();
 
-    auxiliar2 = 0;
     temp_giro = Pieza.Rotacion;
     temp_y = Pieza.Y;
     temp_x = Pieza.X;
@@ -569,29 +560,31 @@ u8 Comprobar_Colisiones_Giro()
 
     Ajustar_Colisiones_Actuales();
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    u32 result = 0;
+
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
-            if (Estado_Cuadricula(Pieza.X + (auxiliar % 4) - 1, Pieza.Y - (auxiliar / 4) + 1))
-                auxiliar2 = 1;
+            if (Estado_Cuadricula(Pieza.X + (i % 4) - 1, Pieza.Y - (i / 4) + 1))
+                result = 1;
         }
     }
 
     // Probar subiendo la pieza una posición
-    if (auxiliar2 == 1)
+    if (result == 1)
     {
-        auxiliar2 = 2;
+        result = 2;
         Pieza.Y++;
 
         Ajustar_Colisiones_Actuales();
 
-        for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+        for (int i = 0; i < 16; i++) // Pieza
         {
-            if (Colisiones_Actual[auxiliar] == 1)
+            if (Colisiones_Actual[i] == 1)
             {
-                if (Estado_Cuadricula(Pieza.X + (auxiliar % 4) - 1, Pieza.Y - (auxiliar / 4) + 1))
-                    auxiliar2 = 1;
+                if (Estado_Cuadricula(Pieza.X + (i % 4) - 1, Pieza.Y - (i / 4) + 1))
+                    result = 1;
             }
         }
 
@@ -601,19 +594,19 @@ u8 Comprobar_Colisiones_Giro()
     Ajustar_Colisiones_Actuales();
 
     // Probar moviendo a los lados
-    if (auxiliar2 == 1)
+    if (result == 1)
     {
         // Probar a la derecha
         if (Comprobar_Colisiones_Izquierda() == 1)
         {
-            auxiliar2 = 3;
+            result = 3;
             Pieza.X++;
 
             Ajustar_Colisiones_Actuales();
         }
         else if (Comprobar_Colisiones_Derecha() == 1)
         {
-            auxiliar2 = 4;
+            result = 4;
             Pieza.X--;
             if (Tipo_Pieza[0] == 0)
                 Pieza.X --; // si es la alargada prueba una posicion mas.
@@ -621,12 +614,12 @@ u8 Comprobar_Colisiones_Giro()
             Ajustar_Colisiones_Actuales();
         }
 
-        for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+        for (int i = 0; i < 16; i++) // Pieza
         {
-            if (Colisiones_Actual[auxiliar] == 1)
+            if (Colisiones_Actual[i] == 1)
             {
-                if (Estado_Cuadricula(Pieza.X + (auxiliar % 4) - 1, Pieza.Y - (auxiliar / 4) + 1))
-                    auxiliar2 = 1;
+                if (Estado_Cuadricula(Pieza.X + (i % 4) - 1, Pieza.Y - (i / 4) + 1))
+                    result = 1;
             }
         }
 
@@ -640,10 +633,10 @@ u8 Comprobar_Colisiones_Giro()
     Ajustar_Colisiones_Actuales();
     Dibujar_Pieza_Actual();
 
-    return auxiliar2;
+    return result;
 }
 
-void Borrar_Pieza_Actual()
+void Borrar_Pieza_Actual(void)
 {
     temp_y = Pieza.Y;
     // Sombra
@@ -656,70 +649,76 @@ void Borrar_Pieza_Actual()
         Ajustar_Colisiones_Actuales();
     }
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
-            if ((Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1) == Pieza.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza.X + (i % 4) - 1) == Pieza.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16,Pieza.Y - (i / 4) + 1) == Pieza.Y - (i / 4) + 1))
             {
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].dibujar = 0;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].dibujar = 0;
             }
         }
     }
 
     Pieza.Y = temp_y; // Recuperar posicion
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
-            if ((Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1) == Pieza.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza.X + (i % 4) - 1) == Pieza.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16,Pieza.Y - (i / 4) + 1) == Pieza.Y - (i / 4) + 1))
             {
-                Escenario_Tetris[Limitar_int(0, 9,Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].dibujar = 0;
+                Escenario_Tetris[Limitar_int(0, 9,Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].dibujar = 0;
             }
         }
     }
 }
 
-void Dibujar_Pieza_Actual()
+void Dibujar_Pieza_Actual(void)
 {
+    float red = 0, green = 0, blue = 0;
+
     // Pieza actual
     switch (Tipo_Pieza[0]) // Color
     {
         case 0:
-            red_ = 1;
-            green_ = 1;
-            blue_ = 1;
+            red = 1;
+            green = 1;
+            blue = 1;
             break;
         case 1:
-            red_ = 1;
-            green_ = 1;
-            blue_ = 0;
+            red = 1;
+            green = 1;
+            blue = 0;
             break;
         case 2:
-            red_ = 1;
-            green_ = 0.5;
-            blue_ = 0;
+            red = 1;
+            green = 0.5;
+            blue = 0;
             break;
         case 3:
-            red_ = 1;
-            green_ = 0;
-            blue_ = 0;
+            red = 1;
+            green = 0;
+            blue = 0;
             break;
         case 4:
-            red_ = 0;
-            green_ = 1;
-            blue_ = 0;
+            red = 0;
+            green = 1;
+            blue = 0;
             break;
         case 5:
-            red_ = 0;
-            green_ = 0;
-            blue_ = 1;
+            red = 0;
+            green = 0;
+            blue = 1;
             break;
         case 6:
-            red_ = 0.75;
-            green_ = 0;
-            blue_ = 1;
+            red = 0.75;
+            green = 0;
+            blue = 1;
             break;
     }
 
@@ -733,38 +732,48 @@ void Dibujar_Pieza_Actual()
         Ajustar_Colisiones_Actuales();
     }
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++)
+    for (int i = 0; i < 16; i++)
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
-            if ((Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1) == Pieza.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza.X + (i % 4) - 1) == Pieza.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16,Pieza.Y - (i / 4) + 1) == Pieza.Y - (i / 4) + 1))
             {
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].dibujar = 1;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].red = red_;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].green = green_;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].blue = blue_;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].dibujar = 1;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].red = red;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].green = green;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].blue = blue;
             }
         }
     }
 
     Pieza.Y = temp_y; // Recuperar posicion
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual[auxiliar] == 1)
+        if (Colisiones_Actual[i] == 1)
         {
-            if ((Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1) == Pieza.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1) == Pieza.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza.X + (i % 4) - 1) == Pieza.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16,Pieza.Y - (i / 4) + 1) == Pieza.Y - (i / 4) + 1))
             {
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].dibujar = 2;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].red = red_;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].green = green_;
-                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza.Y - (auxiliar / 4) + 1)].blue = blue_;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].dibujar = 2;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].red = red;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].green = green;
+                Escenario_Tetris[Limitar_int(0, 9, Pieza.X + (i % 4) - 1)]
+                                [Limitar_int(0, 16,Pieza.Y - (i / 4) + 1)].blue = blue;
             }
         }
     }
 }
 
-void Iniciar_Juego()
+void Iniciar_Juego(void)
 {
     Pieza.Y = 16;
     Pieza.X = 4;
@@ -787,23 +796,23 @@ void Iniciar_Juego()
     framecount = 0;
     velocidadcount = 0;
 
-    for (auxiliar = 0; auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
     {
-        for (auxiliar2 = 0; auxiliar2 < ALTO_PIEZAS + 2; auxiliar2++)
+        for (int j = 0; j < ALTO_PIEZAS + 2; j++)
         {
-            Escenario_Tetris[auxiliar][auxiliar2].dibujar = 0;
-            Escenario_Tetris[auxiliar][auxiliar2].red = 0;
-            Escenario_Tetris[auxiliar][auxiliar2].green = 0;
-            Escenario_Tetris[auxiliar][auxiliar2].blue = 0;
+            Escenario_Tetris[i][j].dibujar = 0;
+            Escenario_Tetris[i][j].red = 0;
+            Escenario_Tetris[i][j].green = 0;
+            Escenario_Tetris[i][j].blue = 0;
         }
     }
 
-    for (auxiliar = 0; auxiliar < ALTO_PIEZAS + 2; auxiliar++)
-        Fila_Eliminada[auxiliar] = 0;
+    for (int j = 0; j < ALTO_PIEZAS + 2; j++)
+        Fila_Eliminada[j] = 0;
 
     // Preparar piezas
-    for (auxiliar = 0; auxiliar < 5; auxiliar++)
-        Tipo_Pieza[auxiliar] = PA_RandMinMax(0, 6);
+    for (int i = 0; i < 5; i++)
+        Tipo_Pieza[i] = PA_RandMinMax(0, 6);
 
     Ajustar_Colisiones_Actuales();
     Dibujar_Pieza_Actual();
@@ -812,24 +821,27 @@ void Iniciar_Juego()
     {
         case MODO_NORMAL:
             PA_LoadSpritePal(1, 0, (void *)Pieza_Pal); // Palette name
-            for (auxiliar = 1;auxiliar <= 4; auxiliar++)
+
+            for (int i = 1; i <= 4; i++)
             {
-                PA_CreateSprite(1, auxiliar, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 173, 7 + (39 * (auxiliar - 1)));
-                PA_SetSpriteAnim(1, auxiliar, Tipo_Pieza[auxiliar]);
+                PA_CreateSprite(1, i, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 173, 7 + (39 * (i - 1)));
+                PA_SetSpriteAnim(1, i, Tipo_Pieza[i]);
             }
             break;
+
         case MODO_CONTRA_CPU:
             PA_LoadSpritePal(1, 0,(void *)Pieza_Pal); // Palette name
-            for (auxiliar = 1;auxiliar <= 4; auxiliar++)
+
+            for (int i = 1; i <= 4; i++)
             {
-                PA_CreateSprite(1, auxiliar, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 4, 5 + (39 * (auxiliar - 1)));
-                PA_SetSpriteAnim(1, auxiliar, Tipo_Pieza[auxiliar]);
+                PA_CreateSprite(1, i, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 4, 5 + (39 * (i - 1)));
+                PA_SetSpriteAnim(1, i, Tipo_Pieza[i]);
             }
             break;
     }
 }
 
-void Nueva_Pieza()
+void Nueva_Pieza(void)
 {
     Pieza.Y = 16;
     Pieza.X = 4;
@@ -840,18 +852,18 @@ void Nueva_Pieza()
     velocidadcount = 0;
     girarcount = 0;
 
-    for (auxiliar = 0; auxiliar < 4; auxiliar++)
-        Tipo_Pieza[auxiliar] = Tipo_Pieza[auxiliar + 1];
+    for (int i = 0; i < 4; i++)
+        Tipo_Pieza[i] = Tipo_Pieza[i + 1];
 
     Tipo_Pieza[4] = PA_RandMinMax(0,6);
 
     Ajustar_Colisiones_Actuales();
 
-    for (auxiliar = 1; auxiliar <= 4; auxiliar++)
-        PA_SetSpriteAnim(1, auxiliar, Tipo_Pieza[auxiliar]);
+    for (int i = 1; i <= 4; i++)
+        PA_SetSpriteAnim(1, i, Tipo_Pieza[i]);
 }
 
-void Reservar_Pieza()
+void Reservar_Pieza(void)
 {
     Borrar_Pieza_Actual();
 
@@ -866,6 +878,7 @@ void Reservar_Pieza()
             case MODO_NORMAL:
                 PA_CreateSprite(1, NUMSPRITE_RESERVA, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 142, 26);
                 break;
+
             case MODO_CONTRA_CPU:
                 PA_CreateSprite(1, NUMSPRITE_RESERVA, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 28, 28);
                 break;
@@ -880,9 +893,9 @@ void Reservar_Pieza()
     {
         reservausada = true;
 
-        auxiliar = piezareserva;
+        int temp = piezareserva;
         piezareserva = Tipo_Pieza[0];
-        Tipo_Pieza[0] = auxiliar;
+        Tipo_Pieza[0] = temp;
 
         PA_SetSpriteAnim(1, NUMSPRITE_RESERVA, piezareserva);
 
