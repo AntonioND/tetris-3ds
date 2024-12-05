@@ -9,7 +9,7 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-u8 Add_Record(char* name, u32 score, u16 lines)
+u8 Add_Record(char *name, u32 score, u16 lines)
 {
     for (auxiliar = 0; auxiliar < 10; auxiliar ++)
     {
@@ -31,7 +31,7 @@ u8 Add_Record(char* name, u32 score, u16 lines)
     return 0;
 }
 
-void Records()
+void Records(void)
 {
     PA_ResetBgSys();
     PA_Init2D();
@@ -45,7 +45,7 @@ void Records()
     My_Init_3D_No_Textures();
     Iniciar_3D_Menu();
 
-    PA_Init8bitBg(1,3);
+    PA_Init8bitBg(1, 3);
     PA_EasyBgLoad(1,2,inferior_records);
     PA_SetBgPalCol(1, 1,  PA_RGB(31, 31, 31));
     PA_SetBgPalCol(1, 2,  PA_RGB(31, 31, 22));
@@ -70,7 +70,7 @@ void Records()
     PA_SetBrightness(0, 0);
     PA_SetBrightness(1, 0);
 
-    u8 newrecord = Add_Record((char*)PA_UserInfo.Name, (u32)puntuacion_total, (u16)linecount);
+    u8 newrecord = Add_Record((char *)PA_UserInfo.Name, puntuacion_total, linecount);
     Guardar_Datos();
 
     // Escribir records
@@ -93,18 +93,18 @@ void Records()
     {
         if (newrecord)
         {
-            Escribir_3D_Char(TEXT_MEDIUM, 1,2, CHAR_N,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 2,2, CHAR_E,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 3,2, CHAR_W,  1,1,1);
+            Escribir_3D_Char(TEXT_MEDIUM, 1, 2, CHAR_N,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 2, 2, CHAR_E,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 3, 2, CHAR_W,  1, 1, 1);
 
-            Escribir_3D_Char(TEXT_MEDIUM, 2,4, CHAR_R,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 3,4, CHAR_E,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 4,4, CHAR_C,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 5,4, CHAR_O,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 6,4, CHAR_R,  1,1,1);
-            Escribir_3D_Char(TEXT_MEDIUM, 7,4, CHAR_D,  1,1,1);
+            Escribir_3D_Char(TEXT_MEDIUM, 2, 4, CHAR_R,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 3, 4, CHAR_E,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 4, 4, CHAR_C,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 5, 4, CHAR_O,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 6, 4, CHAR_R,  1, 1, 1);
+            Escribir_3D_Char(TEXT_MEDIUM, 7, 4, CHAR_D,  1, 1, 1);
 
-            Escribir_3D_Char(TEXT_MEDIUM, 8,4, CHAR_CERRAREXCLAMACION,  1,1,1);
+            Escribir_3D_Char(TEXT_MEDIUM, 8, 4, CHAR_CERRAREXCLAMACION,  1, 1, 1);
         }
 
         Actualizar_3D_Menu();
@@ -112,7 +112,6 @@ void Records()
 
         PA_WaitForVBL();
     }
-
 
     PA_WaitForVBL();
     PA_WaitForVBL();

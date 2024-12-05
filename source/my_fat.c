@@ -22,21 +22,21 @@ Datos que se guardan:
 
 */
 
-bool FAT_ERROR = 0; //Activa/desactiva el acceso al FAT
+// Activa/desactiva el acceso al FAT
+bool FAT_ERROR = 0;
 
-// Rutina de checksum
 static int Checksum(u32 datos)
 {
-    u16 checksum = 0;
+    int checksum = 0;
+
     for (u8 aux_checksum = 0; aux_checksum < 32; aux_checksum++)
-    {
-        checksum += ( (datos & (1 << aux_checksum)) >> (aux_checksum) );
-    }
+        checksum += (datos & (1 << aux_checksum)) >> aux_checksum;
+
     return checksum;
 }
 
-//+ = Checksum parcial; * = Checksum completo
-void Guardar_Datos()
+// + = Checksum parcial; * = Checksum completo
+void Guardar_Datos(void)
 {
     if (FAT_ERROR)
         return;
@@ -63,7 +63,7 @@ void Guardar_Datos()
     // Añadir checksum al final
 
     // First, read file
-    FILE* CONFIG_CHECKSUM_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb");
+    FILE *CONFIG_CHECKSUM_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb");
     if (CONFIG_CHECKSUM_FILE == NULL)
         return;
 
@@ -86,14 +86,13 @@ void Guardar_Datos()
     fclose(CONFIG_WRITE_CHECKSUM_FILE);
 }
 
-//Leer datos
-int Leer_Datos()
+int Leer_Datos(void)
 {
     if (FAT_ERROR)
         return 2;
 
     acumulador = 0;
-    FILE* CONFIG_CHECK_READ_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //rb = read
+    FILE *CONFIG_CHECK_READ_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //rb = read
 
     if (CONFIG_CHECK_READ_FILE == NULL)
     {
@@ -154,8 +153,8 @@ int Leer_Datos()
     return 1;
 }
 
-//Comprobar FAT, de paso hace una lectura de los datos.
-void Comprobar_FAT()
+// Comprobar FAT, de paso hace una lectura de los datos.
+void Comprobar_FAT(void)
 {
     if (!FAT_ERROR)
     {

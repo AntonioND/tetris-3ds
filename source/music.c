@@ -9,13 +9,14 @@ bool SONG_ERROR;
 static char Song_Path[50];
 static s8 Wait_Time;
 
-void Wait_To_Stop_Song()
+void Wait_To_Stop_Song(void)
 {
-    //NO VA ¿?
+    // NO VA ¿?
 
-    /* if ((!SONG_ERROR) && (!FAT_ERROR))
+    /*
+    if ((!SONG_ERROR) && (!FAT_ERROR))
     {
-        while((AS_GetMP3Status() & MP3ST_STOPPED) != 0)
+        while ((AS_GetMP3Status() & MP3ST_STOPPED) != 0)
         {
             AS_MP3Stop();
             PA_WaitForVBL();
@@ -24,33 +25,33 @@ void Wait_To_Stop_Song()
     */
 }
 
-void Set_New_Song_Path()
+void Set_New_Song_Path(void)
 {
     snprintf(Song_Path, sizeof(Song_Path), "/Tetris_3DS/Song_%02d.mp3", Current_Song);
 }
 
-void Set_Menu_Song_Path()
+void Set_Menu_Song_Path(void)
 {
     snprintf(Song_Path, sizeof(Song_Path), "/Tetris_3DS/MENU.mp3");
 }
 
-void Pause_Song()
+void Pause_Song(void)
 {
     if ((!FAT_ERROR) && (AS_GetMP3Status() & MP3ST_PLAYING))
         AS_MP3Pause();
 }
 
-void Reset_Song_Loop()
+void Reset_Song_Loop(void)
 {
     Current_Song = 0;
 }
 
-void Clear_Song_Error()
+void Clear_Song_Error(void)
 {
     SONG_ERROR = false;
 }
 
-void Unpause_Song()
+void Unpause_Song(void)
 {
     if (!FAT_ERROR)
     {
@@ -61,7 +62,7 @@ void Unpause_Song()
     }
 }
 
-void Stop_Song()
+void Stop_Song(void)
 {
     if ((!FAT_ERROR) && (AS_GetMP3Status() & MP3ST_PLAYING))
     {
@@ -69,12 +70,13 @@ void Stop_Song()
     }
 }
 
-void Init_Song_Loop()
+void Init_Song_Loop(void)
 {
     if (!FAT_ERROR)
     {
         Clear_Song_Error();
         Set_New_Song_Path();
+
         MP3FILE *file = FILE_OPEN(Song_Path);
         if (!file)
         {
@@ -82,17 +84,19 @@ void Init_Song_Loop()
             return;
         }
         FILE_CLOSE(file);
+
         AS_MP3StreamPlay(Song_Path);
         AS_SetMP3Loop(false);
     }
 }
 
-void Init_Menu_Song_Loop()
+void Init_Menu_Song_Loop(void)
 {
     if (!FAT_ERROR)
     {
         Clear_Song_Error();
         Set_Menu_Song_Path();
+
         MP3FILE *file = FILE_OPEN(Song_Path);
         if (!file)
         {
@@ -100,6 +104,7 @@ void Init_Menu_Song_Loop()
             return;
         }
         FILE_CLOSE(file);
+
         if (!SONG_ERROR)
         {
             AS_MP3StreamPlay(Song_Path);
@@ -108,7 +113,7 @@ void Init_Menu_Song_Loop()
     }
 }
 
-void Check_Song_End()
+void Check_Song_End(void)
 {
     if ((!SONG_ERROR) && (!FAT_ERROR))
     {
@@ -122,6 +127,7 @@ void Check_Song_End()
                 AS_MP3Stop();
                 Current_Song = (Current_Song + 1) % 100;
                 Set_New_Song_Path();
+
                 MP3FILE *file = FILE_OPEN(Song_Path);
                 if (!file)
                 {
@@ -135,6 +141,7 @@ void Check_Song_End()
                     }
                 }
                 FILE_CLOSE(file);
+
                 if (!SONG_ERROR)
                 {
                     AS_MP3StreamPlay(Song_Path);
@@ -154,12 +161,10 @@ void Check_Song_End()
             {
                 AS_MP3Stop();
 
-                //PA_InitASLibForMP3(AS_MODE_MP3 /*| AS_MODE_SURROUND*/ | AS_MODE_16CH);
-
                 char Error_Log[100];
                 snprintf(Error_Log, sizeof(Error_Log), "Error decoding SONG_%02d.mp3 \r\n", Current_Song);
 
-                //Guardar informacion en un archivo
+                // Guardar informacion en un archivo
                 FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "a"); //wb = create/truncate & write
                 if (ERROR_LOG_WRITE_FILE)
                 {
@@ -169,12 +174,13 @@ void Check_Song_End()
                 else
                 {
                     fclose(ERROR_LOG_WRITE_FILE);
+
                     FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb"); //wb = create/truncate & write
                     fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
                     fclose(ERROR_LOG_WRITE_FILE);
                 }
 
-                //Nueva cancion
+                // Nueva cancion
                 AS_MP3Stop();
                 Current_Song = (Current_Song + 1) % 100;
                 Set_New_Song_Path();
@@ -203,7 +209,7 @@ void Check_Song_End()
     }
 }
 
-void Menu_Song()
+void Menu_Song(void)
 {
     if ((!SONG_ERROR) && (!FAT_ERROR))
     {
@@ -279,7 +285,7 @@ void Set_Song_Number(int numero)
     }
 }
 
-int Get_Song_Number()
+int Get_Song_Number(void)
 {
     if (!FAT_ERROR)
     {

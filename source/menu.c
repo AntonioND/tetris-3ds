@@ -23,7 +23,7 @@ void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, 
     PA_Draw16bitLineEx(screen, x2, y1, x2, y2, color, size);
 }
 
-void Iniciar_3D_Menu()
+void Iniciar_3D_Menu(void)
 {
     Fondo_Menu.r = 22;
     Fondo_Menu.ir = -0.1;
@@ -90,7 +90,7 @@ void Actualizar_3D_Menu()
     Figura_Menu.gz = 0;
 }
 
-void Reload_Menu()
+void Reload_Menu(void)
 {
     PA_ResetBgSys();
     PA_Init2D();
@@ -119,7 +119,7 @@ void Reload_Menu()
     PA_SetBrightness(1, 0);
 }
 
-void End_Menu()
+void End_Menu(void)
 {
     PA_WaitForVBL();
     PA_WaitForVBL();
@@ -144,7 +144,7 @@ void End_Menu()
     PA_WaitForVBL();
 }
 
-void Menu()
+void Menu(void)
 {
     Reload_Menu();
 
@@ -216,7 +216,7 @@ void Menu()
     Stop_Song(); // Por si acaso
 }
 
-void Graficos_3D_Menu()
+void Graficos_3D_Menu(void)
 {
     Escribir_3D_Char(TEXT_MEDIUM, 0, 0, CHAR_T,  0, 1.0, 0.5);
     Escribir_3D_Char(TEXT_MEDIUM, 1, 0, CHAR_E,  0, 0.9, 0.6);

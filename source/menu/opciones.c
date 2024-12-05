@@ -10,7 +10,7 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-void Reload_Opciones_Menu()
+void Reload_Opciones_Menu(void)
 {
     PA_ResetBgSys();
     PA_Init2D();
@@ -53,7 +53,7 @@ void Reload_Opciones_Menu()
     PA_SetBrightness(1, 0);
 }
 
-void End_Opciones_Menu()
+void End_Opciones_Menu(void)
 {
     PA_WaitForVBL();
     PA_WaitForVBL();
@@ -78,7 +78,7 @@ void End_Opciones_Menu()
     PA_WaitForVBL();
 }
 
-void Opciones_Menu()
+void Opciones_Menu(void)
 {
     Reload_Opciones_Menu();
 
@@ -119,14 +119,14 @@ void Opciones_Menu()
                     texture_selected++;
                 PA_SetSpriteAnim(1, 10, texture_selected);
             }
-            else if(PA_StylusInZone(160, 60, 174, 84)) // Aba/Izq
+            else if (PA_StylusInZone(160, 60, 174, 84)) // Aba/Izq
             {
                 PA_SetSpriteAnim(1, 2, 1);
                 if (camera_selected > 0)
                     camera_selected--;
                 PA_SetSpriteAnim(1, 11, camera_selected);
             }
-            else if(PA_StylusInZone(212, 60, 226, 84)) // Aba/Der
+            else if (PA_StylusInZone(212, 60, 226, 84)) // Aba/Der
             {
                 PA_SetSpriteAnim(1, 3, 3);
                 if (camera_selected < 2)
@@ -134,6 +134,7 @@ void Opciones_Menu()
                 PA_SetSpriteAnim(1, 11, camera_selected);
             }
         }
+
         if (Stylus.Released)
         {
             PA_SetSpriteAnim(1, 0, 0);

@@ -8,7 +8,7 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
-void Reload_Creditos_Menu()
+void Reload_Creditos_Menu(void)
 {
     PA_ResetBgSys();
     PA_Init2D();
@@ -25,7 +25,7 @@ void Reload_Creditos_Menu()
     PA_Init16bitBg(1, 3);
     PA_Load16bitBitmap(1, inferior_credits_Bitmap);
 
-    //Fade up
+    // Fade up
     for (int i = -31; i < 0; i++)
     {
         PA_SetBrightness(0, i);
@@ -37,7 +37,7 @@ void Reload_Creditos_Menu()
     PA_SetBrightness(1, 0);
 }
 
-void End_Creditos_Menu()
+void End_Creditos_Menu(void)
 {
     PA_WaitForVBL();
     PA_WaitForVBL();
@@ -62,7 +62,7 @@ void End_Creditos_Menu()
     PA_WaitForVBL();
 }
 
-void Creditos()
+void Creditos(void)
 {
     Reload_Creditos_Menu();
     while (!(Pad.Newpress.Anykey || Stylus.Newpress))

@@ -25,10 +25,10 @@ extern __FONDO_MENU__ Fondo_Menu;
 
 void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, u8 size);
 
-void Iniciar_3D_Menu();
-void Actualizar_3D_Menu();
-void Graficos_3D_Menu();
+void Iniciar_3D_Menu(void);
+void Actualizar_3D_Menu(void);
+void Graficos_3D_Menu(void);
 
-void Menu();
+void Menu(void);
 
 #endif // MENU_H__

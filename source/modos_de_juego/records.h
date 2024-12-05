@@ -3,8 +3,8 @@
 
 #include <nds.h>
 
-u8 Add_Record(char* name, u32 score, u16 lines);
+u8 Add_Record(char *name, u32 score, u16 lines);
 
-void Records();
+void Records(void);
 
 #endif // MODOS_DE_JUEGO_RECORDS_H__
