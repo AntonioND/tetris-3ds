@@ -12,7 +12,24 @@
 // PAGfxConverter Include
 #include "gfx/all_gfx.h"
 
+typedef struct
+{
+    float x, y, z;
+    float vx, vy, vz;
+    float gx, gy, gz;
+    u8 tipopieza;
+} __ANIMACION_MENU__;
+
 __ANIMACION_MENU__ Figura_Menu;
+
+#define ACELERACION_PIEZA   0.005
+
+typedef struct
+{
+    float r, g, b;
+    float ir, ig, ib;
+} __FONDO_MENU__;
+
 __FONDO_MENU__ Fondo_Menu;
 
 void Draw16bitRectangleEx(u8 screen, s16 x1, s16 y1, s16 x2, s16 y2, u16 color, u8 size)
