@@ -143,14 +143,14 @@ u8 Comprobar_Huecos_CPU(void)
     return count;
 }
 
-static void Set_Position_CPU() // Ayuda para IA_CPU()
+static void Set_Position_CPU(int x, int y) // Ayuda para IA_CPU()
 {
-    superficie_ = Posicion_CPU[auxiliar][auxiliar2].superficie;
-    huecostotal_ = Posicion_CPU[auxiliar][auxiliar2].huecostotal;
-    huecosdebajo_ = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
-    Posicion_Ideal_CPU.X = auxiliar;
-    Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
-    Posicion_Ideal_CPU.Rotacion = auxiliar2;
+    superficie_ = Posicion_CPU[x][y].superficie;
+    huecostotal_ = Posicion_CPU[x][y].huecostotal;
+    huecosdebajo_ = Posicion_CPU[x][y].huecosdebajo;
+    Posicion_Ideal_CPU.X = x;
+    Posicion_Ideal_CPU.Y = Posicion_CPU[x][y].altura;
+    Posicion_Ideal_CPU.Rotacion = y;
 }
 
 // Maravilla creada por mi XD
@@ -255,12 +255,12 @@ void IA_CPU()
                         {
                             if (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_)
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie == superficie_) &&
                                 (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                         }
                         break;
@@ -273,19 +273,19 @@ void IA_CPU()
                             if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                             if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                         }
                         if ((Posicion_Ideal_CPU.Y + 1 >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
                             (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_) &&
                             (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         break;
 
@@ -297,12 +297,12 @@ void IA_CPU()
                             if ((Posicion_Ideal_CPU.Y + 4 >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                             if ((Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
                                 (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                         }
                         break;
@@ -315,13 +315,13 @@ void IA_CPU()
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_) &&
                                 (Posicion_Ideal_CPU.Y + 3 >= Posicion_CPU[auxiliar][auxiliar2].altura))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie == superficie_) &&
                                 (Posicion_Ideal_CPU.Y == Posicion_CPU[auxiliar][auxiliar2].altura) &&
                                 (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
                             {
-                                Set_Position_CPU();
+                                Set_Position_CPU(auxiliar, auxiliar2);
                             }
                         }
 */
@@ -331,19 +331,19 @@ void IA_CPU()
                             (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_) &&
                             (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         else if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_) &&
                                  (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_) &&
                                  (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         else if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_) &&
                                  (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
                                  (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         break;
 
@@ -353,18 +353,18 @@ void IA_CPU()
                         if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
                             (Posicion_Ideal_CPU.Y + 3 > Posicion_CPU[auxiliar][auxiliar2].altura))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == huecosdebajo_) &&
                             (Posicion_Ideal_CPU.Y > Posicion_CPU[auxiliar][auxiliar2].altura))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == huecosdebajo_) &&
                             (Posicion_Ideal_CPU.Y == Posicion_CPU[auxiliar][auxiliar2].altura) &&
                             (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_))
                         {
-                            Set_Position_CPU();
+                            Set_Position_CPU(auxiliar, auxiliar2);
                         }
                         break;
                 }
