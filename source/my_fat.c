@@ -3,6 +3,8 @@
 #include "global.h"
 #include "my_fat.h"
 
+// TODO: This file requires a lot of error checks. Everywhere.
+
 /*
 
 Datos que se guardan:
@@ -41,8 +43,6 @@ void Guardar_Datos(void)
     if (FAT_ERROR)
         return;
 
-    acumulador = 0;
-
     // wb = create/truncate & write
     FILE *CONFIG_WRITE_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "wb");
     if (CONFIG_WRITE_FILE == NULL)
@@ -52,11 +52,11 @@ void Guardar_Datos(void)
     fwrite(&camera_selected, 1, 1, CONFIG_WRITE_FILE);
     fwrite(&MASTER_SOUND, 1, 1, CONFIG_WRITE_FILE);
 
-    for (auxiliar = 0; auxiliar < 10; auxiliar ++)
+    for (int i = 0; i < 10; i++)
     {
-        fwrite(&Record[auxiliar].Nombre, 1, 10, CONFIG_WRITE_FILE);
-        fwrite(&Record[auxiliar].Puntuacion, 4, 1, CONFIG_WRITE_FILE);
-        fwrite(&Record[auxiliar].Lineas, 2, 1, CONFIG_WRITE_FILE);
+        fwrite(&Record[i].Nombre, 1, 10, CONFIG_WRITE_FILE);
+        fwrite(&Record[i].Puntuacion, 4, 1, CONFIG_WRITE_FILE);
+        fwrite(&Record[i].Lineas, 2, 1, CONFIG_WRITE_FILE);
     }
     fclose(CONFIG_WRITE_FILE);
 
@@ -67,22 +67,24 @@ void Guardar_Datos(void)
     if (CONFIG_CHECKSUM_FILE == NULL)
         return;
 
-    auxiliar2 = 0;
-    for (auxiliar = 0; auxiliar < 163; auxiliar ++)
+    u32 sum = 0;
+
+    for (int i = 0; i < 163; i++)
     {
-        fread(&auxiliar2, 1, 1, CONFIG_CHECKSUM_FILE);
-        acumulador += auxiliar2;
+        u8 b = 0;
+        fread(&b, 1, 1, CONFIG_CHECKSUM_FILE);
+        sum += (u32)b;
     }
     fclose(CONFIG_CHECKSUM_FILE);
 
-    auxiliar = Checksum(acumulador);
+    u32 checksum = Checksum(sum);
 
     // Now, append checksum to it
     FILE *CONFIG_WRITE_CHECKSUM_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "a");
     if (CONFIG_WRITE_CHECKSUM_FILE == NULL)
         return;
 
-    fwrite(&auxiliar, 4, 1, CONFIG_WRITE_CHECKSUM_FILE);
+    fwrite(&checksum, 4, 1, CONFIG_WRITE_CHECKSUM_FILE);
     fclose(CONFIG_WRITE_CHECKSUM_FILE);
 }
 
@@ -91,7 +93,6 @@ int Leer_Datos(void)
     if (FAT_ERROR)
         return 2;
 
-    acumulador = 0;
     FILE *CONFIG_CHECK_READ_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //rb = read
 
     if (CONFIG_CHECK_READ_FILE == NULL)
@@ -110,18 +111,21 @@ int Leer_Datos(void)
     }
 
     // Comprobar archivo
-    auxiliar2 = 0;
+    u32 sum = 0;
 
-    for (auxiliar = 0; auxiliar < 163; auxiliar ++)
+    for (int i = 0; i < 163; i++)
     {
-        fread(&auxiliar2, 1, 1, CONFIG_CHECK_READ_FILE);
-        acumulador += auxiliar2;
+        u8 b = 0;
+        fread(&b, 1, 1, CONFIG_CHECK_READ_FILE);
+        sum += (u32)b;
     }
 
-    fread(&auxiliar, 4, 1, CONFIG_CHECK_READ_FILE);
+    u32 checksum = 0;
+
+    fread(&checksum, 4, 1, CONFIG_CHECK_READ_FILE);
     fclose(CONFIG_CHECK_READ_FILE);
 
-    if (auxiliar == Checksum(acumulador)) // Si el archivo está bien
+    if (checksum == Checksum(sum)) // Si el archivo está bien
     {
         // rb = read
         FILE *CONFIG_READ_FILE = fopen ("/Tetris_3DS/Tetris3DS_Config.dat", "rb");
@@ -130,11 +134,11 @@ int Leer_Datos(void)
         fread(&camera_selected, 1, 1, CONFIG_READ_FILE);
         fread(&MASTER_SOUND, 1, 1, CONFIG_READ_FILE);
 
-        for (auxiliar = 0; auxiliar < 10; auxiliar ++)
+        for (int i = 0; i < 10; i++)
         {
-            fread(&Record[auxiliar].Nombre, 1, 10, CONFIG_READ_FILE);
-            fread(&Record[auxiliar].Puntuacion, 4, 1, CONFIG_READ_FILE);
-            fread(&Record[auxiliar].Lineas, 2, 1, CONFIG_READ_FILE);
+            fread(&Record[i].Nombre, 1, 10, CONFIG_READ_FILE);
+            fread(&Record[i].Puntuacion, 4, 1, CONFIG_READ_FILE);
+            fread(&Record[i].Lineas, 2, 1, CONFIG_READ_FILE);
         }
 
         fclose(CONFIG_READ_FILE);
@@ -158,7 +162,7 @@ void Comprobar_FAT(void)
 {
     if (!FAT_ERROR)
     {
-        switch(Leer_Datos())
+        switch (Leer_Datos())
         {
             case 0:
                 // Todo correcto
@@ -196,6 +200,7 @@ void Comprobar_FAT(void)
                     FAT_ERROR = true;
                     PA_OutputSimpleText(1, 0, 10, "       FAT access error.");
                     PA_OutputSimpleText(1, 0, 14, "          Press START");
+
                     while (!Pad.Newpress.Start)
                         PA_WaitForVBL();
                 }
@@ -203,6 +208,7 @@ void Comprobar_FAT(void)
                 {
                     PA_OutputSimpleText(1, 0, 10, "       Save file created.");
                     PA_OutputSimpleText(1, 0, 14, "          Press START");
+
                     while (!Pad.Newpress.Start)
                         PA_WaitForVBL();
                 }
@@ -213,6 +219,7 @@ void Comprobar_FAT(void)
     {
         PA_OutputSimpleText(1, 0, 10, "       FAT access error.");
         PA_OutputSimpleText(1, 0, 14, "          Press START");
+
         while (!Pad.Newpress.Start)
             PA_WaitForVBL();
 
