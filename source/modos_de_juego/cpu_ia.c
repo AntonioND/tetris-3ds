@@ -160,26 +160,26 @@ void IA_CPU(void)
     Almacen_CPU.Y = Pieza_CPU.Y;
     Almacen_CPU.Rotacion = Pieza_CPU.Rotacion;
 
-    for (auxiliar = 0; auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
     {
-        for (auxiliar2 = 0; auxiliar2 < NUM_ROTACIONES; auxiliar2++)
+        for (int j = 0; j < NUM_ROTACIONES; j++)
         {
-            Posicion_CPU[auxiliar][auxiliar2].altura = 100;
-            Posicion_CPU[auxiliar][auxiliar2].huecosdebajo = 100;
-            Posicion_CPU[auxiliar][auxiliar2].huecostotal = 100;
-            Posicion_CPU[auxiliar][auxiliar2].superficie = 0;
+            Posicion_CPU[i][j].altura = 100;
+            Posicion_CPU[i][j].huecosdebajo = 100;
+            Posicion_CPU[i][j].huecostotal = 100;
+            Posicion_CPU[i][j].superficie = 0;
         }
     }
 
     // Obtener datos
-    for (Pieza_CPU.Rotacion = 0;Pieza_CPU.Rotacion < 4; Pieza_CPU.Rotacion++)
+    for (Pieza_CPU.Rotacion = 0; Pieza_CPU.Rotacion < 4; Pieza_CPU.Rotacion++)
     {
         Ajustar_Colisiones_Actuales_CPU();
 
         if (!Comprobar_Colisiones_Derecha_CPU())
         {
             while (!Comprobar_Colisiones_Derecha_CPU())
-                Pieza_CPU.X++; //Poner a la derecha
+                Pieza_CPU.X++; // Poner a la derecha
         }
 
         int counter = 0;
@@ -213,7 +213,7 @@ void IA_CPU(void)
         Pieza_CPU.Y = Almacen_CPU.Y;
     }
 
-    //Recuperar posicion
+    // Recuperar posicion
 
     Pieza_CPU.Y = Almacen_CPU.Y;
     Pieza_CPU.X = Almacen_CPU.X;
@@ -237,134 +237,129 @@ void IA_CPU(void)
     */
 
     // Ver la mejor posicion (Mas bien lo unico decente...)
-    for (auxiliar = 0;auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
     {
-        for (auxiliar2 = 0; auxiliar2 < NUM_ROTACIONES; auxiliar2++)
+        for (int j = 0; j < NUM_ROTACIONES; j++)
         {
-            if (Posicion_CPU[auxiliar][auxiliar2].altura < 15)
+            if (Posicion_CPU[i][j].altura < 15)
             {
                 //----------------------------
                 //Inicio de las comprobaciones
                 //----------------------------
                 switch (Tipo_Pieza_CPU[0])
-                {                   //-----
-                    case 0:         //Linea
-                                    //-----
-                        if ((Posicion_Ideal_CPU.Y + 3 > Posicion_CPU[auxiliar][auxiliar2].altura) &&
-                            (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_))
+                {
+                    case 0: // Linea
+                        if ((Posicion_Ideal_CPU.Y + 3 > Posicion_CPU[i][j].altura) &&
+                            (Posicion_CPU[i][j].huecosdebajo <= huecosdebajo_))
                         {
                             if (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_)
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie == superficie_) &&
-                                (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_))
+                                (Posicion_CPU[i][j].huecostotal < huecostotal_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                         }
                         break;
-                                    //-----
-                    case 1:         //  L
-                    case 2:         //-----
 
-                        if (Posicion_Ideal_CPU.Y + 3 >= Posicion_CPU[auxiliar][auxiliar2].altura)
+                    case 1: //  L
+                    case 2:
+                        if (Posicion_Ideal_CPU.Y + 3 >= Posicion_CPU[i][j].altura)
                         {
-                            if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
+                            if ((Posicion_CPU[i][j].huecosdebajo < huecosdebajo_) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
-                            if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_) &&
+                            if ((Posicion_CPU[i][j].huecosdebajo <= huecosdebajo_) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                         }
-                        if ((Posicion_Ideal_CPU.Y + 1 >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
+                        if ((Posicion_Ideal_CPU.Y + 1 >= Posicion_CPU[i][j].altura) &&
                             (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_) &&
-                            (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
+                            (Posicion_CPU[i][j].huecostotal <= huecostotal_))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
                         break;
 
-                                    //---------
-                    case 3:         //Cosa rara
-                    case 4:         //---------
-                        if (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_)
+                    case 3: //Cosa rara
+                    case 4:
+                        if (Posicion_CPU[i][j].huecosdebajo <= huecosdebajo_)
                         {
-                            if ((Posicion_Ideal_CPU.Y + 4 >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
+                            if ((Posicion_Ideal_CPU.Y + 4 >= Posicion_CPU[i][j].altura) &&
                                 (Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
-                            if ((Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura) &&
-                                (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
+                            if ((Posicion_Ideal_CPU.Y >= Posicion_CPU[i][j].altura) &&
+                                (Posicion_CPU[i][j].huecostotal <= huecostotal_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                         }
                         break;
-                                    //-----
-                    case 5:         //  T
-                                    //-----
+
+                    case 5: //  T
+
 /*
-                        if (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_)
+                        if (Posicion_CPU[i][j].huecosdebajo <= huecosdebajo_)
                         {
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_) &&
-                                (Posicion_Ideal_CPU.Y + 3 >= Posicion_CPU[auxiliar][auxiliar2].altura))
+                                (Posicion_Ideal_CPU.Y + 3 >= Posicion_CPU[i][j].altura))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                             if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie == superficie_) &&
-                                (Posicion_Ideal_CPU.Y == Posicion_CPU[auxiliar][auxiliar2].altura) &&
-                                (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= huecostotal_))
+                                (Posicion_Ideal_CPU.Y == Posicion_CPU[i][j].altura) &&
+                                (Posicion_CPU[i][j].huecostotal <= huecostotal_))
                             {
-                                Set_Position_CPU(auxiliar, auxiliar2);
+                                Set_Position_CPU(i, j);
                             }
                         }
 */
 
                         if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie == superficie_) &&
-                            (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == huecosdebajo_) &&
-                            (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_) &&
-                            (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
+                            (Posicion_CPU[i][j].huecosdebajo == huecosdebajo_) &&
+                            (Posicion_CPU[i][j].huecostotal < huecostotal_) &&
+                            (Posicion_Ideal_CPU.Y >= Posicion_CPU[i][j].altura - 2))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
                         else if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie > superficie_) &&
-                                 (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo <= huecosdebajo_) &&
-                                 (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
+                                 (Posicion_CPU[i][j].huecosdebajo <= huecosdebajo_) &&
+                                 (Posicion_Ideal_CPU.Y >= Posicion_CPU[i][j].altura - 2))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
                         else if ((Posicion_CPU[Pieza_CPU.X][Pieza_CPU.Rotacion].superficie >= superficie_) &&
-                                 (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
-                                 (Posicion_Ideal_CPU.Y >= Posicion_CPU[auxiliar][auxiliar2].altura - 2))
+                                 (Posicion_CPU[i][j].huecosdebajo < huecosdebajo_) &&
+                                 (Posicion_Ideal_CPU.Y >= Posicion_CPU[i][j].altura - 2))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
                         break;
 
-                                    //--------
-                    case 6:         //Cuadrado
-                                    //--------
-                        if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < huecosdebajo_) &&
-                            (Posicion_Ideal_CPU.Y + 3 > Posicion_CPU[auxiliar][auxiliar2].altura))
+                    case 6: // Cuadrado
+                        if ((Posicion_CPU[i][j].huecosdebajo < huecosdebajo_) &&
+                            (Posicion_Ideal_CPU.Y + 3 > Posicion_CPU[i][j].altura))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
-                        if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == huecosdebajo_) &&
-                            (Posicion_Ideal_CPU.Y > Posicion_CPU[auxiliar][auxiliar2].altura))
+                        if ((Posicion_CPU[i][j].huecosdebajo == huecosdebajo_) &&
+                            (Posicion_Ideal_CPU.Y > Posicion_CPU[i][j].altura))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
-                        if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == huecosdebajo_) &&
-                            (Posicion_Ideal_CPU.Y == Posicion_CPU[auxiliar][auxiliar2].altura) &&
-                            (Posicion_CPU[auxiliar][auxiliar2].huecostotal < huecostotal_))
+                        if ((Posicion_CPU[i][j].huecosdebajo == huecosdebajo_) &&
+                            (Posicion_Ideal_CPU.Y == Posicion_CPU[i][j].altura) &&
+                            (Posicion_CPU[i][j].huecostotal < huecostotal_))
                         {
-                            Set_Position_CPU(auxiliar, auxiliar2);
+                            Set_Position_CPU(i, j);
                         }
                         break;
                 }
@@ -373,29 +368,30 @@ void IA_CPU(void)
 
         /*
             // Temporal, por si no va bien lo nuevo
-            if ((Posicion_Ideal_CPU.Y > Posicion_CPU[auxiliar][auxiliar2].altura))
+            if ((Posicion_Ideal_CPU.Y > Posicion_CPU[i][j].altura))
             {
-                if (Posicion_CPU[auxiliar][auxiliar2].huecosdebajo < counter)
+                if (Posicion_CPU[i][j].huecosdebajo < counter)
                 {
-                    auxiliar3 = Posicion_CPU[auxiliar][auxiliar2].huecostotal;
-                    counter = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
-                    Posicion_Ideal_CPU.X = auxiliar;
-                    Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
-                    Posicion_Ideal_CPU.Rotacion = auxiliar2;
+                    auxiliar3 = Posicion_CPU[i][j].huecostotal;
+                    counter = Posicion_CPU[i][j].huecosdebajo;
+                    Posicion_Ideal_CPU.X = i;
+                    Posicion_Ideal_CPU.Y = Posicion_CPU[i][j].altura;
+                    Posicion_Ideal_CPU.Rotacion = j;
                 }
-                else if ((Posicion_CPU[auxiliar][auxiliar2].huecosdebajo == counter) && (Posicion_CPU[auxiliar][auxiliar2].huecostotal <= auxiliar3))
+                else if ((Posicion_CPU[i][j].huecosdebajo == counter) &&
+                         (Posicion_CPU[i][j].huecostotal <= auxiliar3))
                 {
-                    auxiliar3 = Posicion_CPU[auxiliar][auxiliar2].huecostotal;
-                    counter = Posicion_CPU[auxiliar][auxiliar2].huecosdebajo;
-                    Posicion_Ideal_CPU.X = auxiliar;
-                    Posicion_Ideal_CPU.Y = Posicion_CPU[auxiliar][auxiliar2].altura;
-                    Posicion_Ideal_CPU.Rotacion =auxiliar2;
+                    auxiliar3 = Posicion_CPU[i][j].huecostotal;
+                    counter = Posicion_CPU[i][j].huecosdebajo;
+                    Posicion_Ideal_CPU.X = i;
+                    Posicion_Ideal_CPU.Y = Posicion_CPU[i][j].altura;
+                    Posicion_Ideal_CPU.Rotacion =j;
                 }
             }
         */
-            //---------------------------
-            //Final de las comprobaciones
-            //---------------------------
+            // ---------------------------
+            // Final de las comprobaciones
+            // ---------------------------
         }
     }
 
@@ -469,22 +465,20 @@ void Mover_IA_CPU(void)
 
 void Cancelar_Animacion_Eliminar_Lineas_CPU(void)
 {
-    for (auxiliar3 = 0;auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
-    {
-        Fila_Eliminada_CPU[auxiliar3] = 0;
-    }
+    for (int i = 0; i < ALTO_PIEZAS + 2; i++)
+        Fila_Eliminada_CPU[i] = 0;
 }
 
 u8 Borrar_Lineas_Completas_CPU(void)
 {
     Borrar_Pieza_Actual_CPU();
 
-    auxiliar3 = 0;
+    u32 result = 0;
     for (int linea = ALTO_PIEZAS; linea > 0; linea--)
     {
         if (Comprobar_Linea_CPU(linea - 1))
         {
-            auxiliar3 = 1;
+            result = 1;
             Borrar_Linea_CPU(linea - 1);
         }
     }
@@ -492,51 +486,47 @@ u8 Borrar_Lineas_Completas_CPU(void)
     // Ajustar_Colisiones_Actuales_CPU();
     Dibujar_Pieza_Actual_CPU();
 
-    return auxiliar3;
+    return result;
 }
 
 void Borrar_Linea_CPU(u8 altura)
 {
     linecount_CPU += 1;
 
-    for (auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
-    {
-        Escenario_Tetris_CPU[auxiliar2][altura].dibujar = 0;
-    }
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
+        Escenario_Tetris_CPU[i][altura].dibujar = 0;
 
     // Desplazar líneas hacia abajo
-    for (auxiliar = altura; auxiliar < ALTO_PIEZAS + 2; auxiliar ++)
+    for (int j = altura; j < ALTO_PIEZAS + 2; j ++)
     {
-        for (auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
+        for (int i = 0; i < ANCHO_PIEZAS; i++)
         {
-            Escenario_Tetris_CPU[auxiliar2][auxiliar].dibujar = Escenario_Tetris_CPU[auxiliar2][Limitar_int(0,16,auxiliar + 1)].dibujar;
-            Escenario_Tetris_CPU[auxiliar2][auxiliar].red = Escenario_Tetris_CPU[auxiliar2][Limitar_int(0,16,auxiliar + 1)].red;
-            Escenario_Tetris_CPU[auxiliar2][auxiliar].green = Escenario_Tetris_CPU[auxiliar2][Limitar_int(0,16,auxiliar + 1)].green;
-            Escenario_Tetris_CPU[auxiliar2][auxiliar].blue = Escenario_Tetris_CPU[auxiliar2][Limitar_int(0,16,auxiliar + 1)].blue;
+            Escenario_Tetris_CPU[i][j].dibujar = Escenario_Tetris_CPU[i][Limitar_int(0,16,j + 1)].dibujar;
+            Escenario_Tetris_CPU[i][j].red = Escenario_Tetris_CPU[i][Limitar_int(0,16,j + 1)].red;
+            Escenario_Tetris_CPU[i][j].green = Escenario_Tetris_CPU[i][Limitar_int(0,16,j + 1)].green;
+            Escenario_Tetris_CPU[i][j].blue = Escenario_Tetris_CPU[i][Limitar_int(0,16,j + 1)].blue;
         }
     }
 
     // Borrar última linea
-    for (auxiliar2 = 0;auxiliar2 < ANCHO_PIEZAS; auxiliar2++)
-    {
-        Escenario_Tetris_CPU[auxiliar2][16].dibujar = 0;
-    }
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
+        Escenario_Tetris_CPU[i][16].dibujar = 0;
 }
 
 // Devuelve las líneas completas
 u8 Comprobar_Lineas_Completas_CPU(void)
 {
     int count = 0;
-    for (auxiliar3 = 0; auxiliar3 < ALTO_PIEZAS + 2; auxiliar3++)
+    for (int j = 0; j < ALTO_PIEZAS + 2; j++)
     {
-        if (Comprobar_Linea_CPU(auxiliar3) == 1)
+        if (Comprobar_Linea_CPU(j) == 1)
         {
-            Fila_Eliminada_CPU[auxiliar3] = 30;
+            Fila_Eliminada_CPU[j] = 30;
             count++;
         }
         else
         {
-            Fila_Eliminada_CPU[auxiliar3] --;
+            Fila_Eliminada_CPU[j]--;
         }
     }
     return count;
@@ -544,14 +534,12 @@ u8 Comprobar_Lineas_Completas_CPU(void)
 
 u8 Comprobar_Linea_CPU(u8 altura)
 {
-    auxiliar2 = 0;
+    u32 sum = 0;
 
-    for (auxiliar = 0;auxiliar < ANCHO_PIEZAS; auxiliar++)
-    {
-        auxiliar2 += Estado_Cuadricula_CPU(auxiliar, altura);
-    }
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
+        sum += Estado_Cuadricula_CPU(i, altura);
 
-    if (auxiliar2 > 9)
+    if (sum > 9)
         return 1;
 
     return 0;
@@ -559,8 +547,8 @@ u8 Comprobar_Linea_CPU(u8 altura)
 
 void Ajustar_Colisiones_Actuales_CPU(void)
 {
-    for (auxiliar = 0; auxiliar < 16; auxiliar++)
-        Colisiones_Actual_CPU[auxiliar] = 0;
+    for (int i = 0; i < 16; i++)
+        Colisiones_Actual_CPU[i] = 0;
 
     switch (Tipo_Pieza_CPU[0])
     {
@@ -730,16 +718,16 @@ u8 Estado_Cuadricula_CPU(int x, int y)
 
 u8 Comprobar_Colisiones_Inferior_CPU(void)
 {
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Si el siguiente esta vacio y está a la abajo
-            if ((Colisiones_Actual_CPU[auxiliar + 4] == 0) || (auxiliar / 4 == 3) )
+            if ((Colisiones_Actual_CPU[i + 4] == 0) || (i / 4 == 3) )
             {
-                if (Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1)
+                if (Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1)
                 {
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4)))
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4)))
                         return 1;
                 }
             }
@@ -751,16 +739,16 @@ u8 Comprobar_Colisiones_Inferior_CPU(void)
 
 u8 Comprobar_Colisiones_Derecha_CPU(void)
 {
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Si el siguiente esta vacio y está a la derecha
-            if ((Colisiones_Actual_CPU[auxiliar + 1] == 0) || (auxiliar % 4 == 3) )
+            if ((Colisiones_Actual_CPU[i + 1] == 0) || (i % 4 == 3) )
             {
-                //if (Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) - 1) == Pieza_CPU.Y + (auxiliar / 4) - 1)
+                //if (Limitar_int(0,16,Pieza_CPU.Y + (i / 4) - 1) == Pieza_CPU.Y + (i / 4) - 1)
                 //{
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4), Pieza_CPU.Y - (auxiliar / 4) + 1))
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4), Pieza_CPU.Y - (i / 4) + 1))
                         return 1;
                 //}
             }
@@ -772,16 +760,16 @@ u8 Comprobar_Colisiones_Derecha_CPU(void)
 
 u8 Comprobar_Colisiones_Izquierda_CPU(void)
 {
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
             // Si el siguiente esta vacio y está a la derecha
-            if ((Colisiones_Actual_CPU[auxiliar - 1] == 0) || (auxiliar % 4 == 0) )
+            if ((Colisiones_Actual_CPU[i - 1] == 0) || (i % 4 == 0) )
             {
-                //if (Limitar_int(0,16,Pieza_CPU.Y + (auxiliar / 4) - 1) == Pieza_CPU.Y + (auxiliar / 4) - 1)
+                //if (Limitar_int(0,16,Pieza_CPU.Y + (i / 4) - 1) == Pieza_CPU.Y + (i / 4) - 1)
                 //{
-                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 2, Pieza_CPU.Y - (auxiliar / 4) + 1))
+                    if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 2, Pieza_CPU.Y - (i / 4) + 1))
                         return 1;
                 //}
             }
@@ -794,7 +782,6 @@ u8 Comprobar_Colisiones_Giro_CPU(void)
 {
     Borrar_Pieza_Actual_CPU();
 
-    auxiliar2 = 0;
     temp_giro = Pieza_CPU.Rotacion;
     temp_y = Pieza_CPU.Y;
     temp_x = Pieza_CPU.X;
@@ -802,29 +789,31 @@ u8 Comprobar_Colisiones_Giro_CPU(void)
 
     Ajustar_Colisiones_Actuales_CPU();
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) //Pieza
+    u32 result = 0;
+
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
-            if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4) + 1))
-                auxiliar2 = 1;
+            if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4) + 1))
+                result = 1;
         }
     }
 
     // Probar subiendo la pieza una posición
-    if (auxiliar2 == 1)
+    if (result == 1)
     {
-        auxiliar2 = 2;
+        result = 2;
         Pieza_CPU.Y ++;
 
         Ajustar_Colisiones_Actuales_CPU();
 
-        for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+        for (int i = 0; i < 16; i++) // Pieza
         {
-            if (Colisiones_Actual_CPU[auxiliar] == 1)
+            if (Colisiones_Actual_CPU[i] == 1)
             {
-                if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4) + 1))
-                    auxiliar2 = 1;
+                if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4) + 1))
+                    result = 1;
             }
         }
 
@@ -834,19 +823,19 @@ u8 Comprobar_Colisiones_Giro_CPU(void)
     Ajustar_Colisiones_Actuales_CPU();
 
     // Probar moviendo a los lados
-    if (auxiliar2 == 1)
+    if (result == 1)
     {
         // Probar a la derecha
         if (Comprobar_Colisiones_Izquierda_CPU() == 1)
         {
-            auxiliar2 = 3;
+            result = 3;
             Pieza_CPU.X++;
 
             Ajustar_Colisiones_Actuales_CPU();
         }
         else if (Comprobar_Colisiones_Derecha_CPU() == 1)
         {
-            auxiliar2 = 4;
+            result = 4;
             Pieza_CPU.X--;
             if (Tipo_Pieza_CPU[0] == 0)
                 Pieza_CPU.X --; // si es la alargada prueba una posicion mas.
@@ -854,12 +843,12 @@ u8 Comprobar_Colisiones_Giro_CPU(void)
             Ajustar_Colisiones_Actuales_CPU();
         }
 
-        for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+        for (int i = 0; i < 16; i++) // Pieza
         {
-            if (Colisiones_Actual_CPU[auxiliar] == 1)
+            if (Colisiones_Actual_CPU[i] == 1)
             {
-                if (Estado_Cuadricula_CPU(Pieza_CPU.X + (auxiliar % 4) - 1, Pieza_CPU.Y - (auxiliar / 4) + 1))
-                    auxiliar2 = 1;
+                if (Estado_Cuadricula_CPU(Pieza_CPU.X + (i % 4) - 1, Pieza_CPU.Y - (i / 4) + 1))
+                    result = 1;
             }
         }
 
@@ -873,7 +862,7 @@ u8 Comprobar_Colisiones_Giro_CPU(void)
     Ajustar_Colisiones_Actuales_CPU();
     Dibujar_Pieza_Actual_CPU();
 
-    return auxiliar2;
+    return result;
 }
 
 void Borrar_Pieza_Actual_CPU(void)
@@ -890,26 +879,30 @@ void Borrar_Pieza_Actual_CPU(void)
         Ajustar_Colisiones_Actuales_CPU();
     }
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
-            if ((Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1) == Pieza_CPU.Y - (i / 4) + 1))
             {
-                Escenario_Tetris_CPU[Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 0;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].dibujar = 0;
             }
         }
     }
 
     Pieza_CPU.Y = temp_y; // Recuperar posicion
 
-    for (auxiliar = 0;auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
-            if ((Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1) == Pieza_CPU.Y - (i / 4) + 1))
             {
-                Escenario_Tetris_CPU[Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 0;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].dibujar = 0;
             }
         }
     }
@@ -969,32 +962,42 @@ void Dibujar_Pieza_Actual_CPU(void)
         Ajustar_Colisiones_Actuales_CPU();
     }
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++)
+    for (int i = 0; i < 16; i++)
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
-            if ((Limitar_int(0, 9,Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1) == Pieza_CPU.Y - (i / 4) + 1))
             {
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 1;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].dibujar = 1;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].red = red;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].green = green;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].blue = blue;
             }
         }
     }
 
     Pieza_CPU.Y = temp_y; // Recuperar posicion
 
-    for (auxiliar = 0; auxiliar < 16; auxiliar++) // Pieza
+    for (int i = 0; i < 16; i++) // Pieza
     {
-        if (Colisiones_Actual_CPU[auxiliar] == 1)
+        if (Colisiones_Actual_CPU[i] == 1)
         {
-            if ((Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1) == Pieza_CPU.X + (auxiliar % 4) - 1) && (Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1) == Pieza_CPU.Y - (auxiliar / 4) + 1))
+            if ((Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1) == Pieza_CPU.X + (i % 4) - 1) &&
+                (Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1) == Pieza_CPU.Y - (i / 4) + 1))
             {
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].dibujar = 2;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].red = red;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].green = green;
-                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (auxiliar % 4) - 1)][Limitar_int(0, 16,Pieza_CPU.Y - (auxiliar / 4) + 1)].blue = blue;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].dibujar = 2;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].red = red;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].green = green;
+                Escenario_Tetris_CPU[Limitar_int(0, 9, Pieza_CPU.X + (i % 4) - 1)]
+                                    [Limitar_int(0, 16, Pieza_CPU.Y - (i / 4) + 1)].blue = blue;
             }
         }
     }
@@ -1017,31 +1020,31 @@ void Iniciar_Juego_CPU(void)
 
     velocidadcount_CPU = 0;
 
-    for (auxiliar = 0; auxiliar < ANCHO_PIEZAS; auxiliar++)
+    for (int i = 0; i < ANCHO_PIEZAS; i++)
     {
-        for (auxiliar2 = 0; auxiliar2 < ALTO_PIEZAS + 2; auxiliar2++)
+        for (int j = 0; j < ALTO_PIEZAS + 2; j++)
         {
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].dibujar = 0;
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].red = 0;
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].green = 0;
-            Escenario_Tetris_CPU[auxiliar][auxiliar2].blue = 0;
+            Escenario_Tetris_CPU[i][j].dibujar = 0;
+            Escenario_Tetris_CPU[i][j].red = 0;
+            Escenario_Tetris_CPU[i][j].green = 0;
+            Escenario_Tetris_CPU[i][j].blue = 0;
         }
     }
 
-    for (auxiliar = 0; auxiliar < ALTO_PIEZAS + 2; auxiliar++)
-        Fila_Eliminada_CPU[auxiliar] = 0;
+    for (int j = 0; j < ALTO_PIEZAS + 2; j++)
+        Fila_Eliminada_CPU[j] = 0;
 
     // Preparar piezas
-    for (auxiliar = 0;auxiliar < 5; auxiliar++)
-        Tipo_Pieza_CPU[auxiliar] = PA_RandMinMax(0,6);
+    for (int i = 0; i < 5; i++)
+        Tipo_Pieza_CPU[i] = PA_RandMinMax(0,6);
 
     Ajustar_Colisiones_Actuales_CPU();
     Dibujar_Pieza_Actual_CPU();
 
-    for (auxiliar = 1;auxiliar <= 4; auxiliar++)
+    for (int i = 1; i <= 4; i++)
     {
-        PA_CreateSprite(1, auxiliar + 50, (void*)Pieza_Sprite, OBJ_SIZE_16X32,1, 0, 234, 5 + (39 * (auxiliar - 1)));
-        PA_SetSpriteAnim(1, auxiliar + 50, Tipo_Pieza_CPU[auxiliar]);
+        PA_CreateSprite(1, i + 50, (void *)Pieza_Sprite, OBJ_SIZE_16X32, 1, 0, 234, 5 + (39 * (i - 1)));
+        PA_SetSpriteAnim(1, i + 50, Tipo_Pieza_CPU[i]);
     }
 }
 
@@ -1056,15 +1059,15 @@ void Nueva_Pieza_CPU(void)
     velocidadcount_CPU = 0;
     girarcount_CPU = 0;
 
-    for (auxiliar = 0;auxiliar < 4; auxiliar++)
-        Tipo_Pieza_CPU[auxiliar] = Tipo_Pieza_CPU[auxiliar + 1];
+    for (int i = 0; i < 4; i++)
+        Tipo_Pieza_CPU[i] = Tipo_Pieza_CPU[i + 1];
 
     Tipo_Pieza_CPU[4] = PA_RandMinMax(0, 6);
 
     Ajustar_Colisiones_Actuales_CPU();
 
-    for (auxiliar = 1;auxiliar <= 4; auxiliar++)
-        PA_SetSpriteAnim(1, auxiliar + 50, Tipo_Pieza_CPU[auxiliar]);
+    for (int i = 1; i <= 4; i++)
+        PA_SetSpriteAnim(1, i + 50, Tipo_Pieza_CPU[i]);
 }
 
 void Reservar_Pieza_CPU(void)
@@ -1087,9 +1090,9 @@ void Reservar_Pieza_CPU(void)
     {
         reservausada_CPU = true;
 
-        auxiliar = piezareserva_CPU;
+        int temp = piezareserva_CPU;
         piezareserva_CPU = Tipo_Pieza_CPU[0];
-        Tipo_Pieza_CPU[0] = auxiliar;
+        Tipo_Pieza_CPU[0] = temp;
 
         PA_SetSpriteAnim(1, NUMSPRITE_RESERVA_CPU, piezareserva_CPU);
 
