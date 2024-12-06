@@ -5,7 +5,7 @@ extern bool MENU_ACTIVO, JUEGO_ACTIVO, PAUSA;
 extern u8 pausa_lista;
 extern u8 MODO_DE_JUEGO;
 extern int opcionmenu, submenu;
-extern s32 puntuacion_total, /*puntuacion_record,*/ linecount, puntuacion_total_CPU, linecount_CPU;
+extern s32 puntuacion_total, linecount, puntuacion_total_CPU, linecount_CPU;
 
 extern u8 combo, combo_CPU;
 
@@ -37,8 +37,6 @@ extern u8 Caida_rapida_CPU, jugador_ganador;
 extern float rotarsalaX, rotarsalaY, rotarsalaZ;
 extern float fondorojo, fondoverde, fondoazul;
 extern float incrementorojo, incrementoverde, incrementoazul;
-
-extern int auxiliar, acumulador, auxiliar2, auxiliar3;
 
 #define ANCHO_PIEZAS    10
 #define ALTO_PIEZAS     15
@@ -78,7 +76,7 @@ typedef struct
 
 extern _TEXT_DATA_ Text_Color;
 
-//Modos de juego
+// Modos de juego
 #define MODO_NORMAL     0
 #define MODO_CONTRA_CPU 1
 
