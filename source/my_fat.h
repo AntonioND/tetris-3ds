@@ -7,7 +7,7 @@ void Guardar_Datos(void);
 
 int Leer_Datos(void);
 
-// Comprobar FAT, de paso hace una lectura de los datos.
-void Comprobar_FAT(void);
+// Iniciar FAT y leer datos.
+void Iniciar_FAT(void);
 
 #endif // MY_FAT_H__

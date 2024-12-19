@@ -87,44 +87,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < 30; i++)
         PA_WaitForVBL();
 
-    PA_InitCustomText(1, 0, custom_font); // 2º = background number
-
-    if (Pad.Held.L && Pad.Held.R) // No iniciar FAT
-    {
-        PA_OutputSimpleText(1, 0, 10, "     FAT will not be accesed.");
-        PA_OutputSimpleText(1, 0, 14, "          Press START");
-        FAT_ERROR = true;
-        // Default
-        texture_selected = 2;
-        camera_selected = 2;
-        MASTER_SOUND = 64;
-
-        Reset_Records();
-
-        while (!Pad.Newpress.Start)
-            PA_WaitForVBL();
-
-        PA_OutputSimpleText(1, 0, 10, "                             ");
-        PA_OutputSimpleText(1, 0, 14, "                     ");
-    }
-    else
-    {
-        if (!fatInitDefault()) // Initialise fat library
-        {
-            FAT_ERROR = true;
-            //Default
-            texture_selected = 2;
-            camera_selected = 2;
-            MASTER_SOUND = 64;
-        }
-
-        Comprobar_FAT();
-        //Convertir_Nombre(); // Convertir de ASCII a el formato de este juego de 3D.
-
-        AS_SetMasterVolume(MASTER_SOUND);
-    }
-
-    PA_ResetBgSys(); // Esto tambien desactiva la fuente personalizada
+    Iniciar_FAT();
 
     PA_WaitForVBL();
     PA_WaitForVBL();

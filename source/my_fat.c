@@ -3,6 +3,9 @@
 #include "global.h"
 #include "my_fat.h"
 
+// PAGfxConverter Include
+#include "gfx/all_gfx.h"
+
 // TODO: This file requires a lot of error checks. Everywhere.
 
 /*
@@ -40,9 +43,6 @@ static int Checksum(u32 datos)
 // + = Checksum parcial; * = Checksum completo
 void Guardar_Datos(void)
 {
-    if (FAT_ERROR)
-        return;
-
     // wb = create/truncate & write
     FILE *CONFIG_WRITE_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "wb");
     if (CONFIG_WRITE_FILE == NULL)
@@ -90,16 +90,9 @@ void Guardar_Datos(void)
 
 int Leer_Datos(void)
 {
-    if (FAT_ERROR)
-        return 2;
-
     FILE *CONFIG_CHECK_READ_FILE = fopen("/Tetris_3DS/Tetris3DS_Config.dat", "rb"); //rb = read
-
     if (CONFIG_CHECK_READ_FILE == NULL)
     {
-        // No existe el archivo
-        //fclose(CONFIG_CHECK_READ_FILE);
-
         // Default
         texture_selected = 2;
         camera_selected = 2;
@@ -158,78 +151,108 @@ int Leer_Datos(void)
 }
 
 // Comprobar FAT, de paso hace una lectura de los datos.
-void Comprobar_FAT(void)
+void Iniciar_FAT(void)
 {
-    if (!FAT_ERROR)
+    PA_InitCustomText(1, 0, custom_font); // 2º = background number
+
+    if (Pad.Held.L && Pad.Held.R) // No iniciar FAT
     {
-        switch (Leer_Datos())
-        {
-            case 0:
-                // Todo correcto
-                Guardar_Datos();
-                break;
+        FAT_ERROR = true;
 
-            case 1:
-                // Archivo dañado
-                texture_selected = 2;
-                camera_selected = 2;
-                MASTER_SOUND = 64;
-                Reset_Records();
-
-                Guardar_Datos();
-                PA_OutputSimpleText(1, 0, 10, "       Save file damaged.");
-                PA_OutputSimpleText(1, 0, 11, "   A new one will be created.");
-                PA_OutputSimpleText(1, 0, 14, "           Press START");
-
-                while (!Pad.Newpress.Start)
-                    PA_WaitForVBL();
-
-                break;
-
-            case 2:
-                // Archivo no existe
-                texture_selected = 2;
-                camera_selected = 2;
-                MASTER_SOUND = 64;
-                Reset_Records();
-
-                Guardar_Datos();
-
-                if (Leer_Datos() == 2) // Error del FAT
-                {
-                    FAT_ERROR = true;
-                    PA_OutputSimpleText(1, 0, 10, "       FAT access error.");
-                    PA_OutputSimpleText(1, 0, 14, "          Press START");
-
-                    while (!Pad.Newpress.Start)
-                        PA_WaitForVBL();
-                }
-                else
-                {
-                    PA_OutputSimpleText(1, 0, 10, "       Save file created.");
-                    PA_OutputSimpleText(1, 0, 14, "          Press START");
-
-                    while (!Pad.Newpress.Start)
-                        PA_WaitForVBL();
-                }
-                break;
-        }
-    }
-    else
-    {
-        PA_OutputSimpleText(1, 0, 10, "       FAT access error.");
+        PA_OutputSimpleText(1, 0, 10, "     FAT will not be accesed.");
         PA_OutputSimpleText(1, 0, 14, "          Press START");
+
+        // Default
+        texture_selected = 2;
+        camera_selected = 2;
+        MASTER_SOUND = 64;
+
+        Reset_Records();
 
         while (!Pad.Newpress.Start)
             PA_WaitForVBL();
 
-        texture_selected = 2;
-        camera_selected = 2;
-        MASTER_SOUND = 64;
-        Reset_Records();
+        PA_OutputSimpleText(1, 0, 10, "                             ");
+        PA_OutputSimpleText(1, 0, 14, "                     ");
+    }
+    else
+    {
+        if (!fatInitDefault())
+        {
+            FAT_ERROR = true;
+
+            PA_OutputSimpleText(1, 0, 10, "        FAT init error.");
+            PA_OutputSimpleText(1, 0, 14, "          Press START");
+
+            while (!Pad.Newpress.Start)
+                PA_WaitForVBL();
+
+            //Default
+            texture_selected = 2;
+            camera_selected = 2;
+            MASTER_SOUND = 64;
+            Reset_Records();
+        }
+        else
+        {
+            switch (Leer_Datos())
+            {
+                case 0:
+                    // Todo correcto
+                    Guardar_Datos();
+                    break;
+
+                case 1:
+                    // Archivo dañado
+                    texture_selected = 2;
+                    camera_selected = 2;
+                    MASTER_SOUND = 64;
+                    Reset_Records();
+
+                    Guardar_Datos();
+                    PA_OutputSimpleText(1, 0, 10, "       Save file damaged.");
+                    PA_OutputSimpleText(1, 0, 11, "   A new one will be created.");
+                    PA_OutputSimpleText(1, 0, 14, "           Press START");
+
+                    while (!Pad.Newpress.Start)
+                        PA_WaitForVBL();
+
+                    break;
+
+                case 2:
+                    // Archivo no existe
+                    texture_selected = 2;
+                    camera_selected = 2;
+                    MASTER_SOUND = 64;
+                    Reset_Records();
+
+                    Guardar_Datos();
+
+                    // Verificar datos que acabamos de escribir
+                    if (Leer_Datos() == 2)
+                    {
+                        PA_OutputSimpleText(1, 0, 10, "     Can't create save file.");
+                        PA_OutputSimpleText(1, 0, 14, "          Press START");
+
+                        while (!Pad.Newpress.Start)
+                            PA_WaitForVBL();
+                    }
+                    else
+                    {
+                        PA_OutputSimpleText(1, 0, 10, "       Save file created.");
+                        PA_OutputSimpleText(1, 0, 14, "          Press START");
+
+                        while (!Pad.Newpress.Start)
+                            PA_WaitForVBL();
+                    }
+                    break;
+            }
+        }
     }
 
     PA_OutputSimpleText(1, 0, 10, "                                ");
     PA_OutputSimpleText(1, 0, 11, "                                ");
     PA_OutputSimpleText(1, 0, 14, "                                ");
+
+    PA_ResetBgSys(); // Esto tambien desactiva la fuente personalizada
 }
