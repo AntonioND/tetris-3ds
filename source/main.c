@@ -69,8 +69,15 @@ int main(int argc, char** argv)
 
     // Init AS_Lib for mp3
     PA_VBLFunctionInit(AS_SoundVBL);
-    AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
+    if (!AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH))
+    {
+        consoleDemoInit();
+        printf("Failed to initialize ASlib");
+        while (1)
+            PA_WaitForVBL();
+    }
     AS_SetDefaultSettings(AS_PCM_8BIT, 11025, AS_SURROUND);
+    AS_SetMasterVolume(MASTER_SOUND);
 
     // Compo splash screen
     //Splash_Screen();
