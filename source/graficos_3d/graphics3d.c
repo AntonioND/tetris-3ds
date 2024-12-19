@@ -170,7 +170,7 @@ void Dibujar_Tetris(void)
     }
     glTranslatef(0.0, 0.0, -5);
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 // Dibujar cuadros
@@ -211,7 +211,7 @@ void Dibujar_Tetris_CPU(void)
     }
     glTranslatef(0.0, 0.0, -5);
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Dibujar_Explosiones(void)
@@ -236,7 +236,7 @@ void Dibujar_Explosiones(void)
     glTranslatef(0.0, -7.5, 0.0);
     glTranslatef(0.0, 0.0, -2.25);
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     Finalizar_Transparencia();
 }
@@ -263,7 +263,7 @@ void Dibujar_Explosiones_CPU(void)
     glTranslatef(0.0, -7.5, 0.0);
     glTranslatef(0.0, 0.0, -2.25);
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     Finalizar_Transparencia();
 }

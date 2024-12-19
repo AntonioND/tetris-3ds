@@ -85,7 +85,7 @@ void Dibujar_Escenario_Versus_J1(void)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Dibujar_Escenario_Versus_J2(void)
@@ -172,5 +172,5 @@ void Dibujar_Escenario_Versus_J2(void)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

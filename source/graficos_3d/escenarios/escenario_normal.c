@@ -84,5 +84,5 @@ void Dibujar_Escenario_Normal(void)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

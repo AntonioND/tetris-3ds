@@ -3,8 +3,8 @@
 
 #include <nds.h>
 
-// TODO: Stop using slot 0 as empty slot, simply do `glBindTexture(0, NULL)`
-extern int texture[10]; // Diez slots, el primero debe quedarse vacio.
+// The first slot is currently unused
+extern int texture[10];
 
 int LoadGLTexture_PCX_8bit(u8 *adress, u8 slot, int sizex, int sizey);
 

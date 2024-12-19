@@ -1,6 +1,7 @@
 #include <nds.h>
 
-int texture[10]; // Diez slots, el primero debe quedarse vacio.
+// The first slot is currently unused
+int texture[10];
 
 int LoadGLTexture_PCX_8bit(u8 *adress, u8 slot, int sizex, int sizey)
 {
@@ -17,7 +18,7 @@ int LoadGLTexture_PCX_8bit(u8 *adress, u8 slot, int sizex, int sizey)
 
     imageDestroy(&pcx);
 
-    return TRUE;
+    return 1;
 }
 
 void Iniciar_Transparencia(int ALPHA)

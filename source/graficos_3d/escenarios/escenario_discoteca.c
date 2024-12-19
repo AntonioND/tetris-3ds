@@ -40,7 +40,7 @@ static int value_song;
 
 void Draw_Sujetabola(void)
 {
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glColor3f(0.2, 0.2, 0.2);
 
     glBegin(GL_QUADS);
@@ -128,7 +128,7 @@ void Draw_Foco1Izq(float red, float green, float blue)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Foco2Izq(float red, float green, float blue)
@@ -186,7 +186,7 @@ void Draw_Foco2Izq(float red, float green, float blue)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Foco3Izq(float red, float green, float blue)
@@ -241,12 +241,12 @@ void Draw_Foco3Izq(float red, float green, float blue)
         glVertex3v16(10401, 16972, 8764);
 
     glEnd();
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Bola(void)
 {
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     glBegin(GL_TRIANGLES);
 
@@ -1124,7 +1124,7 @@ void Draw_Foco1Der(float red, float green, float blue)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Foco2Der(float red, float green, float blue)
@@ -1182,7 +1182,7 @@ void Draw_Foco2Der(float red, float green, float blue)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Foco3Der(float red, float green, float blue)
@@ -1240,7 +1240,7 @@ void Draw_Foco3Der(float red, float green, float blue)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_Sala(void)
@@ -1249,7 +1249,7 @@ void Draw_Sala(void)
 
         // Techo
         glColor3f(0, 0, 0);
-        glBindTexture(GL_TEXTURE_2D, texture[0]);
+        glBindTexture(GL_TEXTURE_2D, 0);
         glTexCoord2f(1, 0);
         glVertex3v16(14336, 20480, 12288);
         glTexCoord2f(0, 0);
@@ -1348,9 +1348,10 @@ void Draw_Sala(void)
         glVertex3v16(-14336, 20480, -12288);
         glTexCoord2f(1, 1);
         glVertex3v16(-14336, 20480, 12288);
-        glBindTexture(GL_TEXTURE_2D, texture[0]);
 
     glEnd();
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_AsientoDer(void)
@@ -1409,7 +1410,7 @@ void Draw_AsientoDer(void)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Draw_AsientoIzq(void)
@@ -1468,7 +1469,7 @@ void Draw_AsientoIzq(void)
 
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, texture[0]);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Dibujar_Discoteca(u8 pausa, u8 camara)
