@@ -77,7 +77,6 @@ int main(int argc, char** argv)
             PA_WaitForVBL();
     }
     AS_SetDefaultSettings(AS_PCM_8BIT, 11025, AS_SURROUND);
-    AS_SetMasterVolume(MASTER_SOUND);
 
     // Compo splash screen
     //Splash_Screen();
@@ -88,6 +87,8 @@ int main(int argc, char** argv)
         PA_WaitForVBL();
 
     Iniciar_FAT();
+
+    AS_SetMasterVolume(MASTER_SOUND);
 
     PA_WaitForVBL();
     PA_WaitForVBL();
