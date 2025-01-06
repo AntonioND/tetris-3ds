@@ -13,7 +13,7 @@ ARM_NONE_EABI_PATH	?= $(WONDERFUL_TOOLCHAIN)/toolchain/gcc-arm-none-eabi/bin/
 
 NAME		:= tetris3ds
 
-GAME_TITLE	:= TETRIS 3DS - Version 1.3
+GAME_TITLE	:= TETRIS 3DS - Version 1.4
 GAME_SUBTITLE	:= Antonio Nino Diaz
 GAME_AUTHOR	:=
 GAME_ICON	:= logo.bmp

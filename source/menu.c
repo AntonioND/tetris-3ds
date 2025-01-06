@@ -259,7 +259,7 @@ void Graficos_3D_Menu(void)
     Escribir_3D_Char(TEXT_SMALL, 0, 10, CHAR_V,     1.0, 1.0, 1.0);
     Escribir_3D_Char(TEXT_SMALL, 1, 10, NUM_1,      0.9, 0.9, 0.9);
     Escribir_3D_Char(TEXT_SMALL, 2, 10, CHAR_PUNTO, 0.8, 0.8, 0.8);
-    Escribir_3D_Char(TEXT_SMALL, 3, 10, NUM_3,      0.7, 0.7, 0.7);
+    Escribir_3D_Char(TEXT_SMALL, 3, 10, NUM_4,      0.7, 0.7, 0.7);
 
     glPushMatrix();
 

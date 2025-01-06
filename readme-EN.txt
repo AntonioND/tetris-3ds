@@ -1,5 +1,5 @@
 		-----------------
-		-TETRIS 3DS v1.3-
+		-TETRIS 3DS v1.4-
 		-----------------
 
 This game is a 3D tetris. You will be able to listen to your own MP3
