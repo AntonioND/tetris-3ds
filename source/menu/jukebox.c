@@ -174,8 +174,15 @@ void Jukebox(void)
 
     Stop_Song();
     Wait_To_Stop_Song();
-    for (int i = 0; i < 30; i++)
+
+    // Fade down
+    for (int i = 0; i < 32; i++)
+    {
+        PA_SetBrightness(0, -i);
+        PA_SetBrightness(1, -i);
+        PA_WaitForVBL(); // To slow down the fades, we wait a frame...
         PA_WaitForVBL();
+    }
 
     Init_Menu_Song_Loop();
 }
