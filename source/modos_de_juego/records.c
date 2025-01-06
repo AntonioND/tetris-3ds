@@ -62,14 +62,6 @@ void Records(void)
     PA_SetBgPalCol(1, 10, PA_RGB(22, 0, 0));
     PA_SetBgColor(1, PA_RGB(0, 0, 0));
 
-    //Fade up
-    for (int i = -31; i < 0; i++)
-    {
-        PA_SetBrightness(0, i);
-        PA_SetBrightness(1, i);
-        PA_WaitForVBL();
-    }
-
     PA_SetBrightness(0, 0);
     PA_SetBrightness(1, 0);
 
@@ -89,6 +81,14 @@ void Records(void)
 
         snprintf(str, sizeof(str), "%d", (int)Record[i].Lineas);
         PA_CenterSmartText(1, 207, 6 + (19 * i), 248, 15 + (19 * i), str, i + 1 /*Color*/, 2, 0);
+    }
+
+    //Fade up
+    for (int i = -31; i < 0; i++)
+    {
+        PA_SetBrightness(0, i);
+        PA_SetBrightness(1, i);
+        PA_WaitForVBL();
     }
 
     // Bucle de espera
