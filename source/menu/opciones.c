@@ -73,6 +73,14 @@ static void End_Opciones_Menu(void)
         PA_WaitForVBL();
     }
 
+    PA_DeleteSprite(1, 0);
+    PA_DeleteSprite(1, 1);
+    PA_DeleteSprite(1, 2);
+    PA_DeleteSprite(1, 3);
+    PA_DeleteSprite(1, 10);
+    PA_DeleteSprite(1, 11);
+    PA_WaitForVBL();
+
     PA_SetBrightness(0, 0);
     PA_SetBrightness(1, 0);
     PA_ResetBgSys();
