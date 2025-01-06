@@ -121,6 +121,9 @@ void Reload_Menu(void)
     My_Init_3D_No_Textures();
     Iniciar_3D_Menu();
 
+    Actualizar_3D_Menu();
+    Graficos_3D_Menu();
+
     PA_Init16bitBg(1, 3);
     PA_Load16bitBitmap(1, menu_inferior_Bitmap);
 

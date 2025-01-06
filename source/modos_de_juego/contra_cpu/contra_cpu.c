@@ -108,6 +108,8 @@ void Modo_Contra_CPU()
 
     My_Init_3D();
 
+    Graficos_3D_Contra_CPU();
+
     // Fade up
     for (int i = -31; i < 0; i++)
     {

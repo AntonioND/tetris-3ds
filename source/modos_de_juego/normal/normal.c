@@ -91,6 +91,8 @@ void Modo_Normal()
 
     My_Init_3D();
 
+    Graficos_3D_Normal();
+
     // Fade up
     for (int i = -31; i < 0; i++)
     {

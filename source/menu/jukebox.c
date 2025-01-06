@@ -62,6 +62,8 @@ void Jukebox(void)
     Load_Disco_Textures();
     Iniciar_Focos();
 
+    Graficos_3D_Juekebox();
+
     // Fade up
     for (int i = -31; i < 0; i++)
     {

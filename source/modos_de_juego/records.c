@@ -45,6 +45,9 @@ void Records(void)
     My_Init_3D_No_Textures();
     Iniciar_3D_Menu();
 
+    Actualizar_3D_Menu();
+    Graficos_3D_Menu();
+
     PA_Init8bitBg(1, 3);
     PA_EasyBgLoad(1,2,inferior_records);
     PA_SetBgPalCol(1, 1,  PA_RGB(31, 31, 31));
