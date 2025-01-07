@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: GPL-3.0-only
+//
+// Copyright (c) 2008, 2024-2025 Antonio Niño Díaz
+
 #include "graficos_3d/escenarios/escenarios.h"
 #include "graficos_3d/funciones_texturas.h"
 

@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: GPL-3.0-only
+//
+// Copyright (c) 2008, 2024-2025 Antonio Niño Díaz
+
 //#include "as_lib9.h" // include our own as_lib9.h before including the one in PALib!
 
 #include <PA9.h>

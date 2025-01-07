@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: GPL-3.0-only
+//
+// Copyright (c) 2008, 2024-2025 Antonio Niño Díaz
+
 #ifndef GRAFICOS_2D_GRAPHICS3D_H__
 #define GRAFICOS_2D_GRAPHICS3D_H__
 

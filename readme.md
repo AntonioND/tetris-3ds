@@ -21,6 +21,8 @@ the code a bit. Most of it is still pretty terrible, though, so don't judge it
 too harshly. This cleanup has finished in 2025, and the game was written in
 2008, when I was still learning how to code!
 
+The game has been released under the license GPL-3.0-only.
+
 ## Needed files
 
 Create folder `Tetris_3DS` in the root of your SD card. Then, add as many songs
