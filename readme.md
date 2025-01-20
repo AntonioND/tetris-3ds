@@ -111,7 +111,11 @@ After the game ends, records are saved automatically.
 
 1. Install [BlocksDS](https://blocksds.skylyrac.net/docs/).
 
-2. Install [PAlib](https://github.com/AntonioND/palib) from source.
+2. Install [PAlib](https://github.com/AntonioND/palib):
+
+   ```bash
+   wf-pacman -Sy blocksds-palib
+   ```
 
 3. Run the following command in the root of this repository:
 
