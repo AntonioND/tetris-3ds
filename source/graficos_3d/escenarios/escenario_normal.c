@@ -7,22 +7,22 @@
 
 void Dibujar_Escenario_Normal(void)
 {
-    scrolly += 0.005;
-    if (scrolly > 0.5)
-        scrolly -= 0.5;
+    escenario_scrolly += 0.005;
+    if (escenario_scrolly > 0.5)
+        escenario_scrolly -= 0.5;
 
     glBegin(GL_QUADS);
 
     glBindTexture(GL_TEXTURE_2D, texture[7]);
 
         glColor3f(0.6, 0.6, 0.6);
-        glTexCoord2f(1, 0 + scrolly);
+        glTexCoord2f(1, 0 + escenario_scrolly);
         glVertex3v16(1023, -1024, -1024);
-        glTexCoord2f(0, 0 + scrolly);
+        glTexCoord2f(0, 0 + escenario_scrolly);
         glVertex3v16(1024, -1024, 19456);
-        glTexCoord2f(0, 0.5 + scrolly);
+        glTexCoord2f(0, 0.5 + escenario_scrolly);
         glVertex3v16(1024, 29696, 19456);
-        glTexCoord2f(1, 0.5 + scrolly);
+        glTexCoord2f(1, 0.5 + escenario_scrolly);
         glVertex3v16(1023, 29696, -1024);
 
     glBindTexture(GL_TEXTURE_2D, texture[9]);

@@ -117,7 +117,7 @@ ARCH		:= -mthumb -mcpu=arm946e-s+nofp
 
 SPECS		:= $(BLOCKSDS)/sys/crts/ds_arm9.specs
 
-WARNFLAGS	:= -Wall
+WARNFLAGS	:= -Wall -Wextra -Wshadow
 
 ifeq ($(SOURCES_CPP),)
 	LIBS	+= -lc

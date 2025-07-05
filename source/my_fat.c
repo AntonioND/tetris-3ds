@@ -34,7 +34,7 @@ Datos que se guardan:
 // Activa/desactiva el acceso al FAT
 bool FAT_ERROR = 0;
 
-static int Checksum(u32 datos)
+static u32 Checksum(u32 datos)
 {
     int checksum = 0;
 

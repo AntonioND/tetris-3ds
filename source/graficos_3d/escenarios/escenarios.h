@@ -5,8 +5,8 @@
 #ifndef GRAFICOS_3D_ESCENARIOS_ESCENARIOS_H__
 #define GRAFICOS_3D_ESCENARIOS_ESCENARIOS_H__
 
-extern float scrolly;
-extern float scrolly_CPU;
+extern float escenario_scrolly;
+extern float escenario_scrolly_CPU;
 
 #include "escenario_normal.h"
 #include "escenario_versus.h"

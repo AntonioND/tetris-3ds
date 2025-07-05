@@ -110,9 +110,9 @@ void Jukebox(void)
             Current_Song = Limitar_int(0,numsongs, Current_Song  + Pad.Newpress.Up - Pad.Newpress.Down);
             if (Pad.Newpress.Up || Pad.Newpress.Down)
             {
-                char songnum[6];
-                snprintf(songnum, sizeof(songnum), " %02d ", Current_Song);
-                PA_CenterSmartText(1, 193, 19, 244, 50, songnum, 1 /*Color*/ , 4, 0);
+                char _songnum[6];
+                snprintf(_songnum, sizeof(_songnum), " %02d ", Current_Song);
+                PA_CenterSmartText(1, 193, 19, 244, 50, _songnum, 1 /*Color*/ , 4, 0);
             }
 
             if ((AS_GetMP3Status() & MP3ST_DECODE_ERROR) && !logwrote)

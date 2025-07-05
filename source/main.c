@@ -65,8 +65,11 @@ void Tetris3DSSplashScreen(void)
     PA_ResetBgSys();
 }
 
-int main(int argc, char** argv)
+int main(int argc, char *argv[])
 {
+    (void)argc;
+    (void)argv;
+
     defaultExceptionHandler();
 
     PA_Init();
