@@ -135,7 +135,7 @@ void Check_Song_End(void)
             {
                 Reset_Song_Loop();
                 Set_New_Song_Path();
-                FILE *file = fopen(Song_Path, "rb");
+                file = fopen(Song_Path, "rb");
                 if (file == NULL)
                 {
                     SONG_ERROR = true;
@@ -190,7 +190,7 @@ void Check_Song_End(void)
                 Reset_Song_Loop();
                 Set_New_Song_Path();
 
-                FILE *file = fopen(Song_Path, "rb");
+                file = fopen(Song_Path, "rb");
                 if (file == NULL)
                 {
                     SONG_ERROR = true;
@@ -324,7 +324,7 @@ void Write_Error_Log(int numero)
     }
     else
     {
-        FILE *ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb");
+        ERROR_LOG_WRITE_FILE = fopen("/Tetris_3DS/Error_Log.txt", "wb");
         if (ERROR_LOG_WRITE_FILE != NULL)
         {
             fprintf(ERROR_LOG_WRITE_FILE, Error_Log);
